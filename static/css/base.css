@@ -1,13 +1,36 @@
 body {
-    background: blue;
+    background: url('/media/hero-main.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: calc(100vh - 164px);
+}
+
+/* ---text styling--- */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat';
 }
 
 .logo-font {
     font-family: "Playwrite ES Deco", cursive !important;
     font-optical-sizing: auto;
     font-style: normal;
+    color: #008080 !important;
 }
 
+.brand-color {
+    color: #008080 !important;
+}
+
+.user-action {
+    color: #008080;
+}
+
+.user-action:hover,
+.user-action:active,
+.user-action:focus {
+    color: #004747 !important;
+}
+/* ---icons--- */
 /* from Bulma */
 .icon {
     align-items: center;
@@ -15,4 +38,26 @@ body {
     justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
+}
+
+/* ---buttons--- */
+.brand-btn {
+    background: #008080;
+}
+
+.book-now-button {
+    background: #004747;
+    color: #fff;
+}
+
+.book-now-button:active,
+.book-now-button:hover,
+.book-now-button:focus {
+    background: #008080;
+    color: #fff;
+}
+
+/* ---hero--- */
+.hero-banner {
+    background-image: url("{% media 'hero-main.jpg' %}");
 }
