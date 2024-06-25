@@ -1,3 +1,18 @@
-logo-font {
-    font-family: "Playwrite ES Deco", cursive;
+body {
+    background: blue;
+}
+
+.logo-font {
+    font-family: "Playwrite ES Deco", cursive !important;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/* from Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
 }
