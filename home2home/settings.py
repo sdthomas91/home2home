@@ -110,9 +110,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # additional login requirements 
 
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5  # before login is disabled temporarily
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # seconds before login allowed again
-
 ACCOUNT_SESSION_REMEMBER = True  # remember user session
 
 ACCOUNT_UNIQUE_EMAIL = True  # ensures unique email per user
