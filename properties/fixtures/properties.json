@@ -1,0 +1,74 @@
+[
+    {
+      "": "host_id",
+      "__1": "name",
+      "__2": "email",
+      "__3": "profile_picture",
+      "__4": "bio",
+      "__5": "join_date"
+    },
+    {
+      "": 1,
+      "__1": "John",
+      "__2": "john@john.com",
+      "__3": "",
+      "__4": "Loves hosting guests in his remote countryside home. You’ll never want to leave!",
+      "__5": "2019-10-01"
+    },
+    {
+      "": 2,
+      "__1": "Jane",
+      "__2": "jane@doe.com",
+      "__3": "",
+      "__4": "Come and forget  your worries in my magical getaways!",
+      "__5": "2019-12-25"
+    },
+    {
+      "": 3,
+      "__1": "Bob",
+      "__2": "Bob@thebuilder.com",
+      "__3": "",
+      "__4": "Loves to build and refurbish properties",
+      "__5": "2020-05-31"
+    },
+    {
+      "": 4,
+      "__1": "Alice",
+      "__2": "alice@wonderland.com",
+      "__3": "",
+      "__4": "Properties to feed the wildest imaginations",
+      "__5": "2020-09-13"
+    },
+    {
+      "": 5,
+      "__1": "Charlie",
+      "__2": "charlie@chocfact.com",
+      "__3": "",
+      "__4": "Enjoys providing sweet treats for every stay",
+      "__5": "2021-07-03"
+    },
+    {
+      "": 6,
+      "__1": "Evie",
+      "__2": "evie@vulpix.com",
+      "__3": "",
+      "__4": "Passionate about hospitality and giving a 5 start experience",
+      "__5": "2022-08-13"
+    },
+    {
+      "": 7,
+      "__1": "James",
+      "__2": "james@giantpeach.com",
+      "__3": "",
+      "__4": "Enjoys meeting new people from around the world",
+      "__5": "2022-09-10"
+    },
+    {
+      "": 8,
+      "__1": "Ariel",
+      "__2": "ariel@littlemerm.com",
+      "__3": "",
+      "__4": "Nautical themed properties for a seaside feel.",
+      "__5": "2024-01-01"
+    }
+  ]
