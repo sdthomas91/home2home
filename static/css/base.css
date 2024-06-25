@@ -30,6 +30,11 @@ h1, h2, h3, h4, h5, h6 {
 .user-action:focus {
     color: #004747 !important;
 }
+
+/* --BOOTSTRAP OVERRIDES--- */
+.navbar-light .navbar-toggler {
+    border: none;
+}
 /* ---icons--- */
 /* from Bulma */
 .icon {
