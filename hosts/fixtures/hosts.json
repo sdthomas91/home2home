@@ -1,0 +1,66 @@
+[
+    {
+      "host_id": 1,
+      "name": "John",
+      "email": "john@john.com",
+      "profile_picture": "profile_pics/avatar-1.jpg",
+      "bio": "Loves hosting guests in his remote countryside home. You will never want to leave!",
+      "join_date": "2019-10-01"
+    },
+    {
+      "host_id": 2,
+      "name": "Jane",
+      "email": "jane@doe.com",
+      "profile_picture": "profile_pics/avatar-2.jpg",
+      "bio": "Come and forget  your worries in my magical getaways!",
+      "join_date": "2019-12-25"
+    },
+    {
+      "host_id": 3,
+      "name": "Bob",
+      "email": "Bob@thebuilder.com",
+      "profile_picture": "profile_pics/avatar-3.jpg",
+      "bio": "Loves to build and refurbish properties",
+      "join_date": "2020-05-31"
+    },
+    {
+      "host_id": 4,
+      "name": "Alice",
+      "email": "alice@wonderland.com",
+      "profile_picture": "profile_pics/avatar-4.jpg",
+      "bio": "Properties to feed the wildest imaginations",
+      "join_date": "2020-09-13"
+    },
+    {
+      "host_id": 5,
+      "name": "Charlie",
+      "email": "charlie@chocfact.com",
+      "profile_picture": "profile_pics/avatar-5.jpg",
+      "bio": "Enjoys providing sweet treats for every stay",
+      "join_date": "2021-07-03"
+    },
+    {
+      "host_id": 6,
+      "name": "Evie",
+      "email": "evie@vulpix.com",
+      "profile_picture": "profile_pics/avatar-6.jpg",
+      "bio": "Passionate about hospitality and giving a 5 start experience",
+      "join_date": "2022-08-13"
+    },
+    {
+      "host_id": 7,
+      "name": "James",
+      "email": "james@giantpeach.com",
+      "profile_picture": "profile_pics/avatar-7.jpg",
+      "bio": "Enjoys meeting new people from around the world",
+      "join_date": "2022-09-10"
+    },
+    {
+      "host_id": 8,
+      "name": "Ariel",
+      "email": "ariel@littlemerm.com",
+      "profile_picture": "profile_pics/avatar-8.jpg",
+      "bio": "Nautical themed properties for a seaside feel.",
+      "join_date": "2024-01-01"
+    }
+  ]
