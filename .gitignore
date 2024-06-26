@@ -14,3 +14,4 @@ cloudinary_python.txt
 *.pyc
 PLANNING.md
 hosts.json
+debug-log.md
