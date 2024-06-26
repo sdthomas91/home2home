@@ -1,5 +1,23 @@
 from allauth.account.forms import SignupForm
 from django import forms
+from .models import Profile
+
+# custom signup form to include Guest or Host signup selection
+
+class CustomSignupForm(SignupForm):
+    USER_TYPE_CHOICES = (
+        ('Host', 'Host'),
+        ('Guest', 'Guest'),
+    )
+    
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES)
+
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.profile.user_type = self.cleaned_data.get('user_type')
+        user.profile.save()
+        return user
+
 
 class GuestSignupForm(SignupForm):
     bio = forms.CharField(required=False, widget=forms.Textarea)
