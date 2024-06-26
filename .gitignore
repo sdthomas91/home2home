@@ -12,3 +12,5 @@ node_modules/
 cloudinary_python.txt
 *.sqlite3
 *.pyc
+PLANNING.md
+hosts.json
