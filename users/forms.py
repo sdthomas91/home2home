@@ -24,8 +24,7 @@ class CustomSignupForm(SignupForm):
         return user
 
     
-
-
+# Guest specific profile setup form
 class GuestProfileForm(forms.ModelForm):
     full_name = forms.CharField()
     address = forms.CharField(widget=forms.Textarea)
@@ -36,6 +35,7 @@ class GuestProfileForm(forms.ModelForm):
         model = Profile
         fields = ['full_name', 'address', 'default_payment_method', 'profile_picture']
 
+#  Host specific profile setup form
 class HostProfileForm(forms.ModelForm):
     first_name = forms.CharField()
     address = forms.CharField(widget=forms.Textarea)
@@ -46,3 +46,9 @@ class HostProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'address', 'bio', 'interests', 'hobbies']
+
+# Profile editing form
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'profile_picture']

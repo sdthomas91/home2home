@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomSignupForm, GuestProfileForm, HostProfileForm
-from allauth.account.views import SignupView  # Required to use allauth template
+from .forms import CustomSignupForm, GuestProfileForm, HostProfileForm, ProfileEditForm
+from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 
-# Create your views here.
 
-# Custom signup view
 class CustomSignupView(SignupView):
     """
     Provides a custom signup form to allow users to select
@@ -29,31 +27,20 @@ def profile_setup(request):
     Guest or Host
     """
     if request.user.profile.user_type == 'Guest':
-        if request.method == 'POST':
-            form = GuestProfileForm(
-                request.POST,
-                request.FILES,
-                instance=request.user.profile
-            )
-            if form.is_valid():
-                form.save()
-                return redirect('home')
-        else:
-            form = GuestProfileForm(instance=request.user.profile)
+        form_class = GuestProfileForm
     else:
-        if request.method == 'POST':
-            form = HostProfileForm(
-                request.POST,
-                request.FILES,
-                instance=request.user.profile
-            )
-            if form.is_valid():
-                form.save()
-                return redirect('home')
-        else:
-            form = HostProfileForm(instance=request.user.profile)
+        form_class = HostProfileForm
+
+    if request.method == 'POST':
+        form = form_class(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = form_class(instance=request.user.profile)
 
     return render(request, 'account/profile_setup.html', {'form': form})
+
 
 @login_required
 def profile_view(request):
@@ -61,4 +48,12 @@ def profile_view(request):
     Loads the profile page for viewing and editing 
     """
     profile = get_object_or_404(Profile, user=request.user)
-    return render(request, 'users/profile.html', {'profile': profile})
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileEditForm(instance=profile)
+    return render(request, 'users/profile.html', {'form': form, 'profile': profile})
+

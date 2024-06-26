@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block extra-title %}
 My Profile
 {% endblock %}
@@ -13,6 +14,13 @@ My Profile
                     <h4>{{ profile.user.username }}</h4>
                 </div>
                 <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="brand-btn btn btn-dark w-50 mt-4">Save Changes</button>
+                        </div>
+                    </form>
                     <p><strong>Email:</strong> {{ profile.user.email }}</p>
                     <p><strong>Bio:</strong> {{ profile.bio }}</p>
                     {% if profile.profile_picture %}
