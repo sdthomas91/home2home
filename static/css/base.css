@@ -10,6 +10,16 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat';
 }
 
+a {
+    color: #008080;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #004747;
+}
+
 .logo-font {
     font-family: "Playwrite ES Deco", cursive !important;
     font-optical-sizing: auto;
