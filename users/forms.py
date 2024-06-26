@@ -19,24 +19,23 @@ class CustomSignupForm(SignupForm):
         return user
 
 
-class GuestSignupForm(SignupForm):
-    bio = forms.CharField(required=False, widget=forms.Textarea)
+class GuestProfileForm(forms.ModelForm):
+    full_name = forms.CharField()
+    address = forms.CharField(widget=forms.Textarea)
+    default_payment_method = forms.CharField(required=False)
+    profile_picture = forms.ImageField(required=False)
 
-    def save(self, request):
-        user = super(GuestSignupForm, self).save(request)
-        user.profile.user_type = 'Guest'
-        user.profile.bio = self.cleaned_data.get('bio')
-        user.profile.save()
-        return user
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'address', 'default_payment_method', 'profile_picture']
 
-class HostSignupForm(SignupForm):
-    bio = forms.CharField(required=True, widget=forms.Textarea)
-    profile_picture = forms.ImageField(required=True)
+class HostProfileForm(forms.ModelForm):
+    first_name = forms.CharField()
+    address = forms.CharField(widget=forms.Textarea)
+    bio = forms.CharField(widget=forms.Textarea)
+    interests = forms.CharField(widget=forms.Textarea)
+    hobbies = forms.CharField(widget=forms.Textarea)
 
-    def save(self, request):
-        user = super(HostSignupForm, self).save(request)
-        user.profile.user_type = 'Host'
-        user.profile.bio = self.cleaned_data.get('bio')
-        user.profile.profile_picture = self.cleaned_data.get('profile_picture')
-        user.profile.save()
-        return user
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'address', 'bio', 'interests', 'hobbies']
