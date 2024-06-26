@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
 {% block extra-title %}
 My Profile
 {% endblock %}
@@ -14,18 +13,23 @@ My Profile
                     <h4>{{ profile.user.username }}</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="brand-btn btn btn-dark w-50 mt-4">Save Changes</button>
+                    <div class="row">
+                        <div class="col-3">
+                            {% if profile.profile_picture %}
+                            <p><img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }} Profile Picture" class="img-fluid rounded-circle"></p>
+                            {% else %}
+                            <p><img src="{{ MEDIA_URL }}no-profile-pic.jpg" alt="No Profile Picture" class="img-fluid rounded-circle"></p>
+                            {% endif %}
                         </div>
-                    </form>
-                    <p><strong>Email:</strong> {{ profile.user.email }}</p>
-                    <p><strong>Bio:</strong> {{ profile.bio }}</p>
-                    {% if profile.profile_picture %}
-                    <p><img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle"></p>
-                    {% endif %}
+                        <div class="col-7 offset-1">
+                            <p><strong>Full Name:</strong> {{ profile.user.get_full_name }}</p>
+                            <p><strong>Email:</strong> {{ profile.user.email }}</p>      
+                            <p><strong>Bio:</strong> {{ profile.bio }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a>
                 </div>
             </div>
         </div>

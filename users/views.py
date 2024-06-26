@@ -42,10 +42,20 @@ def profile_setup(request):
     return render(request, 'account/profile_setup.html', {'form': form})
 
 
+
+
 @login_required
 def profile_view(request):
     """
-    Loads the profile page for viewing and editing 
+    Loads the profile page for viewing
+    """
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request, 'users/profile.html', {'profile': profile})
+
+@login_required
+def profile_edit(request):
+    """
+    Loads the profile page for editing
     """
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
@@ -55,5 +65,4 @@ def profile_view(request):
             return redirect('profile')
     else:
         form = ProfileEditForm(instance=profile)
-    return render(request, 'users/profile.html', {'form': form, 'profile': profile})
-
+    return render(request, 'users/edit_profile.html', {'form': form, 'profile': profile})
