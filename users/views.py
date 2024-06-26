@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomSignupForm, GuestProfileForm, HostProfileForm
-from allauth.account.views import SignupView  #required to use allauth template
+from allauth.account.views import SignupView  # Required to use allauth template
 from django.contrib.auth.decorators import login_required
-
+from .models import Profile
 
 # Create your views here.
 
@@ -34,7 +34,7 @@ def profile_setup(request):
                 request.POST,
                 request.FILES,
                 instance=request.user.profile
-                )
+            )
             if form.is_valid():
                 form.save()
                 return redirect('home')
@@ -46,7 +46,7 @@ def profile_setup(request):
                 request.POST,
                 request.FILES,
                 instance=request.user.profile
-                )
+            )
             if form.is_valid():
                 form.save()
                 return redirect('home')
@@ -54,3 +54,11 @@ def profile_setup(request):
             form = HostProfileForm(instance=request.user.profile)
 
     return render(request, 'account/profile_setup.html', {'form': form})
+
+@login_required
+def profile_view(request):
+    """
+    Loads the profile page for viewing and editing 
+    """
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request, 'users/profile.html', {'profile': profile})

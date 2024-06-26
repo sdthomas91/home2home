@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra-title %}
+My Profile
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center my-4">My Profile</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{ profile.user.username }}</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+                    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+                    {% if profile.profile_picture %}
+                    <p><img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle"></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
