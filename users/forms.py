@@ -1,5 +1,7 @@
 from allauth.account.forms import SignupForm
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Field, Div, Row, Column
 from .models import Profile
 
 # custom signup form to include Guest or Host signup selection
@@ -10,13 +12,18 @@ class CustomSignupForm(SignupForm):
         ('Guest', 'Guest'),
     )
     
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES)
+    user_type = forms.ChoiceField(
+        choices=USER_TYPE_CHOICES, 
+        label="Are you a Host or Guest?"
+        )
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         user.profile.user_type = self.cleaned_data.get('user_type')
         user.profile.save()
         return user
+
+    
 
 
 class GuestProfileForm(forms.ModelForm):

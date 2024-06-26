@@ -56,20 +56,23 @@ a:focus {
 }
 
 /* ---buttons--- */
-.brand-btn {
-    background: #008080;
-}
 
-.book-now-button {
+.brand-btn {
     background: #004747;
     color: #fff;
 }
 
-.book-now-button:active,
-.book-now-button:hover,
-.book-now-button:focus {
+.brand-btn:active,
+.brand-btn:hover,
+.brand-btn:focus {
     background: #008080;
     color: #fff;
+}
+
+/* ---forms--- */
+
+.form-container {
+    height: 100vh;
 }
 
 /* ---hero--- */
