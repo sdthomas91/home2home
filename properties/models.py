@@ -1,44 +1,42 @@
 from django.db import models
+from users.models import User
 
-# Create your models here.
+class Amenity(models.Model):
+    name = models.CharField(max_length=50)
+    icon = models.CharField(max_length=50, null=True, blank=True)  # For font-awesome icons
 
-from django.db import models
+    def __str__(self):
+        return self.name
 
 class Property(models.Model):
-    # host = models.ForeignKey(Host, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
+    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    price_per_night = models.DecimalField(max_digits=6, decimal_places=2)
-    location = models.CharField(max_length=255)
-    latitude = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        null=True,
-        blank=True
-        )
-    longitude = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        null=True,
-        blank=True
-        )
-    property_type = models.CharField(max_length=50, choices=[
-        ('Apartment', 'Apartment'),
-        ('Cottage', 'Cottage'),
-        ('Villa', 'Villa'),
-        ('House', 'House'),
-        ('Loft', 'Loft'),
-        ('Flat', 'Flat')
-    ])
-    num_bedrooms = models.IntegerField()
-    num_bathrooms = models.IntegerField()
-    amenities = models.TextField()  # change to amenity model
-    images = models.ImageField(
-        upload_to='property_images/',
-        null=True,
-        blank=True
-        )
-    availability_calendar = models.TextField()  # consider a booking model
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
+    max_guests = models.IntegerField()
+    number_of_bedrooms = models.IntegerField()
+    number_of_bathrooms = models.IntegerField()
+    availability = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    featured = models.BooleanField(default=False)
+    amenities = models.ManyToManyField(Amenity, blank=True)
+    pets_allowed = models.BooleanField(default=False)  # New field for pets allowed
 
     def __str__(self):
         return self.title
+
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='property_images/')
+    description = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return self.property.title + " Image"
