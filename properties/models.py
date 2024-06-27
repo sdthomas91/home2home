@@ -1,10 +1,11 @@
 from django.db import models
+from django.utils import timezone
 from users.models import User
 
 class Amenity(models.Model):
-    name = models.CharField(max_length=50)
-    # include font-awesome icons inspired by Isabella Mitchell Lonely House
-    icon = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=100)
+    # for font-awesome icons inspired by Isabella Mitchell Lonely House
+    icon = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -30,11 +31,10 @@ class Property(models.Model):
     number_of_bedrooms = models.IntegerField()
     number_of_bathrooms = models.IntegerField()
     availability = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     featured = models.BooleanField(default=False)
     amenities = models.ManyToManyField(Amenity, blank=True)
-    # add pets_allowed to model for guests to set when adding property
     pets_allowed = models.BooleanField(default=False) 
 
     def __str__(self):
