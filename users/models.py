@@ -13,6 +13,7 @@ class Profile(models.Model):
     user_type = models.CharField(max_length=5, choices=USER_TYPE_CHOICES)
     bio = models.TextField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    join_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
