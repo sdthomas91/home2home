@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from users.models import User
 
 
@@ -10,7 +11,11 @@ class Amenity(models.Model):
 
     def __str__(self):
         return self.name
-        
+
+    class Meta:
+        verbose_name = _("Amenity")
+        verbose_name_plural = _("Amenities")
+
 
 class Property(models.Model):
     host = models.ForeignKey(
@@ -41,6 +46,10 @@ class Property(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = _("Property")
+        verbose_name_plural = _("Properties")
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(
