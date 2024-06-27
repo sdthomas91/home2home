@@ -2,13 +2,15 @@ from django.db import models
 from django.utils import timezone
 from users.models import User
 
+
 class Amenity(models.Model):
     name = models.CharField(max_length=100)
     # for font-awesome icons inspired by Isabella Mitchell Lonely House
-    icon = models.CharField(max_length=100)
+    font_awesome_class = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+        
 
 class Property(models.Model):
     host = models.ForeignKey(
