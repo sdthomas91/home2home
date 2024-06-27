@@ -3,9 +3,21 @@ from users.models import User
 from properties.models import Property
 
 class Review(models.Model):
-    guest = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='reviews')
-    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='host_reviews')  # New field for host
+    guest = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='reviews'
+        )
+    property = models.ForeignKey(
+        Property,
+        on_delete=models.CASCADE,
+        related_name='reviews'
+        )
+    host = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='host_reviews'
+        )
     rating = models.IntegerField()
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
