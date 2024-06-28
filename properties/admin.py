@@ -20,9 +20,15 @@ class PropertyImageInline(admin.StackedInline):
 class PropertyAdmin(admin.ModelAdmin):
     form = PropertyAdminForm
     inlines = [PropertyImageInline]
-    list_display = ('title', 'host', 'city', 'country', 'price_per_night', 'featured')
+    list_display = ('title', 'get_host_name', 'city', 'country', 'price_per_night', 'featured')
     list_filter = ('city', 'country', 'featured')
     search_fields = ('title', 'host__username', 'city', 'country')
+    ordering = ('host__username',)
+
+    def get_host_name(self, obj):
+        return obj.host.username
+    get_host_name.admin_order_field = 'host__username'  # Enables sorting by host's username
+    get_host_name.short_description = 'Host Name'
 
 admin.site.register(Property, PropertyAdmin)
 
