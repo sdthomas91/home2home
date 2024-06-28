@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra-title %}All Properties{% endblock %}
+
+{% block content %}
+<h1>All Properties</h1>
+<form method="get">
+    <label for="city">City:</label>
+    <select name="city" id="city">
+        <option value="">All Cities</option>
+        <option value="London">London</option>
+        <option value="Brighton">Brighton</option>
+        <option value="Manchester">Manchester</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for property in properties %}
+    <li>
+        <a href="{% url 'property_detail' property.id %}">{{ property.title }}</a>
+        <p>{{ property.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
