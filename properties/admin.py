@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import Property, PropertyImage, Amenity
+from .forms import PropertyForm
 
 class PropertyImageInline(admin.StackedInline):
     model = PropertyImage
     extra = 1
 
 class PropertyAdmin(admin.ModelAdmin):
+    form = PropertyForm
     inlines = [PropertyImageInline]
     list_display = ('title', 'host', 'city', 'country', 'price_per_night', 'featured')
     list_filter = ('city', 'country', 'featured')
