@@ -5,10 +5,10 @@
 {% block content %}
 <h1>All Properties</h1>
 
-<button id="filter-toggle" class="btn brand-btn mb-3">Show Filters</button>
+<button id="filter-toggle" class="btn btn-primary mb-3">Show Filters</button>
 
 <div id="filter-form" style="display: none;" class="mb-4">
-    <form method="get" class="form-inline">
+    <form method="get" id="filter-form-id" class="form-inline">
         <div class="form-group mr-2">
             <label for="city">City:</label>
             <select name="city" id="city" class="form-control ml-2">
@@ -67,8 +67,8 @@
             </div>
         </div>
 
-        <button type="submit" class="btn brand-btn mx-2">Filter</button>
-        <a href="{% url 'all_properties' %}" class="btn btn-secondary mx-2">Clear Filters</a>
+        <button type="submit" class="btn brand-btn">Filter</button>
+        <a href="{% url 'all_properties' %}" class="btn btn-secondary">Clear Filters</a>
     </form>
 </div>
 
@@ -82,7 +82,7 @@
             </div>
             <div class="card-footer">
                 <p class="card-text">£{{ property.price_per_night }} per night</p>
-                <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
+                <a href="{% url 'property_detail' property.id %}" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
@@ -107,16 +107,5 @@
     </span>
 </div>
 
-<script>
-document.getElementById('filter-toggle').addEventListener('click', function() {
-    var filterForm = document.getElementById('filter-form');
-    if (filterForm.style.display === 'none') {
-        filterForm.style.display = 'block';
-        this.textContent = 'Hide Filters';
-    } else {
-        filterForm.style.display = 'none';
-        this.textContent = 'Show Filters';
-    }
-});
-</script>
+<script src="{% static 'properties/properties.js' %}"></script>
 {% endblock %}
