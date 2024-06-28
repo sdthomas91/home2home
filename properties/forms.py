@@ -9,4 +9,14 @@ class PropertyForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PropertyForm, self).__init__(*args, **kwargs)
-        self.fields['host'].queryset = Profile.objects.filter(user_type='Host').values_list('user', flat=True)
+        self.fields[
+            'host'
+            ].queryset = Profile.objects.filter(
+                user_type='Host'
+                ).select_related('user')
+
+        # Override the choices displayed in the dropdown
+        self.fields['host'].queryset = Profile.objects.filter(user_type='Host')
+        self.fields[
+            'host'
+            ].label_from_instance = lambda obj: f"{obj.user.username}"
