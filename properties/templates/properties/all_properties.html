@@ -72,13 +72,29 @@
     </form>
 </div>
 
-<div class="row">
+<div class="row properties-container">
     {% for property in properties %}
     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ property.title }}</h5>
-                <img src="{% static 'path/to/property/image.jpg' %}" class="card-img-top" alt="{{ property.title }}">
+                <div id="carouselPropertyImages{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in property.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{MEDIA_URL}}/property_images/house-front.jpg" class="d-block w-100" alt="{{ property.title }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPropertyImages{{ forloop.counter }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselPropertyImages{{ forloop.counter }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
             <div class="card-footer">
                 <p class="card-text">£{{ property.price_per_night }} per night</p>
