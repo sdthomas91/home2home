@@ -3,108 +3,49 @@
 {% block extra-title %}All Properties{% endblock %}
 
 {% block content %}
-<h1>All Properties</h1>
 
-<button id="filter-toggle" class="btn brand-btn mb-3">Show Filters</button>
+<div class="property-page">
 
-<div id="filter-form" style="display: none;" class="mb-4">
-    <form method="get" id="filter-form-id" class="form-inline">
-        <div class="form-group mr-2">
-            <label for="city">City:</label>
-            <select name="city" id="city" class="form-control ml-2">
-                <option value="">All Cities</option>
-                <option value="London" {% if selected_city == 'London' %}selected{% endif %}>London</option>
-                <option value="Brighton" {% if selected_city == 'Brighton' %}selected{% endif %}>Brighton</option>
-                <option value="Manchester" {% if selected_city == 'Manchester' %}selected{% endif %}>Manchester</option>
-            </select>
-        </div>
+<h1 class="text-center">All Properties</h1>
 
-        <div class="form-group mr-2">
-            <label for="bedrooms">Bedrooms:</label>
-            <select name="bedrooms" id="bedrooms" class="form-control ml-2">
-                <option value="">All</option>
-                <option value="1" {% if selected_bedrooms == '1' %}selected{% endif %}>1+</option>
-                <option value="2" {% if selected_bedrooms == '2' %}selected{% endif %}>2+</option>
-                <option value="3" {% if selected_bedrooms == '3' %}selected{% endif %}>3+</option>
-                <option value="4" {% if selected_bedrooms == '4' %}selected{% endif %}>4+</option>
-                <option value="5" {% if selected_bedrooms == '5' %}selected{% endif %}>5+</option>
-            </select>
-        </div>
+{% include 'properties/includes/filter_modal.html' %}
 
-        <div class="form-group mr-2">
-            <label for="bathrooms">Bathrooms:</label>
-            <select name="bathrooms" id="bathrooms" class="form-control ml-2">
-                <option value="">All</option>
-                <option value="1" {% if selected_bathrooms == '1' %}selected{% endif %}>1+</option>
-                <option value="2" {% if selected_bathrooms == '2' %}selected{% endif %}>2+</option>
-                <option value="3" {% if selected_bathrooms == '3' %}selected{% endif %}>3+</option>
-            </select>
-        </div>
-
-        <div class="form-group mr-2">
-            <label for="price">Price per Night:</label>
-            <select name="price" id="price" class="form-control ml-2">
-                <option value="">All Prices</option>
-                <option value="0-24.99" {% if selected_price == '0-24.99' %}selected{% endif %}>£0.00-£24.99</option>
-                <option value="25-39.99" {% if selected_price == '25-39.99' %}selected{% endif %}>£25.00-£39.99</option>
-                <option value="40-74.99" {% if selected_price == '40-74.99' %}selected{% endif %}>£40.00-£74.99</option>
-                <option value="75" {% if selected_price == '75' %}selected{% endif %}>£75+</option>
-            </select>
-        </div>
-
-        <div class="form-group mr-2">
-            <label for="pet_friendly">Pet Friendly:</label>
-            <input type="checkbox" name="pet_friendly" id="pet_friendly" class="form-control ml-2" {% if selected_pet_friendly %}checked{% endif %}>
-        </div>
-
-        <div class="form-group mr-2">
-            <label for="amenities">Amenities:</label>
-            <div class="form-check">
-                {% for amenity in amenities %}
-                <input class="form-check-input" type="checkbox" name="amenities" value="{{ amenity.id }}" id="amenity{{ amenity.id }}" {% if amenity.id|stringformat:"s" in selected_amenities %}checked{% endif %}>
-                <label class="form-check-label" for="amenity{{ amenity.id }}">{{ amenity.name }}</label><br>
-                {% endfor %}
-            </div>
-        </div>
-
-        <button type="submit" class="btn brand-btn">Filter</button>
-        <a href="{% url 'all_properties' %}" class="btn btn-secondary">Clear Filters</a>
-    </form>
-</div>
-
-<div class="row properties-container">
-    {% for property in properties %}
-    <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ property.title }}</h5>
-                <div id="carouselPropertyImages{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for image in property.images.all %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{MEDIA_URL}}/property_images/house-front.jpg" class="d-block w-100" alt="{{ property.title }}">
+<div class="d-flex justify-content-center">
+    <div class="properties-container">
+        <div class="row">
+            {% for property in properties %}
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div id="carouselExampleControls{{ forloop.counter }}" class="carousel slide" data-ride="carousel">
+                        <div class="property-carousel-inner">
+                            {% for image in property.images.all %}
+                            <div class="property-carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ MEDIA_URL }}{{ image.image }}" class="d-block w-100" alt="{{ property.title }}">
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPropertyImages{{ forloop.counter }}" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselPropertyImages{{ forloop.counter }}" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ property.title }}</h5>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">£{{ property.price_per_night }} per night</p>
+                        <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
+                    </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <p class="card-text">£{{ property.price_per_night }} per night</p>
-                <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
-            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
 </div>
-
 <div class="pagination">
     <span class="step-links">
         {% if properties.has_previous %}
@@ -122,6 +63,6 @@
         {% endif %}
     </span>
 </div>
-
+</div>
 <script src="{% static 'js/properties/properties.js' %}"></script>
 {% endblock %}
