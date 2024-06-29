@@ -5,7 +5,7 @@
 {% block content %}
 <h1>All Properties</h1>
 
-<button id="filter-toggle" class="btn btn-primary mb-3">Show Filters</button>
+<button id="filter-toggle" class="btn brand-btn mb-3">Show Filters</button>
 
 <div id="filter-form" style="display: none;" class="mb-4">
     <form method="get" id="filter-form-id" class="form-inline">
@@ -82,7 +82,7 @@
             </div>
             <div class="card-footer">
                 <p class="card-text">£{{ property.price_per_night }} per night</p>
-                <a href="{% url 'property_detail' property.id %}" class="btn btn-primary">View Details</a>
+                <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
             </div>
         </div>
     </div>
@@ -107,5 +107,5 @@
     </span>
 </div>
 
-<script src="{% static 'properties/properties.js' %}"></script>
+<script src="{% static 'js/properties/properties.js' %}"></script>
 {% endblock %}

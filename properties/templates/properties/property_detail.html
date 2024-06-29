@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra-title %}{{ property.title }}{% endblock %}
+
+{% block content %}
+<div class="property-detail">
+    <h1>{{ property.title }}</h1>
+    <p>{{ property.description }}</p>
+    <p>Price per night: £{{ property.price_per_night }}</p>
+    <p>City: {{ property.city }}</p>
+    <p>Country: {{ property.country }}</p>
+    <p>Bedrooms: {{ property.number_of_bedrooms }}</p>
+    <p>Bathrooms: {{ property.number_of_bathrooms }}</p>
+    <p>Max Guests: {{ property.max_guests }}</p>
+    <p>Pet Friendly: {{ property.pets_allowed }}</p>
+
+    <div class="property-images">
+        {% for image in property.images.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}">
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
