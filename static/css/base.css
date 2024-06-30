@@ -180,3 +180,12 @@ a:focus {
     padding: 1rem !important;
 }
 
+/* ---MEDIA QUERIES--- */
+
+@media screen and (max-width: 1200px) {
+
+    .featured-properties {
+      padding: 0 2rem;
+    }
+  
+  }
