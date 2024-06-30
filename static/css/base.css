@@ -285,8 +285,8 @@ a:focus {
 .contact-container {
     width: 60%;
     margin: auto;
-    margin-top: 3rem;
-    padding-bottom: 10rem;
+    margin-top: 5rem;
+    padding-bottom: 15rem;
 }
 /* ---FOOTER--- */
 
@@ -303,6 +303,10 @@ a:focus {
     .featured-properties {
       padding: 0 2rem;
     }
+
+    .contact-container {
+        width: 75%;
+    }
   
 }
 
@@ -311,5 +315,10 @@ a:focus {
         width: 80% !important;
         margin: 2rem auto !important;
         border-radius: 2rem !important;
+    }
+
+    .contact-container {
+        width: 80%;
+        margin-top: 3rem;
     }
 }
