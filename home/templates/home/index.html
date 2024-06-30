@@ -12,10 +12,43 @@
             </h1>
             <div class="my-5">
                 <h4>
-                    <a href="" class="brand-btn btn btn-lg rounded-5 text-uppercase py-3">Book Now</a>
+                    <a href="{% url 'all_properties' %}" class="brand-btn btn btn-lg rounded-5 text-uppercase py-3">Browse & Book</a>
                 </h4>
             </div>
         </div>
     </div>
 </div>
+<div class="featured-properties-container h-100 bg-white">
+    <div class="block-title text-center">
+        <h1 class="display-4 text-black">
+            Featured Properties
+        </h1>
+        <hr class="brand-break">
+    </div> 
+    <div class="d-flex justify-content-center">
+        <div class="row w-100" style="max-width: 1200px;">
+            {% for property in featured_properties %}
+            {% if property.featured %}
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    {% include 'properties/includes/image-carousel.html' %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ property.title }}</h5>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">£{{ property.price_per_night }} per night</p>
+                        <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <p><a href="" class="btn brand-btn">Click here</a> to feature your property!</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

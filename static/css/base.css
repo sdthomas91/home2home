@@ -44,10 +44,27 @@ a:focus {
 .pagination { 
     font-size: 1.4rem;
 }
+
+/* ---lines--- */
+
+.brand-break {
+    border: none;
+    height: 3px;
+    border-radius: 6px;
+    background-color: #008080;
+    width: 10rem;
+}
 /* --BOOTSTRAP OVERRIDES--- */
 .navbar-light .navbar-toggler {
     border: none;
 }
+
+/* ---titles--- */
+.block-title {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
 /* ---icons--- */
 /* from Bulma */
 .icon {
@@ -92,7 +109,6 @@ a:focus {
 .properties-container {
     width: 80%;
 }
-
 
 
 /* ---property card--- */
@@ -163,3 +179,4 @@ a:focus {
     border-radius: 1rem !important;
     padding: 1rem !important;
 }
+
