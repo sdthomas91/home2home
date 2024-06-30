@@ -3,6 +3,9 @@ from django.core.paginator import Paginator
 from .models import Property, Amenity
 
 def all_properties(request):
+    """
+    View to display all properties with filters
+    """
     properties = Property.objects.all()
 
     city = request.GET.get('city')
@@ -51,5 +54,49 @@ def all_properties(request):
     })
 
 def property_detail(request, property_id):
+    """
+    View to display selected property details
+    """
     property = get_object_or_404(Property, id=property_id)
-    return render(request, 'properties/property_detail.html', {'property': property})
+    return render(
+        request,
+        'properties/property_detail.html',
+        {'property': property}
+        )
+
+@login_required
+def add_property(request):
+    """
+    View for hosts to add a new property
+    """
+    if not request.user.profile.user_type == 'Host':
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = PropertyCreateForm(request.POST)
+        if form.is_valid():
+            property_instance = form.save(commit=False)
+            property_instance.host = request.user.profile 
+            property_instance.save()
+            
+            # Handle image uploads
+            for file in request.FILES.getlist('images'):
+                PropertyImage.objects.create(
+                    property=property_instance,
+                    image=file
+                    )
+            
+            return redirect(
+                'property_detail',
+                property_id=property_instance.id
+                )
+    else:
+        form = PropertyCreateForm()
+        image_form = PropertyImageForm()
+
+    return render(
+        request,
+        'properties/add_property.html',
+        {'form': form,
+        'image_form': image_form}
+        )
