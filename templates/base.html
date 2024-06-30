@@ -42,7 +42,7 @@
       <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
           <a href="{% url 'home' %}" class="nav-link main-logo-link">
-            <h2 class="logo-font text-black my0">
+            <h2 class="logo-font my0">
               home<strong> 2 </strong>home
             </h2>
           </a>
@@ -119,6 +119,50 @@
   {% endblock %}
   {% block content %}
   {% endblock %}
+  <footer class="mt-auto d-flex bg-white">
+    <div class="container-fluid">
+        <hr class="footer-hr brand-break">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-sm-left">
+                  <h4 class="logo-font">
+                    home<strong> 2 </strong>home
+                  </h4>
+                  <p>
+                    Find your perfect homestay or your ideal guest using Home 2 Home, the all new home from home booking platform
+                  </p>
+                </div>
+                <div class="col-sm-6 text-sm-right">
+                    <ul class="list-inline social-links">
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://www.facebook.com">
+                                <i class="fa-brands fa-facebook-square" aria-hidden="true"></i>
+                                <span class="sr-only">Facebook</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://twitter.com">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <span class="sr-only">Twitter</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://www.instagram.com">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                                <span class="sr-only">Instagram</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 text-sm-left">
+                    <p class="small">
+                        Copyright © 2022 Lonely House
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
   {% block postload-js %}
   {% endblock %}

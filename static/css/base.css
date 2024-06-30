@@ -1,7 +1,9 @@
 body {
     background: url('/media/hero-main.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ---text styling--- */
@@ -42,7 +44,14 @@ a:focus {
 }
 
 .pagination { 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+}
+
+.page-pill {
+    border: 0.2rem solid #008080;
+    color: #008080;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
 }
 
 /* ---lines--- */
@@ -53,6 +62,11 @@ a:focus {
     border-radius: 6px;
     background-color: #008080;
     width: 10rem;
+}
+
+.footer-hr {
+    height: 1px !important;
+    width: 90% !important;
 }
 /* --BOOTSTRAP OVERRIDES--- */
 .navbar-light .navbar-toggler {
@@ -80,6 +94,8 @@ a:focus {
 .brand-btn {
     background: #004747;
     color: #fff;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .brand-btn:active,
@@ -88,6 +104,7 @@ a:focus {
     background: #008080;
     color: #fff;
 }
+
 
 /* ---forms--- */
 
@@ -98,6 +115,7 @@ a:focus {
 /* ---hero--- */
 .hero-banner {
     background-image: url("{% media 'hero-main.jpg' %}");
+    margin: 10rem 2rem;
 }
 
 /* ------ PROPERTIES ------ */
@@ -180,7 +198,13 @@ a:focus {
     padding: 1rem !important;
 }
 
+/* ---FOOTER--- */
+
+.social-links {
+    font-size: 2rem; 
+}
 /* ---MEDIA QUERIES--- */
+
 
 @media screen and (max-width: 1200px) {
 
