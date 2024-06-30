@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from .models import Property, Amenity
+from django.contrib import messages
+from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm
 
 def all_properties(request):
@@ -68,37 +69,24 @@ def property_detail(request, property_id):
 
 @login_required
 def add_property(request):
-    """
-    View for hosts to add a new property
-    """
     if not request.user.profile.user_type == 'Host':
+        messages.error(request, 'You must be a host to add a property.')
         return redirect('home')
 
     if request.method == 'POST':
         form = PropertyCreateForm(request.POST)
         if form.is_valid():
             property_instance = form.save(commit=False)
-            property_instance.host = request.user.profile 
+            property_instance.host = request.user
             property_instance.save()
             
-            # Handle image uploads
             for file in request.FILES.getlist('images'):
-                PropertyImage.objects.create(
-                    property=property_instance,
-                    image=file
-                    )
+                PropertyImage.objects.create(property=property_instance, image=file)
             
-            return redirect(
-                'property_detail',
-                property_id=property_instance.id
-                )
+            messages.success(request, 'Property added successfully!')
+            return redirect('property_detail', property_id=property_instance.id)
     else:
         form = PropertyCreateForm()
         image_form = PropertyImageForm()
 
-    return render(
-        request,
-        'properties/add_property.html',
-        {'form': form,
-        'image_form': image_form}
-        )
+    return render(request, 'properties/add_property.html', {'form': form, 'image_form': image_form})

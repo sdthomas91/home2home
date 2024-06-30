@@ -24,7 +24,12 @@ class PropertyForm(forms.ModelForm):
 class PropertyCreateForm(forms.ModelForm):
     class Meta:
         model = Property
-        exclude = ['host'] # Set manually in the view
+        exclude = ['host', 'featured']  # Exclude host to handle it in the view
+
+    def __init__(self, *args, **kwargs):
+        super(PropertyCreateForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
 class PropertyImageForm(forms.ModelForm):
     class Meta:
