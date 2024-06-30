@@ -44,11 +44,12 @@ a:focus {
 }
 
 .pagination { 
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
 }
 
 .page-pill {
-    border: 0.2rem solid #008080;
+    border: 0.15rem solid #008080;
     color: #008080;
     border-radius: 1.5rem;
     padding: 0.5rem 1rem;
@@ -196,6 +197,17 @@ a:focus {
 .modal-content { 
     border-radius: 1rem !important;
     padding: 1rem !important;
+}
+
+/* ---HOME PAGE--- */
+.become-host-container {
+    background: rgba(255,255,255,0.7);
+    padding: 2rem 0 5rem 0;
+}
+
+.become-host-text {
+    font-size: 1.3rem;
+    width: 60%;
 }
 
 /* ---FOOTER--- */
