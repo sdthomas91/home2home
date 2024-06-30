@@ -1,3 +1,4 @@
+# forms.py
 from allauth.account.forms import SignupForm
 from django import forms
 from crispy_forms.helper import FormHelper
@@ -11,10 +12,7 @@ class CustomSignupForm(SignupForm):
         ('Guest', 'Guest'),
     )
     
-    user_type = forms.ChoiceField(
-        choices=USER_TYPE_CHOICES,
-        label="Are you a Host or Guest?"
-        )
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, label="Are you a Host or Guest?")
 
     def save(self, request):
         user = super().save(request)
@@ -84,8 +82,29 @@ class HostProfileSetupForm(forms.ModelForm):
             'profile_picture'
             ]
 
-# Profile editing form
-class ProfileEditForm(forms.ModelForm):
+# form for updating address
+class AddressEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_picture']
+        fields = [
+            'address_1',
+            'address_2',
+            'city',
+            'state',
+            'postal_code',
+            'country'
+        ]
+
+# form for updating profile
+class ProfileEditForm(forms.ModelForm):
+    hobbies = forms.CharField(widget=forms.TextInput, required=False, label="Hobbies (comma separated)")
+    interests = forms.CharField(widget=forms.TextInput, required=False, label="Interests (comma separated)")
+
+    class Meta:
+        model = Profile
+        fields = [
+            'bio',
+            'hobbies',
+            'interests',
+            'profile_picture'
+        ]
