@@ -40,7 +40,7 @@
         </div>
     {% else %}
         <div class="alert alert-info text-center mp-alert" role="alert">
-            No properties yet? <a href="" class="alert-link">Get started on your first listing!</a>
+            No properties yet? <a href="{% url 'add_property' %}" class="alert-link">Get started on your first listing!</a>
         </div>
     {% endif %}
 </div>

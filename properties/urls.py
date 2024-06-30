@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import all_properties, property_detail
+from .views import all_properties, property_detail, add_property
 
 urlpatterns = [
     path('properties/', all_properties, name='all_properties'),
