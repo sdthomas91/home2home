@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra-title %}Add Property{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Add a New Property</h1>
+    <hr class="brand-break">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.as_p }}
+            </div>
+            <div class="col-md-6">
+                {{ image_form.as_p }}
+                <div class="form-group">
+                    <label for="images">Property Images</label>
+                    <input type="file" name="images" id="images" multiple class="form-control-file">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn brand-btn">Add Property</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
