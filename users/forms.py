@@ -20,8 +20,9 @@ class CustomSignupForm(SignupForm):
         user.profile.save()
         return user
 
-# Guest specific profile setup form
-class GuestProfileSetupForm(forms.ModelForm):
+
+
+class ProfileSetupForm(forms.ModelForm):
     first_name = forms.CharField()
     last_name = forms.CharField()
     address_1 = forms.CharField(label="Address Line 1")
@@ -32,38 +33,8 @@ class GuestProfileSetupForm(forms.ModelForm):
     country = forms.CharField()
     bio = forms.CharField(widget=forms.Textarea, required=False)
     profile_picture = forms.ImageField(required=False)
-    default_payment_method = forms.CharField(required=False)
-
-    class Meta:
-        model = Profile
-        fields = [
-            'first_name',
-            'last_name',
-            'address_1',
-            'address_2', 
-            'city',
-            'state',
-            'postal_code',
-            'country',
-            'bio',
-            'profile_picture',
-            'default_payment_method'
-            ]
-
-# Host specific profile setup form
-class HostProfileSetupForm(forms.ModelForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    address_1 = forms.CharField(label="Address Line 1")
-    address_2 = forms.CharField(label="Address Line 2", required=False)
-    city = forms.CharField()
-    state = forms.CharField()
-    postal_code = forms.CharField(label="Postal Code")
-    country = forms.CharField()
-    bio = forms.CharField(widget=forms.Textarea)
-    hobbies = forms.CharField(label="Hobbies (comma separated)")
-    interests = forms.CharField(label="Interests (comma separated)")
-    profile_picture = forms.ImageField(required=False)
+    hobbies = forms.CharField(widget=forms.TextInput, required=False, label="Hobbies (comma separated)")
+    interests = forms.CharField(widget=forms.TextInput, required=False, label="Interests (comma separated)")
 
     class Meta:
         model = Profile
@@ -77,10 +48,10 @@ class HostProfileSetupForm(forms.ModelForm):
             'postal_code',
             'country',
             'bio',
+            'profile_picture',
             'hobbies',
-            'interests',
-            'profile_picture'
-            ]
+            'interests'
+        ]
 
 # form for updating address
 class AddressEditForm(forms.ModelForm):

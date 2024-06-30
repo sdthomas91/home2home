@@ -1,6 +1,6 @@
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomSignupForm, GuestProfileSetupForm, HostProfileSetupForm, ProfileEditForm
+from .forms import CustomSignupForm, ProfileSetupForm, ProfileEditForm, AddressEditForm
 from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
 from .models import Profile
@@ -15,22 +15,27 @@ class CustomSignupView(SignupView):
 
 @login_required
 def profile_setup(request):
-    if request.user.profile.user_type == 'Host':
-        form = HostProfileSetupForm(instance=request.user.profile)
-    else:
-        form = GuestProfileSetupForm(instance=request.user.profile)
-
+    profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
-        if request.user.profile.user_type == 'Host':
-            form = HostProfileSetupForm(request.POST, request.FILES, instance=request.user.profile)
-        else:
-            form = GuestProfileSetupForm(request.POST, request.FILES, instance=request.user.profile)
-
+        form = ProfileSetupForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('profile')
-
+    else:
+        form = ProfileSetupForm(instance=profile)
     return render(request, 'users/profile_setup.html', {'form': form})
+
+@login_required
+def profile_edit(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileEditForm(instance=profile)
+    return render(request, 'users/profile_edit.html', {'form': form})
 
 @login_required
 def profile_view(request):
@@ -49,15 +54,3 @@ def address_edit(request):
     else:
         form = AddressEditForm(instance=profile)
     return render(request, 'users/address_edit.html', {'form': form})
-
-@login_required
-def profile_edit(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    if request.method == 'POST':
-        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = ProfileEditForm(instance=profile)
-    return render(request, 'users/profile_edit.html', {'form': form})

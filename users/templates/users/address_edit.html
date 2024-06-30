@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block extra-title %}
-Profile Setup
+Edit Address
 {% endblock %}
 {% block content %}
 <div class="container-fluid profile-container">
@@ -9,14 +9,14 @@ Profile Setup
         <div class="col-md-8">
             <div class="card profile-card mt-5">
                 <div class="card-header profile-card-header">
-                    <h4>Setup Your Profile</h4>
+                    <h4>Edit Address</h4>
                 </div>
                 <div class="card-body edit-profile-body">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="brand-btn btn btn-dark w-50 mt-4">Save Profile</button>
+                            <button type="submit" class="brand-btn btn btn-dark w-50 mt-4">Save Changes</button>
                         </div>
                     </form>
                 </div>

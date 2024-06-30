@@ -5,7 +5,7 @@ My Profile
 {% endblock %}
 {% block content %}
 <div class="container-fluid profile-container">
-    <div class="row justify-content-center">
+    <div class="row container-fluid justify-content-center">
         <div class="col-md-8">
             <h2 class="text-center my-4">My Profile</h2>
             <hr class="brand-break">
@@ -24,21 +24,24 @@ My Profile
                             <p class="d-none d-lg-block"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
                         </div>
                         <div class="col-7 offset-1">
-                            <p><strong>Full Name:</strong> {{ profile.user.get_full_name }}</p>
-                            <p><strong>Email:</strong> {{ profile.user.email }}</p>      
+                            <p><strong>Full Name:</strong> {{ profile.first_name }} {{ profile.last_name}} </p>
+                            <p><strong>Email:</strong> {{ profile.user.email }}</p>  
+                            <p class="d-none d-lg-block"><strong>Address:</strong> {{ profile.address_1 }}, {{ profile.address_2 }}, {{ profile.city }}, {{ profile.state }}, {{ profile.postal_code }}, {{ profile.country }}</p>    
                             <p class="d-none d-lg-block"><strong>Bio:</strong> {{ profile.bio }}</p>
+                            <p class="d-block d-lg-none"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
                             </div>
                     </div>
-                    <div class="row d-block d-lg-none">
+                    <div class="row d-block d-lg-none mb-4">
                         <div class="col-12">
+                            <p><strong>Address:</strong> {{ profile.address_1 }}, {{ profile.address_2 }}, {{ profile.city }}, {{ profile.state }}, {{ profile.postal_code }}, {{ profile.country }}</p>    
                             <p><strong>Bio:</strong> {{ profile.bio }}</p>
-                            <p class="d-block d-lg-none"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
-                        
+                            <p class="d-none d-lg-block"><strong>{% if profile.user.user_type == 'host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer profile-card-footer text-center">
+                <div class="card-footer profile-card-footer text-center mb-4">
                     <a href="{% url 'profile_edit' %}" class="brand-btn btn">Edit Profile</a>
+                    <a href="{% url 'address_edit' %}" class="btn page-pill">Edit Address</a>
                 </div>
             </div>
         </div>
