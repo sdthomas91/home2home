@@ -159,6 +159,34 @@ a:focus {
     border: none !important;
 }
 
+/* ---property-details--- */
+.detail-container {
+    width: 80%;
+    margin: auto;
+}
+
+.amenities-list {
+    padding: 0;
+}
+
+.amenities-list li {
+    list-style: none;
+}
+
+.bb-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: #008080;
+}
+
+.bb-text {
+    font-size: 1.5rem;
+}
+
+.am-icon {
+    font-size: 1.3rem;
+    color: #008080;
+}
 /* ---image carousel--- */
 /* some help found here - https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square */
 .carousel-inner {
@@ -185,6 +213,17 @@ a:focus {
     border-radius: 2rem;
 }
 
+/* ---details carousel--- */
+.thumbnail-img {
+    width: 100%;
+    height: auto; /* Ensures the image maintains its aspect ratio */
+    max-height: 100px; /* Uniform height for all thumbnails */
+    object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+    border-radius: 1rem;
+    border: none;
+}
+
+
 /* ---filters--- */
 
 .filter-btn {
@@ -192,15 +231,6 @@ a:focus {
     padding: 0.4rem 1.3rem;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem !important;
-}
-
-.amenities-dropdown .dropdown-item {
-    display: flex;
-    align-items: center;
-}
-
-.amenities-dropdown .form-check-input {
-    margin-right: 10px;
 }
 
 /* ---filter modal--- */
