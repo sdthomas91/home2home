@@ -8,6 +8,8 @@ class Amenity(models.Model):
     name = models.CharField(max_length=100)
     # for font-awesome icons inspired by Isabella Mitchell Lonely House
     font_awesome_class = models.CharField(max_length=50)
+    # Custom ordering to prioritise most popular amenities
+    order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -15,6 +17,7 @@ class Amenity(models.Model):
     class Meta:
         verbose_name = _("Amenity")
         verbose_name_plural = _("Amenities")
+        ordering = ['order', 'name']
 
 
 class Property(models.Model):

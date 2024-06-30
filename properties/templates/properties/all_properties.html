@@ -16,23 +16,7 @@
             {% for property in properties %}
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">
-                    <div id="carouselExampleControls{{ forloop.counter }}" class="carousel slide" data-ride="carousel">
-                        <div class="property-carousel-inner">
-                            {% for image in property.images.all %}
-                            <div class="property-carousel-item {% if forloop.first %}active{% endif %}">
-                                <img src="{{ MEDIA_URL }}{{ image.image }}" class="d-block w-100" alt="{{ property.title }}">
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </button>
-                    </div>
+                    {% include 'properties/includes/image-carousel.html' %}
                     <div class="card-body">
                         <h5 class="card-title">{{ property.title }}</h5>
                     </div>
@@ -46,20 +30,20 @@
         </div>
     </div>
 </div>
-<div class="pagination">
+<div class="pagination d-flex justify-content-center mb-5">
     <span class="step-links">
         {% if properties.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ properties.previous_page_number }}">previous</a>
+            <a href="?page=1"><i class="icon fa-solid fa-angles-left"></i></a>
+            <a href="?page={{ properties.previous_page_number }}"><i class="icon fa-solid fa-angle-left"></i></a>
         {% endif %}
 
         <span class="current">
-            Page {{ properties.number }} of {{ properties.paginator.num_pages }}.
+            Page {{ properties.number }} of {{ properties.paginator.num_pages }}
         </span>
 
         {% if properties.has_next %}
-            <a href="?page={{ properties.next_page_number }}">next</a>
-            <a href="?page={{ properties.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ properties.next_page_number }}"><i class="icon fa-solid fa-angle-right ml-2"></i></a>
+            <a href="?page={{ properties.paginator.num_pages }}"><i class="icon fa-solid fa-angles-right"></i></a>
         {% endif %}
     </span>
 </div>

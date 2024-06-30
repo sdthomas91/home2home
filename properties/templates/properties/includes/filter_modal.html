@@ -1,7 +1,7 @@
 <!-- Button to Open the Modal -->
 <div class="d-flex justify-content-center">
-    <button type="button" class="btn brand-btn mb-3" data-toggle="modal" data-target="#filterModal">
-        Show Filters
+    <button type="button" class="btn brand-btn mb-3 filter-btn btn-lg" data-toggle="modal" data-target="#filterModal">
+        Filters <i class="icon fa fa-sliders"></i>
     </button>
 </div>
 
@@ -69,13 +69,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="pet_friendly">Pet Friendly:</label>
-                                <input type="checkbox" name="pet_friendly" id="pet_friendly" class="form-control" {% if selected_pet_friendly %}checked{% endif %}>
-                            </div>
-                        </div>
-
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="amenities">Amenities:</label>
@@ -99,11 +92,11 @@
                     </div>
 
                     <div class="row mt-2">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn brand-btn">Filter</button>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <a href="{% url 'all_properties' %}" class="btn btn-secondary">Clear Filters</a>
+                        <div class="col-md-12 text-right">
+                            <div class="d-inline-flex">
+                                <button type="submit" class="btn brand-btn mr-1">Filter</button>
+                                <a href="{% url 'all_properties' %}" class="btn btn-secondary ml-1">Clear Filters</a>
+                            </div>
                         </div>
                     </div>
                 </form>

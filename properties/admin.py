@@ -33,6 +33,9 @@ class PropertyAdmin(admin.ModelAdmin):
 admin.site.register(Property, PropertyAdmin)
 
 class AmenityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'font_awesome_class')
+    list_display = ('name', 'font_awesome_class', 'order')
+    # allow for ordering of amenities in admin to prioritise most popular 
+    list_editable = ('order',)
+    ordering = ('order',)
 
 admin.site.register(Amenity, AmenityAdmin)
