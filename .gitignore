@@ -13,4 +13,3 @@ cloudinary_python.txt
 *.sqlite3
 *.pyc
 PLANNING.md
-debug-log.md
