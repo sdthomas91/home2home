@@ -37,6 +37,19 @@ def profile_view(request):
     profile = get_object_or_404(Profile, user=request.user)
     return render(request, 'users/profile.html', {'profile': profile})
 
+
+@login_required
+def address_edit(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = AddressEditForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AddressEditForm(instance=profile)
+    return render(request, 'users/address_edit.html', {'form': form})
+
 @login_required
 def profile_edit(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -47,4 +60,4 @@ def profile_edit(request):
             return redirect('profile')
     else:
         form = ProfileEditForm(instance=profile)
-    return render(request, 'users/edit_profile.html', {'form': form, 'profile': profile})
+    return render(request, 'users/profile_edit.html', {'form': form})
