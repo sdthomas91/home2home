@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra-title %}
+Contact Us
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid bg-white">
+    <h1 class="text-center">Contact Us</h1>
+    <hr class="brand-break">
+    <div class="contact-container">
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" placeholder="Enter Full Name" class="form-control" id="name" value="{{ form.name.value }}">
+                </div>
+                <div class="form-group col-6">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="Enter Email" class="form-control" id="email" value="{{ form.email.value }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="message">Let us know how we can help</label>
+                    <textarea name="message" class="form-control" id="message" placeholder="Type your message...">{{ form.message.value }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn brand-btn">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

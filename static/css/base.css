@@ -280,11 +280,21 @@ a:focus {
 .edit-profile-body { 
     padding: 1.5rem !important;
 }
+
+/* ---CONTACT--- */
+.contact-container {
+    width: 60%;
+    margin: auto;
+    margin-top: 3rem;
+    padding-bottom: 10rem;
+}
 /* ---FOOTER--- */
 
 .social-links {
     font-size: 2rem; 
 }
+
+
 /* ---MEDIA QUERIES--- */
 
 
