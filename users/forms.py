@@ -5,23 +5,20 @@ from crispy_forms.layout import Submit, Layout, Field, Div, Row, Column
 from .models import Profile
 
 # custom signup form to include Guest or Host signup selection
-
 class CustomSignupForm(SignupForm):
     USER_TYPE_CHOICES = (
         ('Host', 'Host'),
         ('Guest', 'Guest'),
     )
     
-    user_type = forms.ChoiceField(
-        choices=USER_TYPE_CHOICES, 
-        label="Are you a Host or Guest?"
-        )
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, label="Are you a Host or Guest?")
 
     def save(self, request):
-        user = super(CustomSignupForm, self).save(request)
+        user = super().save(request)
         user.profile.user_type = self.cleaned_data.get('user_type')
         user.profile.save()
         return user
+
 
     
 # Guest specific profile setup form
