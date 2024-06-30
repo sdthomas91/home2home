@@ -26,20 +26,23 @@ def profile_setup(request):
     profile following signup. Displays different fields depending on status
     Guest or Host
     """
-    if request.user.profile.user_type == 'Guest':
-        form_class = GuestProfileForm
+    if request.user.profile.user_type == 'Host':
+        form = HostProfileForm(instance=request.user.profile)
     else:
-        form_class = HostProfileForm
+        form = GuestProfileForm(instance=request.user.profile)
 
     if request.method == 'POST':
-        form = form_class(request.POST, request.FILES, instance=request.user.profile)
+        if request.user.profile.user_type == 'Host':
+            form = HostProfileForm(request.POST, instance=request.user.profile)
+        else:
+            form = GuestProfileForm(request.POST, instance=request.user.profile)
+
         if form.is_valid():
             form.save()
-            return redirect('home')
-    else:
-        form = form_class(instance=request.user.profile)
+            return redirect('profile')
 
-    return render(request, 'account/profile_setup.html', {'form': form})
+    return render(request, 'users/profile_setup.html', {'form': form})
+
 
 
 
