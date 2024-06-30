@@ -1,9 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block page-extratitle %} My Properties{% endblock %}
+{% block extra-title %}My Properties{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>My Properties</h1>
-    <hr class="brand-break">
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div id="carouselExampleControls{{ forloop.counter }}" class="carousel slide" data-ride="carousel">
+                    <div class="property-carousel-inner">
+                        {% for image in property.images.all %}
+                        <div class="property-carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ property.title }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#carouselExampleControls{{ forloop.counter }}" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ property.title }}</h5>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">£{{ property.price_per_night }} per night</p>
+                    <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

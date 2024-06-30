@@ -76,6 +76,9 @@
                   <a href="#" class="dropdown-item">Product Management</a>
                   {% endif %}
                   <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                  {% if request.user.is_authenticated and request.user.profile.user_type == 'Host' %}
+                  <a href="{% url 'my_properties' %}" class="dropdown-item">My Properties</a>
+                  {% endif %}
                   <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                 {% else %}
                   <a href="{% url 'account_signup' %}" class="dropdown-item">Register as Guest</a>
