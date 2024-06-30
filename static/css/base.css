@@ -210,6 +210,35 @@ a:focus {
     width: 60%;
 }
 
+/* ---PROFILES--- */
+
+.profile-container { 
+    padding: 3rem 0 10rem;
+    background: rgba(255,255,255,0.5);
+}
+
+/* ---profile card overrides--- */
+
+.profile-card {
+    box-shadow: -3px 2px 5px rgba(50,50,50,0.3);
+    border-radius: 1rem !important;
+}
+
+.profile-card-body {
+    padding: 1.25rem 1.25rem 0 1.25rem !important;
+}
+
+.profile-card-header {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.profile-card-footer {
+    border-radius: 0 0 1rem 1rem !important;
+}
+
+.edit-profile-body { 
+    padding: 1.5rem !important;
+}
 /* ---FOOTER--- */
 
 .social-links {
