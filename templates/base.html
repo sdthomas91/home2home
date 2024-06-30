@@ -79,6 +79,7 @@
                     <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                     {% if request.user.profile.user_type == 'Host' %}
                     <a href="{% url 'my_properties' %}" class="dropdown-item">My Properties</a>
+                    <a href="{% url 'add_property' %}" class="dropdown-item">Add Property</a>
                     {% endif %}
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                   {% else %}

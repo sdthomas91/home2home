@@ -15,7 +15,6 @@ def all_properties(request):
     bedrooms = request.GET.get('bedrooms')
     bathrooms = request.GET.get('bathrooms')
     price = request.GET.get('price')
-    pet_friendly = request.GET.get('pet_friendly')
     amenities = request.GET.getlist('amenities')
 
     if city:
@@ -33,8 +32,6 @@ def all_properties(request):
         }
         min_price, max_price = price_range.get(price, (0, float('inf')))
         properties = properties.filter(price_per_night__gte=min_price, price_per_night__lte=max_price)
-    if pet_friendly:
-        properties = properties.filter(pets_allowed=True)
     if amenities:
         for amenity_id in amenities:
             properties = properties.filter(amenities__id=amenity_id)
@@ -52,7 +49,6 @@ def all_properties(request):
         'selected_bedrooms': bedrooms,
         'selected_bathrooms': bathrooms,
         'selected_price': price,
-        'selected_pet_friendly': pet_friendly,
         'selected_amenities': amenities,
     })
 

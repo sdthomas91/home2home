@@ -45,7 +45,6 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     featured = models.BooleanField(default=False)
     amenities = models.ManyToManyField(Amenity, blank=True)
-    pets_allowed = models.BooleanField(default=False) 
 
     def __str__(self):
         return self.title
