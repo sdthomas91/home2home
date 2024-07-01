@@ -18,7 +18,7 @@ def book_property(request, property_id):
                 checkout=form.cleaned_data['checkout'],
                 guests=form.cleaned_data['guests'],
             )
-            booking.save()  # This will trigger the save method and print the debug info
+            booking.save()
             messages.success(
                 request,
                 'Your dates are available! Please proceed to checkout'
@@ -53,4 +53,3 @@ def clear_basket(request):
     bookings.delete()
     messages.success(request, 'All bookings cleared from your basket!')
     return redirect('basket')
-

@@ -1,9 +1,9 @@
-<!-- Modal to confirm line item deletion in basket -->
-<div class="modal fade" id="deleteBookingModal{{ booking.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteBookingModalLabel{{ booking.id }}" aria-hidden="true">
+<!-- Modal to confirm clearing the basket -->
+<div class="modal fade" id="clearBasketModal" tabindex="-1" role="dialog" aria-labelledby="clearBasketModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteBookingModalLabel{{ booking.id }}">Confirm Deletion</h5>
+                <h5 class="modal-title" id="clearBasketModalLabel">Confirm Clear Basket</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,12 +12,12 @@
                 Are you sure you want to clear your basket?
             </div>
             <div class="modal-footer">
-                <form id="deleteBookingForm{{ booking.id }}" method="post" action="{% url 'clear_basket' %}">
+                <form id="clearBasketForm" method="post" action="{% url 'clear_basket' %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </form>
             </div>
         </div>
     </div>
-  </div>
-  
+</div>
