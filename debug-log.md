@@ -50,6 +50,8 @@
         * used the col method and was okay for the most part but still looked clumsy
         * changed plan and decided to go with Bootstrap modal for the filtering options, inspired by AirBnb interface. It is clean, easy to use and works responsively. 
     * Amenities ordering - wanted most popular amenities to be listed at the top - should have consideredd this when loading JSON data. Used django documentation and stack overflow to implement manual ordering within the admin interface. This worked nicely and now 8 top amenities show with a "show more" button
+    * Map
+        - Tried adding diferent sized maps but it actually made UI worse - only medium screens where it looks like too much white space. Will stick with 1 size map below all info
 
 - Users
     * Profiles

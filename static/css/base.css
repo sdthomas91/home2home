@@ -60,6 +60,7 @@ a:focus {
     margin: auto;
 }
 
+
 /* ---lines--- */
 
 .brand-break {
@@ -190,6 +191,10 @@ a:focus {
     margin: auto;
 }
 
+.property-card-body {
+    padding-top: 0 !important;
+}
+
 .amenities-list {
     padding: 0;
 }
@@ -222,6 +227,7 @@ a:focus {
 .alert-container {
     padding-bottom: 25rem;
 }
+
 /* ---image carousel--- */
 /* some help found here - https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square */
 .carousel-inner {
@@ -258,6 +264,27 @@ a:focus {
     border: none;
 }
 
+
+/* ---REVIEWS--- */
+
+.fa-star {
+    color: #008080;
+    font-size: 1.5rem;
+}
+
+.write-review-container { 
+    width: 80%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.review-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 15px 0;
+}
 
 /* ---filters--- */
 

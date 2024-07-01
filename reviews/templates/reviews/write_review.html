@@ -5,7 +5,8 @@
 {% include 'includes/star_ratings_script.html' %}
 {% endblock %}
 {% block content %}
-<div class="container mt-5">
+<div class="container">
+    <div class="write-review-container">
     <h1>Write a Review for {{ property.title }}</h1>
     <form method="post">
         {% csrf_token %}
@@ -26,5 +27,6 @@
         </div>
         <button type="submit" class="btn brand-btn">Submit</button>
     </form>
+</div>
 </div>
 {% endblock %}
