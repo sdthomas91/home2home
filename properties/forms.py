@@ -43,3 +43,13 @@ class PropertyImageForm(forms.ModelForm):
     class Meta:
         model = PropertyImage
         fields = ['image']
+
+class PropertyEditForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        exclude = ['host', 'featured', 'availability']
+
+    def __init__(self, *args, **kwargs):
+        super(PropertyEditForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

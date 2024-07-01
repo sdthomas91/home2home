@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'users',
     'properties',
     'bookings',
-    'messaging',
     'contact',
     'checkout',
 ]

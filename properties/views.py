@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from .models import Property, Amenity, PropertyImage
-from .forms import PropertyCreateForm, PropertyImageForm
+from .forms import PropertyCreateForm, PropertyImageForm, PropertyEditForm
 from bookings.forms import BookingForm
 
 def all_properties(request):
@@ -88,3 +89,22 @@ def add_property(request):
         image_form = PropertyImageForm()
 
     return render(request, 'properties/add_property.html', {'form': form, 'image_form': image_form})
+
+
+@login_required
+def edit_property(request, property_id):
+    property = get_object_or_404(Property, id=property_id)
+    
+    # Check if the logged-in user is the host of the property
+    if property.host != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this property.")
+    
+    if request.method == 'POST':
+        form = PropertyEditForm(request.POST, request.FILES, instance=property)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Property updated successfully!')
+            return redirect('my_properties')
+    else:
+        form = PropertyEditForm(instance=property)
+    return render(request, 'properties/edit_property.html', {'form': form, 'property': property})
