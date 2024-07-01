@@ -24,7 +24,11 @@ def write_review(request, property_id):
             return redirect('property_detail', property_id=property.id)
     else:
         form = ReviewForm()
-    return render(request, 'reviews/write_review.html', {'form': form, 'property': property})
+    return render(
+        request,
+        'reviews/write_review.html',
+        {'form': form, 'property': property}
+        )
 
 @login_required
 def property_reviews(request, property_id):
@@ -33,4 +37,27 @@ def property_reviews(request, property_id):
     """
     property = get_object_or_404(Property, id=property_id)
     reviews = property.reviews.all()
-    return render(request, 'reviews/property_reviews.html', {'property': property, 'reviews': reviews})
+    return render(
+        request,
+        'reviews/property_reviews.html',
+        {'property': property, 'reviews': reviews}
+        )
+
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, guest=request.user)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Review updated successfully!')
+            return redirect('property_detail', property_id=review.property.id)
+    else:
+        form = ReviewForm(instance=review)
+    
+    return render(
+        request,
+        'reviews/edit_review.html',
+        {'form': form, 'review': review}
+        )
