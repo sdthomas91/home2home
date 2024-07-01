@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra-title %}
+Edit Review
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Edit Review for {{ review.property.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            {{ form.rating }}
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            {{ form.comment }}
+        </div>
+        <button type="submit" class="btn brand-btn">Submit</button>
+    </form>
+</div>
+{% endblock %}
