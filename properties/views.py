@@ -7,6 +7,7 @@ from django.db.models import Q
 from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm, PropertyEditForm
 from bookings.forms import BookingForm
+from bookings.models import Booking
 
 def all_properties(request):
     """

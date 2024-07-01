@@ -116,6 +116,34 @@
             <p id="longitude" class="d-none">{{ property.longitude }}</p>
         </div>
     </div>
+
+    <!-- Reviews carousel -->
+    <h4>Guest Reviews</h4>
+    {% if property.reviews.all %}
+        <div id="propertyReviewsCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for review in property.reviews.all %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-caption">
+                        <h5>{{ review.guest.username }}</h5>
+                        <p>{{ review.comment }}</p>
+                        <p>Rating: {{ review.rating }} / 5</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#propertyReviewsCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#propertyReviewsCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    {% else %}
+        <p>No reviews yet. Be the first to <a href="{% url 'write_review' property.id %}">write a review</a>!</p>
+    {% endif %}
 </div>
 </div>
 {% include 'properties/includes/property_map_script.html' %}

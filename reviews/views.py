@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import Review
 from properties.models import Property
 from .forms import ReviewForm
+from bookings.models import Booking
 
 @login_required
 def write_review(request, property_id):
