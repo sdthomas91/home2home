@@ -72,4 +72,11 @@
         - Fixed by amending view to include user instead of profile - another easy fix but generated a type error to address which was fixed by updating the booking model
         - Final issue was an operational one as I hadn't migrated the updated booking model - resolved and now need to proceed with checkout and basket to be able to fully test
         
+- Basket
+    * Adding to basket
+        - Tried adding items to basket, had a few minor issues such as redirects to checkout (not created yet) but nothing major. 
+        - Line items were missing values so could not generate a total value for the basket. Added in the fields and refreshed but kept populating with £0.00 
+        - Tried a number of things including rebuilding the views and forms and reformatting template, but nothing was working.
+        - Foolish mistake, existing bookings in the cart were created before model was updated and so had no values for total price etc. 
+        - Created new booking and now displays correctly - need to add delete functionality to remove line items or clear basket
 

@@ -18,8 +18,7 @@ def book_property(request, property_id):
                 checkout=form.cleaned_data['checkout'],
                 guests=form.cleaned_data['guests'],
             )
-            # Save the booking to trigger the save method in the model
-            booking.save()
+            booking.save()  # This will trigger the save method and print the debug info
             messages.success(
                 request,
                 'Your dates are available! Please proceed to checkout'
@@ -32,6 +31,7 @@ def book_property(request, property_id):
         'properties/property_detail.html',
         {'property': property, 'form': form}
     )
+
 
 
 @login_required

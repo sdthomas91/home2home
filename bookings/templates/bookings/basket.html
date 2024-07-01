@@ -12,10 +12,10 @@ Basket
         {% for booking in bookings %}
         <li>
             <p>Property: {{ booking.property.title }}</p>
-            <p>Check-in: {{ booking.checkin }}</p>
-            <p>Check-out: {{ booking.checkout }}</p>
+            <p>Check-in: {{ booking.checkin }} 14:00 || Check-out: {{ booking.checkout }} 10:00 || Total Nights: {{ booking.total_nights }}</p>
             <p>Guests: {{ booking.guests }}</p>
             <p>Price per Night: £{{ booking.property.price_per_night }}</p>
+            <p></p>
             <p>Total: £{{ booking.total_price }}</p>
         </li>
         {% endfor %}
