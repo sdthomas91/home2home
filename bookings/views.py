@@ -40,3 +40,17 @@ def basket_view(request):
     subtotal = sum(booking.total_price for booking in bookings)
     return render(request, 'bookings/basket.html', {'bookings': bookings, 'subtotal': subtotal})
 
+@login_required
+def delete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    booking.delete()
+    messages.success(request, 'Booking deleted successfully!')
+    return redirect('basket')
+
+@login_required
+def clear_basket(request):
+    bookings = Booking.objects.filter(user=request.user)
+    bookings.delete()
+    messages.success(request, 'All bookings cleared from your basket!')
+    return redirect('basket')
+

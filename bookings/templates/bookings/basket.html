@@ -1,5 +1,5 @@
-<!-- basket.html -->
 {% extends "base.html" %}
+{% load static %}
 {% block extra-title %}
 Basket
 {% endblock %}
@@ -30,23 +30,32 @@ Basket
                 <td>£{{ booking.property.price_per_night }}</td>
                 <td>£{{ booking.total_price }}</td>
                 <td>
-                    <form method="post" action="{% url 'delete_booking' booking.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#confirmationModal" data-url="{% url 'delete_booking' booking.id %}" data-message="Are you sure you want to delete this booking?">Delete</button>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <form method="post" action="{% url 'clear_basket' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning">Clear Basket</button>
-    </form>
+    <button class="btn btn-warning" data-toggle="modal" data-target="#confirmationModal" data-url="{% url 'clear_basket' %}" data-message="Are you sure you want to clear your bookings?">Clear Basket</button>
     {% else %}
     <div class="alert alert-info text-center" role="alert">
         Your basket is empty. <a href="{% url 'all_properties' %}" class="alert-link">Browse properties to book your stay!</a>
     </div>
     {% endif %}
 </div>
+{% include 'includes/delete_booking_modal.html' %}
+{% include 'includes/clear_basket_modal.html' %}
+{% endblock %}
+
+{% block extra-js %}
+<script>
+    $('#confirmationModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var url = button.data('url')
+        var message = button.data('message')
+        var modal = $(this)
+        modal.find('#confirmationForm').attr('action', url)
+        modal.find('#modalBody').text(message)
+    })
+</script>
 {% endblock %}
