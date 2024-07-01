@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseForbidden
+from django.db.models import Q
 from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm, PropertyEditForm
 from bookings.forms import BookingForm
@@ -33,7 +34,10 @@ def all_properties(request):
             "75": (75, float('inf'))
         }
         min_price, max_price = price_range.get(price, (0, float('inf')))
-        properties = properties.filter(price_per_night__gte=min_price, price_per_night__lte=max_price)
+        properties = properties.filter(
+            price_per_night__gte=min_price,
+            price_per_night__lte=max_price
+            )
     if amenities:
         for amenity_id in amenities:
             properties = properties.filter(amenities__id=amenity_id)
@@ -80,15 +84,25 @@ def add_property(request):
             property_instance.save()
             
             for file in request.FILES.getlist('images'):
-                PropertyImage.objects.create(property=property_instance, image=file)
+                PropertyImage.objects.create(
+                    property=property_instance,
+                    image=file
+                    )
             
             messages.success(request, 'Property added successfully!')
-            return redirect('property_detail', property_id=property_instance.id)
+            return redirect(
+                'property_detail',
+                property_id=property_instance.id
+                )
     else:
         form = PropertyCreateForm()
         image_form = PropertyImageForm()
 
-    return render(request, 'properties/add_property.html', {'form': form, 'image_form': image_form})
+    return render(
+        request,
+        'properties/add_property.html',
+        {'form': form, 'image_form': image_form}
+        )
 
 
 @login_required
@@ -97,7 +111,9 @@ def edit_property(request, property_id):
     
     # Check if the logged-in user is the host of the property
     if property.host != request.user:
-        return HttpResponseForbidden("You are not allowed to edit this property.")
+        return HttpResponseForbidden(
+            "You are not allowed to edit this property."
+            )
     
     if request.method == 'POST':
         form = PropertyEditForm(request.POST, request.FILES, instance=property)
@@ -107,4 +123,31 @@ def edit_property(request, property_id):
             return redirect('my_properties')
     else:
         form = PropertyEditForm(instance=property)
-    return render(request, 'properties/edit_property.html', {'form': form, 'property': property})
+    return render(
+        request,
+        'properties/edit_property.html',
+        {'form': form, 'property': property}
+        )
+
+
+def search_results(request):
+    """
+    A view to handle search and return appropriate properties
+    """
+    query = request.GET.get('q')
+    if query:
+        results = Property.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(city__icontains=query) |
+            Q(state__icontains=query) |
+            Q(country__icontains=query)
+        )
+    else:
+        results = Property.objects.none()
+    
+    return render(
+        request,
+        'properties/search_results.html',
+        {'results': results, 'query': query}
+        )

@@ -49,18 +49,18 @@
             </a>
           </div>
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <form method="GET" action="">
-              <div class="input-group w-">
-                <input type="text" name="q" class="form-control border border-black rounded-5" placeholder="Search for your stay">
-                <div class="input-group-append">
-                  <button class="form-control btn btn-black border border-black rounded-0" type="submit">
-                    <span class="icon">
-                      <i class="fas fa-search brand-color"></i>
-                    </span>
-                  </button>
-                </div>
+            <form method="GET" action="{% url 'search_results' %}">
+              <div class="input-group">
+                  <input type="text" name="q" class="form-control border border-black rounded-0" placeholder="Search for your stay">
+                  <div class="input-group-append">
+                      <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                          <span class="icon">
+                              <i class="fas fa-search brand-color"></i>
+                          </span>
+                      </button>
+                  </div>
               </div>
-            </form>
+          </form>          
           </div>
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
             <ul class="list-inline list-unstyled text-center text-lg-right my-0">

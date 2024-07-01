@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block extra-title %}All Properties{% endblock %}
+{% block extra-title %}Search Results{% endblock %}
 
 {% block content %}
 
 <div class="property-page">
 
-<h1 class="text-center">All Properties</h1>
-
-{% include 'properties/includes/filter_modal.html' %}
+<h1 class="text-center">Search Results for "{{ query }}"</h1>
+<hr class="brand-break mb-4">
 
 <div class="d-flex justify-content-center">
     <div class="properties-container">
         <div class="row">
-            {% for property in properties %}
+            {% for property in results %}
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">
                     {% include 'properties/includes/image-carousel.html' %}
@@ -32,9 +31,9 @@
 </div>
 <div class="pagination d-flex justify-content-center mb-5">
     <span class="step-links">
-        {% if properties.has_previous %}
+        {% if results.has_previous %}
             <a href="?page=1"><i class="icon fa-solid fa-angles-left"></i></a>
-            <a href="?page={{ properties.previous_page_number }}"><i class="icon fa-solid fa-angle-left"></i></a>
+            <a href="?page={{ results.previous_page_number }}"><i class="icon fa-solid fa-angle-left"></i></a>
         {% endif %}
 
         <span class="current page-pill">
@@ -45,12 +44,19 @@
             {% endif %}
         </span>
 
-        {% if properties.has_next %}
-            <a href="?page={{ properties.next_page_number }}"><i class="icon fa-solid fa-angle-right ml-2"></i></a>
-            <a href="?page={{ properties.paginator.num_pages }}"><i class="icon fa-solid fa-angles-right"></i></a>
+        {% if results.has_next %}
+            <a href="?page={{ results.next_page_number }}"><i class="icon fa-solid fa-angle-right ml-2"></i></a>
+            <a href="?page={{ results.paginator.num_pages }}"><i class="icon fa-solid fa-angles-right"></i></a>
         {% endif %}
     </span>
 </div>
+
+{% if not results %}
+    <div class="alert alert-info text-center" role="alert">
+        No results found for "{{ query }}". <a href="{% url 'all_properties' %}" class="alert-link">Browse all properties</a>
+    </div>
+{% endif %}
+
 </div>
 <script src="{% static 'js/properties/properties.js' %}"></script>
 {% endblock %}
