@@ -84,3 +84,7 @@
     * Displaying star rating
         - Tried displaying a star rating or "No Reviews Yet" on property page, but discovered [Django Star Rating](https://medium.com/geekculture/django-implementing-star-rating-e1deff03bb1c)
         - Implemented but want to replace the No Ratings Yet with 5 empty stars
+        - Had to utilised some custom JS to add a star rating element to the write_review template - this worked with the fontawesome classes to provide a filled or empty star
+        - Stars were remaining solid, reformatted JS to include an initial empty state, but this didn't show as empty
+        - Realised I was using incorrect fontawesome - outdated from previous projects - needed to use fa-solid instead of fas
+        - Once rectified classes and amended JS accordingly the star widget now works - need to ensure it uploads the rating to the database

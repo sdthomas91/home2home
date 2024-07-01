@@ -1,14 +1,16 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let ratingInput = document.getElementById('id_rating');
-        let stars = document.querySelectorAll('.star-ratings .fa');
+        let stars = document.querySelectorAll('.fa-star');
 
-        // Function to set the filled state of stars
+        // Set state of filled and empty stars
         function setStars(score) {
             stars.forEach(function(star) {
-                star.classList.remove('filled');
+                star.classList.remove('fa-solid');
+                star.classList.add('fa-regular');
                 if (star.getAttribute('data-score') <= score) {
-                    star.classList.add('filled');
+                    star.classList.remove('fa-regular');
+                    star.classList.add('fa-solid');
                 }
             });
         }
