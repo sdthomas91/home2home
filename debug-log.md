@@ -94,3 +94,6 @@
         - Managed to amend logic similar to star ratings in order to get stars to appear correctly on user reviews. 
         - Cannot get the edit button to be clickable - have corrected urls etc. but no luck
         - Think the issue may be down to carousel style - think the carousel controls overlap the button - will try center aligning button
+        - rectified issue, for now will stick with loading the latest reviews - possibly the latest 2 for styling purposes
+        - Tested functionality and now the review can be edited and when edited it affects the property average rating. Seaside Haven is best for viewing as it has reviews loaded on - will load more via JSON.
+        

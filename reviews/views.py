@@ -13,6 +13,11 @@ def write_review(request, property_id):
     """
     property = get_object_or_404(Property, id=property_id)
     
+    if not request.user.bookings.filter(property=property).exists():
+        messages.error(request, "You haven't stayed here yet, book now!")
+        return redirect('property_detail', property_id=property.id)
+
+        
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
