@@ -12,7 +12,7 @@ def book_property(request, property_id):
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = Booking(
-                user=request.user.profile,
+                user=request.user,
                 property=property,
                 checkin=form.cleaned_data['checkin'],
                 checkout=form.cleaned_data['checkout'],
