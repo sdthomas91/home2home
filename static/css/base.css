@@ -269,7 +269,8 @@ a:focus {
 
 .fa-star {
     color: #008080;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin-right: 5px;
 }
 
 .write-review-container { 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from users.models import User
 # Star ratings found 
@@ -48,12 +49,7 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     featured = models.BooleanField(default=False)
     amenities = models.ManyToManyField(Amenity, blank=True)
-    rating = models.ForeignKey(
-        Rating,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-        )
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -61,6 +57,26 @@ class Property(models.Model):
     class Meta:
         verbose_name = _("Property")
         verbose_name_plural = _("Properties")
+
+    def update_average_rating(self):
+        avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        self.average_rating = avg_rating
+        self.save()
+
+    def render_star_rating(self):
+        if not self.average_rating:
+            return format_html('<span class="text-info">No Ratings Yet</span>')
+        
+        filled_stars = int(self.average_rating)
+        empty_stars = 5 - filled_stars
+        half_star = 1 if self.average_rating - filled_stars >= 0.5 else 0
+        
+        stars_html = ''.join(['<i class="fa-solid fa-star"></i>' for _ in range(filled_stars)])
+        stars_html += ''.join(['<i class="fa-regular fa-star"></i>' for _ in range(empty_stars - half_star)])
+        if half_star:
+            stars_html += '<i class="fa-solid fa-star-half-alt"></i>'
+        
+        return format_html(stars_html)
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(

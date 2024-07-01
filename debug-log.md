@@ -30,9 +30,6 @@
     * Constructed custom admin.py but had issues loading the page - followed [django documentation](https://docs.djangoproject.com/en/5.0/ref/contrib/admin/filters/) to implement the filter view. Functions as hoped
     <img src="media/testing/django-filter.png">
 
-- Reviews
-    * Used [Simple is better than complex blog](https://simpleisbetterthancomplex.com/) to assist with some of the logic in the reviews model such as custom logic for the save function
-
 - Properties
     * Issues migrating the properties/models.py file
         * When migrating forgot I had previously migrated a properties model and so had to run through some overrides.
@@ -90,3 +87,6 @@
         - Stars were remaining solid, reformatted JS to include an initial empty state, but this didn't show as empty
         - Realised I was using incorrect fontawesome - outdated from previous projects - needed to use fa-solid instead of fas
         - Once rectified classes and amended JS accordingly the star widget now works - need to ensure it uploads the rating to the database
+        - Rating not populating on property_detail page and not displaying stars in carousels - need to revise property model I think to get an average rating, rather than just the single rating
+        - Stars_rating actually seemed to make things more complex, unnecessarily, especially when it came to displaying the average rating of a property - instead decided to try modifying the property model. It kept bugging but settled on calculating the average rating, and then adding a custom star generation within the model itself. The logic in html was too cluttered and clumsy and made for a messy UI. 
+        - Settled on the model logic, clean and works well. Means I can display it across multiple areas such as reviews carousels etc. if needed
