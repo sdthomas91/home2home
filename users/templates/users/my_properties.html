@@ -4,7 +4,9 @@
 
 {% block content %}
 <div class="container mt-4 h-100">
+    
     <h1 class="text-center">My Properties</h1>
+    <hr class="brand-break mb-4">
     {% if properties.exists %}
         <div class="row h-100">
             {% for property in properties %}
@@ -32,13 +34,14 @@
                     </div>
                     <div class="card-footer">
                         <p class="card-text">£{{ property.price_per_night }} per night</p>
-                        <a href="{% url 'property_detail' property.id %}" class="btn brand-btn">View Details</a>
+                        <a href="{% url 'edit_property' property.id %}" class="btn brand-btn">Edit Property</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     {% else %}
+    </div>
         <div class="alert alert-info text-center mp-alert" role="alert">
             No properties yet? <a href="{% url 'add_property' %}" class="alert-link">Get started on your first listing!</a>
         </div>

@@ -88,7 +88,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth', 
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'home2home.context_processors.basket_total', # context for basket
+                # Context processor used for basket 
+                # https://dev.to/sarahhudaib/context-processors-in-django-15h2
+                'home2home.context_processors.basket_total', 
+                
             ],
         },
     },
