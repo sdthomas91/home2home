@@ -1,5 +1,5 @@
+<!-- basket.html -->
 {% extends "base.html" %}
-
 {% block extra-title %}
 Basket
 {% endblock %}
@@ -8,23 +8,44 @@ Basket
 <div class="container mt-5">
     <h1>Your Basket</h1>
     {% if bookings %}
-    <ul>
-        {% for booking in bookings %}
-        <li>
-            <p>Property: {{ booking.property.title }}</p>
-            <p>Check-in: {{ booking.checkin }} 14:00 || Check-out: {{ booking.checkout }} 10:00 || Total Nights: {{ booking.total_nights }}</p>
-            <p>Guests: {{ booking.guests }}</p>
-            <p>Price per Night: £{{ booking.property.price_per_night }}</p>
-            <p></p>
-            <p>Total: £{{ booking.total_price }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-    <p><strong>Subtotal: £{{ subtotal }}</strong></p>
-    <a href="{% url 'home' %}" class="btn btn-primary">Proceed to Checkout</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Guests</th>
+                <th>Price per Night</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.property.title }}</td>
+                <td>{{ booking.checkin }}</td>
+                <td>{{ booking.checkout }}</td>
+                <td>{{ booking.guests }}</td>
+                <td>£{{ booking.property.price_per_night }}</td>
+                <td>£{{ booking.total_price }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_booking' booking.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form method="post" action="{% url 'clear_basket' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning">Clear Basket</button>
+    </form>
     {% else %}
-    <div class="alert alert-info text-center mp-alert" role="alert">
-        Your basket is empty. <a href="{% url 'all_properties' %}" class="alert-link">Book your stay</a> to add items to your basket.
+    <div class="alert alert-info text-center" role="alert">
+        Your basket is empty. <a href="{% url 'all_properties' %}" class="alert-link">Browse properties to book your stay!</a>
     </div>
     {% endif %}
 </div>
