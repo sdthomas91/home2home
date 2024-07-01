@@ -69,4 +69,7 @@
         - Issues incorporating the booking form on the property_detail page - throwing a url error 
         - Had added booking URL's but not added to main URL's - easy fix
         - New issue thrown "Cannot assign "<Profile: mrHost>": "Booking.user" must be a "User" instance."
-        - 
+        - Fixed by amending view to include user instead of profile - another easy fix but generated a type error to address which was fixed by updating the booking model
+        - Final issue was an operational one as I hadn't migrated the updated booking model - resolved and now need to proceed with checkout and basket to be able to fully test
+        
+

@@ -18,9 +18,25 @@ def book_property(request, property_id):
                 checkout=form.cleaned_data['checkout'],
                 guests=form.cleaned_data['guests'],
             )
+            # Save the booking to trigger the save method in the model
             booking.save()
-            messages.success(request, 'Your booking was successfully created!')
-            return redirect('checkout')
+            messages.success(
+                request,
+                'Your dates are available! Please proceed to checkout'
+            )
+            return redirect('basket')
     else:
         form = BookingForm()
-    return render(request, 'properties/property_detail.html', {'property': property, 'form': form})
+    return render(
+        request,
+        'properties/property_detail.html',
+        {'property': property, 'form': form}
+    )
+
+
+@login_required
+def basket_view(request):
+    bookings = Booking.objects.filter(user=request.user)
+    subtotal = sum(booking.total_price for booking in bookings)
+    return render(request, 'bookings/basket.html', {'bookings': bookings, 'subtotal': subtotal})
+

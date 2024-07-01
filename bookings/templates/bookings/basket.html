@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block extra-title %}
+Basket
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Your Basket</h1>
+    {% if bookings %}
+    <ul>
+        {% for booking in bookings %}
+        <li>
+            <p>Property: {{ booking.property.title }}</p>
+            <p>Check-in: {{ booking.checkin }}</p>
+            <p>Check-out: {{ booking.checkout }}</p>
+            <p>Guests: {{ booking.guests }}</p>
+            <p>Price per Night: £{{ booking.property.price_per_night }}</p>
+            <p>Total: £{{ booking.total_price }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <p><strong>Subtotal: £{{ subtotal }}</strong></p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Proceed to Checkout</a>
+    {% else %}
+    <div class="alert alert-info text-center mp-alert" role="alert">
+        Your basket is empty. <a href="{% url 'all_properties' %}" class="alert-link">Book your stay</a> to add items to your basket.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
