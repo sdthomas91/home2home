@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from users.models import User
+# Star ratings found 
+# https://medium.com/geekculture/django-implementing-star-rating-e1deff03bb1c
+from star_ratings.models import Rating
 
 
 class Amenity(models.Model):
@@ -45,6 +48,12 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     featured = models.BooleanField(default=False)
     amenities = models.ManyToManyField(Amenity, blank=True)
+    rating = models.ForeignKey(
+        Rating,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+        )
 
     def __str__(self):
         return self.title

@@ -10,7 +10,13 @@
     <div class="row">
         <div class="col-12 text-left">
             <h1>{{ property.title }}</h1>
-            <p>Rating: {% if property.rating %}{{ property.rating }}{% else %} <span class="text-info">No Ratings Yet</span>{% endif %}</p>
+            <p>Rating: {% if property.rating %}
+                {{ property.rating.average }} / 5
+                {% include 'star_ratings/widget.html' with object=property %}
+            {% else %}
+                <span class="text-info">No Ratings Yet</span>
+            {% endif %}
+            </p>
         </div>
     </div>
     <div class="row">
