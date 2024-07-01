@@ -55,6 +55,11 @@ a:focus {
     padding: 0.5rem 1rem;
 }
 
+.page-title {
+    width: 80%;
+    margin: auto;
+}
+
 /* ---lines--- */
 
 .brand-break {
@@ -206,6 +211,16 @@ a:focus {
 .am-icon {
     font-size: 1.3rem;
     color: #008080;
+}
+
+#map {
+    border-radius: 2rem;
+    box-shadow: 1px 1px 6px 3px rgba(40, 40, 40, 0.2);
+    border: 1px solid #d4d4d4;
+}
+
+.alert-container {
+    padding-bottom: 25rem;
 }
 /* ---image carousel--- */
 /* some help found here - https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square */
