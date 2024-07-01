@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm
+from bookings.forms import BookingForm
 
 def all_properties(request):
     """
@@ -54,15 +55,14 @@ def all_properties(request):
 
 def property_detail(request, property_id):
     """
-    View to display selected property details
+    View to display selected property
     """
     property = get_object_or_404(Property, id=property_id)
     form = BookingForm()
     return render(
         request,
         'properties/property_detail.html',
-        {'property': property},
-        {'form', form}
+        {'property': property, 'form': form}
         )
 
 @login_required

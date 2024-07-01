@@ -54,30 +54,25 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Booking Details</h4>
-                    <!-- Date Selection Placeholder -->
-                    <div class="form-group">
-                        <label for="checkin">Check-in Date:</label>
-                        <input type="date" class="form-control" id="checkin" name="checkin">
-                    </div>
-                    <div class="form-group">
-                        <label for="checkout">Check-out Date:</label>
-                        <input type="date" class="form-control" id="checkout" name="checkout">
-                    </div>
-                    <div class="form-group">
-                        <label for="guests">Number of Guests:</label>
-                        <select class="form-control" id="guests" name="guests">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                        <small class="form-text text-muted">
-                            If you require more than 6 guests please <a href="{% url 'contact' %}">Contact Us</a> to discuss your booking.
-                        </small>
-                    </div>
-
+                    <form method="post" action="{% url 'book_property' property.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="checkin">Check-in Date:</label>
+                            {{ form.checkin }}
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Check-out Date:</label>
+                            {{ form.checkout }}
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests:</label>
+                            {{ form.guests }}
+                            <small class="form-text text-muted">
+                                If you require more than 6 guests please <a href="{% url 'contact' %}">Contact Us</a> to discuss your booking.
+                            </small>
+                        </div>
+                        <button type="submit" class="btn brand-btn mb-3">Book Now</button>
+                    </form>
                     <button type="button" class="btn brand-btn mb-3">Book Now</button>
                     <div class="row">
                         <div class="col-4">

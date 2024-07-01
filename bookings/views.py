@@ -1,20 +1,26 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Booking, Property
+from django.contrib import messages
+from properties.models import Property
 from .forms import BookingForm
+from .models import Booking
 
 @login_required
 def book_property(request, property_id):
-    property = Property.objects.get(id=property_id)
+    property = get_object_or_404(Property, id=property_id)
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            booking = form.save(commit=False)
-            booking.user = request.user
-            booking.property = property
-            booking.total_price = property.price_per_night * (booking.check_out - booking.check_in).days
+            booking = Booking(
+                user=request.user.profile,
+                property=property,
+                checkin=form.cleaned_data['checkin'],
+                checkout=form.cleaned_data['checkout'],
+                guests=form.cleaned_data['guests'],
+            )
             booking.save()
-            return redirect('checkout', booking.id)
+            messages.success(request, 'Your booking was successfully created!')
+            return redirect('checkout')
     else:
         form = BookingForm()
-    return render(request, 'book_property.html', {'form': form, 'property': property})
+    return render(request, 'properties/property_detail.html', {'property': property, 'form': form})

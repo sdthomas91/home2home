@@ -64,3 +64,9 @@
         - Identified the issue was with the user model - I had not added or migrated the first name and last name to the user model so there was nothing to update
         - Still not displaying - realised I also needed to update the django templating in the HTML as it was trying to pull a full name, but that isn't a specific field. Changed to first and last and works okay now
     
+- Bookings
+    * Booking form
+        - Issues incorporating the booking form on the property_detail page - throwing a url error 
+        - Had added booking URL's but not added to main URL's - easy fix
+        - New issue thrown "Cannot assign "<Profile: mrHost>": "Booking.user" must be a "User" instance."
+        - 
