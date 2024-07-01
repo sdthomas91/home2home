@@ -1,0 +1,28 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let ratingInput = document.getElementById('id_rating');
+        let stars = document.querySelectorAll('.star-ratings .fa');
+
+        // Function to set the filled state of stars
+        function setStars(score) {
+            stars.forEach(function(star) {
+                star.classList.remove('filled');
+                if (star.getAttribute('data-score') <= score) {
+                    star.classList.add('filled');
+                }
+            });
+        }
+
+        // Set stars to empty initially
+        setStars(0);
+
+        // Update rating on click
+        stars.forEach(function(star) {
+            star.addEventListener('click', function() {
+                var score = this.getAttribute('data-score');
+                ratingInput.value = score;
+                setStars(score);
+            });
+        });
+    });
+</script>

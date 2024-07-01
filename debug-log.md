@@ -80,3 +80,7 @@
         - Foolish mistake, existing bookings in the cart were created before model was updated and so had no values for total price etc. 
         - Created new booking and now displays correctly - need to add delete functionality to remove line items or clear basket
 
+- Reviews
+    * Displaying star rating
+        - Tried displaying a star rating or "No Reviews Yet" on property page, but discovered [Django Star Rating](https://medium.com/geekculture/django-implementing-star-rating-e1deff03bb1c)
+        - Implemented but want to replace the No Ratings Yet with 5 empty stars
