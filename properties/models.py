@@ -3,16 +3,11 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from users.models import User
-# Star ratings found 
-# https://medium.com/geekculture/django-implementing-star-rating-e1deff03bb1c
-from star_ratings.models import Rating
-
+from django.db.models import Avg
 
 class Amenity(models.Model):
     name = models.CharField(max_length=100)
-    # for font-awesome icons inspired by Isabella Mitchell Lonely House
     font_awesome_class = models.CharField(max_length=50)
-    # Custom ordering to prioritise most popular amenities
     order = models.IntegerField(default=0)
 
     def __str__(self):
@@ -23,13 +18,12 @@ class Amenity(models.Model):
         verbose_name_plural = _("Amenities")
         ordering = ['order', 'name']
 
-
 class Property(models.Model):
     host = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='properties'
-        )
+    )
     title = models.CharField(max_length=200)
     description = models.TextField()
     address = models.CharField(max_length=255)
@@ -37,7 +31,6 @@ class Property(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
-    # Include lat & long for map display
     latitude = models.FloatField()
     longitude = models.FloatField()
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
@@ -60,7 +53,7 @@ class Property(models.Model):
 
     def update_average_rating(self):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
-        self.average_rating = avg_rating
+        self.average_rating = round(avg_rating, 1) if avg_rating else None
         self.save()
 
     def render_star_rating(self):
@@ -83,7 +76,7 @@ class PropertyImage(models.Model):
         Property,
         on_delete=models.CASCADE,
         related_name='images'
-        )
+    )
     image = models.ImageField(upload_to='property_images/')
     description = models.CharField(max_length=255, null=True, blank=True)
 
