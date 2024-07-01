@@ -67,7 +67,7 @@ def property_detail(request, property_id):
     return render(
         request,
         'properties/property_detail.html',
-        {'property': property, 'form': form}
+        {'property': property, 'form': form, 'request': request}
         )
 
 @login_required

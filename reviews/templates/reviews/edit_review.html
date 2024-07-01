@@ -1,22 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ratings %}
 {% block extra-title %}
 Edit Review
 {% endblock %}
+{% block extra-js %}
+{% include 'includes/star_ratings_script.html' %}
+{% endblock %}
 {% block content %}
 <div class="container">
-    <h1>Edit Review for {{ review.property.title }}</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="rating">Rating:</label>
-            {{ form.rating }}
-        </div>
-        <div class="form-group">
-            <label for="comment">Comment:</label>
-            {{ form.comment }}
-        </div>
-        <button type="submit" class="btn brand-btn">Submit</button>
-    </form>
+    <div class="write-review-container">
+        <h1>Edit Review for {{ review.property.title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <div class="star-ratings">
+                    <input type="hidden" name="rating" id="id_rating" value="{{ form.rating.value }}">
+                    {% for i in "12345" %}
+                        <i class="fa {% if i|add:"0" <= form.rating.value %}fa-solid fa-star{% else %}fa-regular fa-star{% endif %}" data-score="{{ i }}"></i>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea name="comment" id="comment" class="form-control">{{ form.comment.value }}</textarea>
+            </div>
+            <button type="submit" class="btn brand-btn">Submit</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

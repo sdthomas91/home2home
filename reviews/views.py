@@ -45,6 +45,9 @@ def property_reviews(request, property_id):
 
 @login_required
 def edit_review(request, review_id):
+    """
+    View to edit existing review
+    """
     review = get_object_or_404(Review, id=review_id, guest=request.user)
     
     if request.method == 'POST':
@@ -57,7 +60,7 @@ def edit_review(request, review_id):
         form = ReviewForm(instance=review)
     
     return render(
-        request,
+        request, 
         'reviews/edit_review.html',
         {'form': form, 'review': review}
         )

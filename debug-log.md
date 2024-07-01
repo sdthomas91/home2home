@@ -90,3 +90,7 @@
         - Rating not populating on property_detail page and not displaying stars in carousels - need to revise property model I think to get an average rating, rather than just the single rating
         - Stars_rating actually seemed to make things more complex, unnecessarily, especially when it came to displaying the average rating of a property - instead decided to try modifying the property model. It kept bugging but settled on calculating the average rating, and then adding a custom star generation within the model itself. The logic in html was too cluttered and clumsy and made for a messy UI. 
         - Settled on the model logic, clean and works well. Means I can display it across multiple areas such as reviews carousels etc. if needed
+    * Review carousel
+        - Managed to amend logic similar to star ratings in order to get stars to appear correctly on user reviews. 
+        - Cannot get the edit button to be clickable - have corrected urls etc. but no luck
+        - Think the issue may be down to carousel style - think the carousel controls overlap the button - will try center aligning button

@@ -280,11 +280,12 @@ a:focus {
 }
 
 .review-card {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(100, 100, 100, 0.2);
+    border-radius: 1rem;
+    background-color: #fafafa;
     margin: 15px 0;
+    box-shadow: 2px 2px 4px rgba(40, 40, 40, 0.3);
 }
 
 /* ---filters--- */
