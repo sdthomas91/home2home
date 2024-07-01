@@ -1,11 +1,6 @@
 from django import forms
-from .models import Booking
 
-class BookingForm(forms.ModelForm):
-    class Meta:
-        model = Booking
-        fields = ['check_in', 'check_out', 'guests']
-        widgets = {
-            'check_in': forms.DateInput(attrs={'type': 'date'}),
-            'check_out': forms.DateInput(attrs={'type': 'date'}),
-        }
+class BookingForm(forms.Form):
+    checkin = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    checkout = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    guests = forms.ChoiceField(choices=[(i, i) for i in range(1, 7)], widget=forms.Select(attrs={'class': 'form-control'}))

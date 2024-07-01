@@ -57,10 +57,12 @@ def property_detail(request, property_id):
     View to display selected property details
     """
     property = get_object_or_404(Property, id=property_id)
+    form = BookingForm()
     return render(
         request,
         'properties/property_detail.html',
-        {'property': property}
+        {'property': property},
+        {'form', form}
         )
 
 @login_required

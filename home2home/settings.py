@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'bookings',
     'messaging',
     'contact',
+    'checkout',
 ]
 
 MIDDLEWARE = [
