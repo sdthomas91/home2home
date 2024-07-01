@@ -2,7 +2,7 @@
     <div class="carousel-inner">
         {% for image in property.images.all %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ MEDIA_URL }}{{ image.image }}" class="d-block w-100" alt="{{ property.title }}">
+            <a href="{% url 'property_detail' property.id %}"><img src="{{ MEDIA_URL }}{{ image.image }}" class="d-block w-100" alt="{{ property.title }}"></a>
         </div>
         {% endfor %}
     </div>
