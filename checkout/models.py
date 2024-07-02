@@ -20,7 +20,6 @@ class Order(models.Model):
     payment_status = models.CharField(max_length=50, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # Address details
     street_address1 = models.CharField(max_length=255)
     street_address2 = models.CharField(max_length=255, blank=True, null=True)
     town_or_city = models.CharField(max_length=255)

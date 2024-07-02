@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from bookings.models import Booking
-from .models import Order
+from .models import Order, PaymentDetail
 from .forms import CheckoutForm
 import stripe
 
-stripe.api_key = 'stripe_secret_key'
+stripe.api_key = 'sk_test_51PY2bgFil8lo0gUPG6SZWjsEclPb6fLyu8noaxB9KDSChxHRrjqxizRu6CiSQ6qJr5ZQyWgzOVBb9aNqLyyScdqr00KvWJSxk7'
 
 @login_required
 def checkout(request):
@@ -34,17 +34,31 @@ def checkout(request):
                 # Mark bookings as confirmed
                 bookings.update(confirmed=True)
 
-                # Create an order record
+                # Create order
                 for booking in bookings:
                     Order.objects.create(
                         booking=booking,
+                        user=user,
                         total_price=total_price,
-                        payment_status='Paid'
-                        )
-                messages.success(
-                    request,
-                    "Payment successful and booking confirmed!"
+                        payment_status='Paid',
+                        street_address1=form.cleaned_data['street_address1'],
+                        street_address2=form.cleaned_data['street_address2'],
+                        town_or_city=form.cleaned_data['town_or_city'],
+                        county=form.cleaned_data['county'],
+                        country=form.cleaned_data['country'],
+                        postcode=form.cleaned_data['postcode']
                     )
+
+                # Save payment details if the user opted to
+                if form.cleaned_data['save_payment_details']:
+                    PaymentDetail.objects.create(
+                        user=user,
+                        card_number=form.cleaned_data['card_number'],
+                        expiry_date=form.cleaned_data['expiry_date'],
+                        cvv=form.cleaned_data['cvv']
+                    )
+
+                messages.success(request, "Payment successful and booking confirmed!")
                 return redirect('my_bookings')
             except stripe.error.CardError as e:
                 messages.error(request, f"Payment error: {e.error.message}")
@@ -58,9 +72,4 @@ def checkout(request):
             'total_price': total_price,
             'form': form
         }
-        )
-
-@login_required
-def my_bookings(request):
-    bookings = Booking.objects.filter(user=request.user, confirmed=True)
-    return render(request, 'my_bookings.html', {'bookings': bookings})
+    )
