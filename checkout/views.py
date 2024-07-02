@@ -52,7 +52,7 @@ def checkout(request):
 
     return render(
         request,
-        'checkout.html',
+        'checkout/checkout.html',
         {
             'bookings': bookings,
             'total_price': total_price,
