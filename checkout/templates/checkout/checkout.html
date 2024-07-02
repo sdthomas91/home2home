@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+{% block extra-js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script id="id_stripe_public_key" type="application/json">{{ stripe_public_key|escapejs }}</script>
+<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="page-container">
     <div class="container checkout-container bg-light">

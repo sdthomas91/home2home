@@ -8,6 +8,7 @@ import stripe
 
 stripe.api_key = 'sk_test_51PY2bgFil8lo0gUPG6SZWjsEclPb6fLyu8noaxB9KDSChxHRrjqxizRu6CiSQ6qJr5ZQyWgzOVBb9aNqLyyScdqr00KvWJSxk7'
 
+# checkout/views.py
 @login_required
 def checkout(request):
     user = request.user
@@ -34,42 +35,25 @@ def checkout(request):
                 # Mark bookings as confirmed
                 bookings.update(confirmed=True)
 
-                # Create order
+                # Create an order record
                 for booking in bookings:
                     Order.objects.create(
                         booking=booking,
-                        user=user,
                         total_price=total_price,
-                        payment_status='Paid',
-                        street_address1=form.cleaned_data['street_address1'],
-                        street_address2=form.cleaned_data['street_address2'],
-                        town_or_city=form.cleaned_data['town_or_city'],
-                        county=form.cleaned_data['county'],
-                        country=form.cleaned_data['country'],
-                        postcode=form.cleaned_data['postcode']
+                        payment_status='Paid'
                     )
-
-                # Save payment details if the user opted to
-                if form.cleaned_data['save_payment_details']:
-                    PaymentDetail.objects.create(
-                        user=user,
-                        card_number=form.cleaned_data['card_number'],
-                        expiry_date=form.cleaned_data['expiry_date'],
-                        cvv=form.cleaned_data['cvv']
-                    )
-
                 messages.success(request, "Payment successful and booking confirmed!")
                 return redirect('my_bookings')
             except stripe.error.CardError as e:
                 messages.error(request, f"Payment error: {e.error.message}")
                 return redirect('checkout')
 
-    return render(
-        request,
-        'checkout/checkout.html',
-        {
-            'bookings': bookings,
-            'total_price': total_price,
-            'form': form
-        }
-    )
+    context = {
+        'bookings': bookings,
+        'total_price': total_price,
+        'form': form,
+        'stripe_public_key': 'pk_test_51PY2bgFil8lo0gUPDdftv8oVaMTbDir3Ott0fonwbNbh0HAl9HBrZED1L4A7Kprb68rZDM7ou3o0fWj76Co2f6lK00o7LeuxKw'
+    }
+
+    return render(request, 'checkout/checkout.html', context)
+
