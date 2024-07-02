@@ -33,27 +33,7 @@
     </div>
 </div>
 {% if results %}
-<div class="pagination d-flex justify-content-center mb-5">
-    <span class="step-links">
-        {% if results.has_previous %}
-            <a href="?page=1"><i class="icon fa-solid fa-angles-left"></i></a>
-            <a href="?page={{ results.previous_page_number }}"><i class="icon fa-solid fa-angle-left"></i></a>
-        {% endif %}
-
-        <span class="current page-pill">
-            Page {% if results and results.paginator.num_pages > 1 %}
-                {{ results.number }} of {{ results.paginator.num_pages }}
-            {% else %}
-                1
-            {% endif %}
-        </span>
-
-        {% if results.has_next %}
-            <a href="?page={{ results.next_page_number }}"><i class="icon fa-solid fa-angle-right ml-2"></i></a>
-            <a href="?page={{ results.paginator.num_pages }}"><i class="icon fa-solid fa-angles-right"></i></a>
-        {% endif %}
-    </span>
-</div>
+{% include 'properties/includes/pagination.html' %}
 {% endif %}
 
 {% if not results %}
