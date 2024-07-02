@@ -1,159 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-{% endblock %}
 
-{% block page_header %}
-<div class="header-container-lg"></div>
-{% endblock %} 
+{% block extra-title %}
+Checkout
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col text-center">
             <h2>Checkout</h2>
-        </div>
-    </div>
-
-    <div class="card p-2">
-        <div class="row">
-            <div class="col-12 col-lg-6 order-lg-last mb-5 p-4">
-                <p class="text-muted">Order Summary ({{ cart_items|length }})</p>
-                <hr>
-                {% for item in cart_items %}
-                <div class="row mb-3">
-                    <div class="col-4 mb-1">
-                        <a href="{% url 'property_detail' item.property.id %}">
-                            {% if item.property.image %}
-                            <img class="w-100" src="{{ MEDIA_URL }}{{ item.property.image }}" alt="{{ item.property.title }}">
-                            {% else %}
-                            <img class="w-100" src="{{ MEDIA_URL }}holding-image.jpg" alt="{{ item.property.title }}">
-                            {% endif %}
-                        </a>
-                    </div>
-                    <div class="col-8">
-                        <p class="my-0"><strong>{{ item.property.title }}</strong></p>
-                        <p class="my-0">Check in: {{ item.checkin }}</p>
-                        <p class="my-0">Check out: {{ item.checkout }}</p>
-                        <p class="my-0">Guests: {{ item.guests }}</p>
-                        <p class="my-0">Total: £{{ item.total_price|floatformat:2 }}</p>
-                    </div>
-                </div>
-                <hr>
-                {% endfor %}
-                <div class="row">
-                    <div class="col-12">
-                        <p class="my-0 text-right">Order Total: £{{ total|floatformat:2 }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <p class="muted pl-4 pt-4">Please fill in the form to complete your order</p>
-
-                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                    {% csrf_token %}
-                    <fieldset class="rounded px-3 mb-5">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
-                        <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ order_form.first_name.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ order_form.last_name.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ order_form.email.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone_number">Phone Number</label>
-                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ order_form.phone_number.value }}">
-                        </div>
-                    </fieldset>
-                    <fieldset class="rounded px-3 mb-5">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Address</legend>
-                        <div class="form-group">
-                            <label for="street_address1">Street Address 1</label>
-                            <input type="text" class="form-control" id="street_address1" name="street_address1" value="{{ order_form.street_address1.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="street_address2">Street Address 2</label>
-                            <input type="text" class="form-control" id="street_address2" name="street_address2" value="{{ order_form.street_address2.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="town_or_city">Town or City</label>
-                            <input type="text" class="form-control" id="town_or_city" name="town_or_city" value="{{ order_form.town_or_city.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="county">County</label>
-                            <input type="text" class="form-control" id="county" name="county" value="{{ order_form.county.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <input type="text" class="form-control" id="country" name="country" value="{{ order_form.country.value }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="postcode">Postcode</label>
-                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ order_form.postcode.value }}">
-                        </div>
-                        <div class="form-check form-check-inline float-right mr-0">
-                            {% if user.is_authenticated %}
-                            <label class="form-check-label" for="save-info">Save this address to my profile</label>
-                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="save-info" name="save-info" checked>
-                            {% else %}
-                            <label class="form-check-label" for="save-info">
-                                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                            </label>
-                            {% endif %}
-                        </div>
-                    </fieldset>
-                    <fieldset class="px-3">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                        <div class="mb-3" id="card-element"></div>
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </fieldset>
-
-                    <div class="submit-button text-center text-md-right mt-3 mb-2">
-                        <a href="{% url 'basket' %}" class="btn btn-outline-dark rounded-0 mt-1">
-                            <span>
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="font-weight-bold">Amend Cart</span>
-                        </a>
-                        <button id="submit-button" class="btn btn-dark rounded-0 mt-1">
-                            <span class="font-weight-bold">Complete Order</span>
-                            <span>
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </button>
-                        <p class="small text-danger my-0 mt-3">
-                            <span>
-                                <i class="fas fa-exclamation-circle"></i>
-                            </span>
-                            <span>Your card will be charged <strong>£{{ total|floatformat:2 }}</strong></span>
-                        </p>
-                    </div>
-                </form>
-            </div>
+            <hr class="brand-break mb-5">
         </div>
     </div>
 </div>
-<div id="loading-overlay">
-    <div class="h1 loading-spinner">
-        <span class="light-text">
-            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-        </span>
-    </div>
-</div>
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-{{ stripe_public_key|json_script:"id_stripe_public_key" }}
-{{ client_secret|json_script:"id_client_secret" }}
-<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
