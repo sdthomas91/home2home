@@ -1,0 +1,22 @@
+<div class="row d-flex d-md-none text-center">
+    {% for review in latest_reviews.all|slice:":3" %}
+    <div class="col-12 col-md-6 col-xl-3 mb-4">
+        <div class="card review-card">
+            <div class="card-body">
+                <h5>{{ review.guest.username }}</h5>
+                <p>
+                    <strong>Rating:</strong> 
+                    {% for i in "12345" %}
+                        <i class="fa {% if forloop.counter <= review.rating %}fa-solid fa-star{% else %}fa-regular fa-star{% endif %}"></i>
+                    {% endfor %}
+                </p>
+                <p>{{ review.comment }}</p>
+                <p><small>Reviewed on {{ review.created_at|date:"F j, Y" }}</small></p>
+                {% if request.user == review.guest %}
+                <a href="{% url 'edit_review' review.id %}" class="btn brand-btn">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -288,6 +288,10 @@ a:focus {
     box-shadow: 2px 2px 4px rgba(40, 40, 40, 0.3);
 }
 
+.home-review-container {
+    width: 90%;
+    margin: auto;
+}
 /* ---filters--- */
 
 .filter-btn {
