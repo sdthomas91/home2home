@@ -64,7 +64,7 @@
                 <p>If you have always dreamed of sharing your home with guests then Home 2 Home can help make your dream a reality!</p>
             </div>
             <div class="col-12">
-                <a href="" class="btn brand-btn btn-lg">Get Started</a>
+                <a href="{% url 'account_signup' %}" class="btn brand-btn btn-lg">Get Started</a>
             </div>
         </div>
     </div>
@@ -80,6 +80,9 @@
     <div class="d-flex justify-content-center home-review-container">
         {% include 'includes/include_reviews_md.html' %}
         {% include 'includes/include_reviews_mob.html' %}
+    </div>
+    <div class="col-12 text-center">
+        <a href="{% url 'all_properties' %}" class="btn brand-btn">Browse Properties</a>
     </div>
 </div>
 

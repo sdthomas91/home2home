@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.db.models import Q
 from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm, PropertyEditForm
 from bookings.forms import BookingForm
+
+
+def is_superuser(user):
+    return user.is_superuser
 
 def all_properties(request):
     """
@@ -151,3 +155,38 @@ def search_results(request):
         'properties/search_results.html',
         {'results': results, 'query': query}
         )
+
+# SUPERUSER VIEWS
+
+@login_required
+@user_passes_test(is_superuser)
+def manage_properties(request):
+    """
+    Specific view for superusers viewing properties to edit
+    """
+    properties = Property.objects.all()
+    
+    paginator = Paginator(properties, 12)
+    page_number = request.GET.get('page')
+    properties_page = paginator.get_page(page_number)
+    
+    return render(request, 'properties/manage_properties.html', {'properties': properties_page})
+
+
+@login_required
+@user_passes_test(is_superuser)
+def superuser_edit_property(request, property_id):
+    """
+    View for superuser to edit any property
+    """
+    property = get_object_or_404(Property, id=property_id)
+    if request.method == 'POST':
+        form = PropertyEditForm(request.POST, request.FILES, instance=property)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Property updated successfully!')
+            return redirect('manage_properties')
+    else:
+        form = PropertyEditForm(instance=property)
+    return render(request, 'properties/edit_property.html', {'form': form, 'property': property})
+
