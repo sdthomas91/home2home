@@ -5,6 +5,7 @@ from properties.models import Property
 from .forms import BookingForm
 from .models import Booking
 
+@login_required
 def book_property(request, property_id):
     property = get_object_or_404(Property, id=property_id)
     if request.method == 'POST':
