@@ -1,5 +1,5 @@
 from django import forms
-from .models import PaymentDetail
+from .models import Order, OrderLineItem
 
 class CheckoutForm(forms.Form):
     # Checkout address fields

@@ -1,25 +1,32 @@
+import uuid
+
 from django.db import models
-from properties.models import Property
-from bookings.models import Booking
 from django.contrib.auth.models import User
+from django.db.models import Sum
+from django.conf import settings
 
-class PaymentDetail(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    card_number = models.CharField(max_length=16)
-    expiry_date = models.CharField(max_length=5)
-    cvv = models.CharField(max_length=3)
-    created_at = models.DateTimeField(auto_now_add=True)
+from properties.models import Property
+from users.models import Profile
+from bookings.models import Booking
 
-    def __str__(self):
-        return f"Payment Detail for {self.user.username}"
 
 class Order(models.Model):
+    # Booking details
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_status = models.CharField(max_length=50, default='Pending')
-    created_at = models.DateTimeField(auto_now_add=True)
+    # User details
+    user_profile = models.ForeignKey(
+        Profile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='orders'
+        )
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
 
+    # Address Details
     street_address1 = models.CharField(max_length=255)
     street_address2 = models.CharField(max_length=255, blank=True, null=True)
     town_or_city = models.CharField(max_length=255)
@@ -27,5 +34,73 @@ class Order(models.Model):
     country = models.CharField(max_length=255)
     postcode = models.CharField(max_length=20)
 
+     # Price and status
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_status = models.CharField(max_length=50, default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def _generate_order_number(self):
+        """
+        Generate a random, unique order number using UUID
+        """
+        return uuid.uuid4().hex.upper()
+
+    def update_total(self):
+        """
+        Update total each time a line item is added,
+        """
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.save()
+    
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the order number
+        if it hasn't been set already.
+        """
+        if not self.order_number:
+            self.order_number = self._generate_order_number()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"Order {self.id} for Booking {self.booking.id}"
+        return self.order_number
+
+class OrderLineItem(models.Model):
+    order = models.ForeignKey(
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='lineitems'
+        )
+    property = models.ForeignKey(
+        Property,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+        )
+    type = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        default="Reservation"
+        )
+    date = models.DateField(null=True, blank=True)
+    lineitem_total = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        editable=False
+        )
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the lineitem total
+        and update the order total.
+        """
+        self.lineitem_total = self.property.price
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.property.name} on order {self.order.order_number}'

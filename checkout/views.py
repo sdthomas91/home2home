@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from bookings.models import Booking
-from .models import Order, PaymentDetail
+from .models import Order, OrderLineItem
 from .forms import CheckoutForm
 import stripe
 
