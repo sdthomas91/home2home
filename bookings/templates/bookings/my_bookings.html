@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra-title %}
+My Bookings
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="container-fluid">
+        <h1>My Bookings</h1>
+
+        <h2>Upcoming Stays</h2>
+        {% if upcoming_bookings %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Guests</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in upcoming_bookings %}
+                <tr>
+                    <td>{{ booking.property.title }}</td>
+                    <td>{{ booking.checkin }}</td>
+                    <td>{{ booking.checkout }}</td>
+                    <td>{{ booking.guests }}</td>
+                    <td>£{{ booking.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No upcoming bookings.</p>
+        {% endif %}
+
+        <h2>Your Previous Stays</h2>
+        {% if past_bookings %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Guests</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in past_bookings %}
+                <tr>
+                    <td>{{ booking.property.title }}</td>
+                    <td>{{ booking.checkin }}</td>
+                    <td>{{ booking.checkout }}</td>
+                    <td>{{ booking.guests }}</td>
+                    <td>£{{ booking.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No past bookings.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
