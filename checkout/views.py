@@ -32,8 +32,8 @@ def cache_checkout_data(request):
 
 @login_required
 def checkout(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY  # Set the Stripe secret key
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     bookings = Booking.objects.filter(user=request.user)
     if not bookings.exists():
@@ -77,13 +77,11 @@ def checkout(request):
     else:
         subtotal = sum(booking.total_price for booking in bookings)
         stripe_total = round(subtotal * 100)
-        stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
 
-        # Attempt to prefill the form with user profile info
         if request.user.is_authenticated:
             try:
                 profile = Profile.objects.get(user=request.user)
@@ -116,22 +114,16 @@ def checkout(request):
 
     return render(request, template, context)
 
-
 @login_required
 def checkout_success(request, order_id):
-    """
-    Handle successful checkouts
-    """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, id=order_id)
 
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
         if save_info:
             profile_data = {
                 'default_payment_method': order.phone_number,
