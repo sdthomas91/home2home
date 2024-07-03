@@ -1,5 +1,3 @@
-# bookings/views.py
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -33,8 +31,8 @@ def book_property(request, property_id):
 
 @login_required
 def basket_view(request):
-    booking = Booking.objects.filter(user=request.user).first()
-    return render(request, 'bookings/basket.html', {'booking': booking})
+    bookings = Booking.objects.filter(user=request.user, status='Pending')
+    return render(request, 'bookings/basket.html', {'bookings': bookings})
 
 @login_required
 def delete_booking(request, booking_id):
@@ -45,10 +43,7 @@ def delete_booking(request, booking_id):
 
 @login_required
 def clear_basket(request):
-    booking = Booking.objects.filter(user=request.user).first()
-    if booking:
-        booking.delete()
-        messages.success(request, 'Booking cleared from your basket!')
-    else:
-        messages.error(request, 'No booking found in your basket.')
+    bookings = Booking.objects.filter(user=request.user, status='Pending')
+    bookings.delete()
+    messages.success(request, 'All bookings cleared from your basket!')
     return redirect('basket')

@@ -37,7 +37,7 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     basket = basket_contents(request)
-    booking = Booking.objects.filter(user=request.user).first()
+    booking = Booking.objects.filter(user=request.user, status='Pending').first()
     total = basket['total']
 
     if not booking:
@@ -67,12 +67,11 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            order.booking = booking
             order.total_price = total
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
+            order.booking = booking
             order.save()
-            
             order_line_item = OrderLineItem(
                 order=order,
                 property=booking.property,
@@ -82,7 +81,9 @@ def checkout(request):
             )
             order_line_item.save()
 
-            booking.delete()  # Clear the basket after creating orders
+            booking.status = 'Confirmed'
+            booking.save()
+            
             messages.success(request, 'Checkout completed successfully!')
             return redirect(reverse('checkout_success', args=[order.id]))
         else:
@@ -117,7 +118,7 @@ def checkout(request):
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
         'subtotal': total,
-        'booking': booking,
+        'bookings': [booking],  # Pass as a list for template compatibility
     }
 
     return render(request, template, context)
@@ -147,9 +148,6 @@ def checkout_success(request, order_id):
             profile.save()
 
     messages.success(request, f'Order successfully processed! Your order number is {order_id}. A confirmation email will be sent to {order.email}.')
-
-    if 'cart' in request.session:
-        del request.session['cart']
 
     template = 'checkout/checkout_success.html'
     context = {

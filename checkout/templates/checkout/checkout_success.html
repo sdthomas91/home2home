@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h1>Order Successful!</h1>
+    <p>Thank you for your order! Your booking details are as follows:</p>
+
+    <h2>Booking Details</h2>
+    <ul>
+      <li>Property: {{ order.booking.property.title }}</li>
+      <li>Check-in Date: {{ order.booking.checkin }}</li>
+      <li>Check-out Date: {{ order.booking.checkout }}</li>
+      <li>Guests: {{ order.booking.guests }}</li>
+      <li>Total Price: £{{ order.total_price }}</li>
+    </ul>
+
+    <p>We have sent a confirmation email to {{ order.email }}.</p>
+  </div>
+{% endblock %}
