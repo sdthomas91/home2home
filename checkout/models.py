@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 from properties.models import Property
 from bookings.models import Booking
 from users.models import Profile
+from django.db.models import Sum
 
 class Order(models.Model):
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    booking = models.ForeignKey(Booking, on_delete=models.SET_NULL, null=True, blank=True)
     user_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
@@ -61,7 +62,7 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        self.lineitem_total = self.property.price
+        self.lineitem_total = self.property.price_per_night * self.order.booking.total_nights
         super().save(*args, **kwargs)
 
     def __str__(self):

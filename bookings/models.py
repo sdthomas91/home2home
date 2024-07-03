@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 class Booking(models.Model):
-    # Add status so can add to my bookings
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
         ('Confirmed', 'Confirmed'),
@@ -21,7 +20,6 @@ class Booking(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     def save(self, *args, **kwargs):
-        # Calculate the number of nights
         if isinstance(self.checkin, str):
             self.checkin = datetime.strptime(self.checkin, "%Y-%m-%d").date()
         if isinstance(self.checkout, str):
@@ -29,7 +27,6 @@ class Booking(models.Model):
             
         self.total_nights = (self.checkout - self.checkin).days
         self.total_price = self.total_nights * self.property.price_per_night
-
         super().save(*args, **kwargs)
 
     def __str__(self):

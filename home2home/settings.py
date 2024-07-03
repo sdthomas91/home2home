@@ -95,7 +95,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 # Context processor used for basket 
                 # https://dev.to/sarahhudaib/context-processors-in-django-15h2
-                'home2home.context_processors.basket_total', 
+                'bookings.context_processors.basket_contents',
                 
             ],
         },
