@@ -1,175 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra-title %}Checkout{% endblock %}
 {% block extra-js %}
 <script src="https://js.stripe.com/v3/"></script>
-<script id="id_stripe_public_key" type="application/json">{{ stripe_public_key|escapejs }}</script>
-<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+<script src="{% static 'checkout/js/stripe.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="page-container">
-    <div class="container checkout-container bg-light">
-        <h2 class="text-center">Checkout</h2>
-        <hr class="brand-break">
-        <div class="row customer-info-row">
-            <div class="col-md-6">
-                <form method="post" id="payment-form">
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
-                    <!-- ADDRESS DETAILS -->
-                    <fieldset>
-                        <legend>Address Details</legend>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.street_address1.id_for_label }}">Address Line 1</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.street_address1 }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.street_address1.id_for_label }}">Address Line 2</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.street_address2 }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.town_or_city.id_for_label }}">Town or City</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.town_or_city }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.county.id_for_label }}">County</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.county }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.country.id_for_label }}">Country</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.country }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.postcode.id_for_label }}">pPostcode</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.postcode }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <!-- PAYMENT DETAILS -->
-                    <fieldset>
-                        <legend>Payment Details</legend>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.card_number.id_for_label }}">Card Number</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.card_number }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.expiry_date.id_for_label }}">Expiry Date</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.expiry_date }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="{{ form.cvv.id_for_label }}">CVV</label>
-                                    </div>
-                                    <div class="col-9">
-                                        {{ form.cvv }}
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                {{ form.save_payment_details }}
-                                <label class="form-check-label" for="{{ form.save_payment_details.id_for_label }}">
-                                    Save payment details for future use
-                                </label>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <!-- Payment button -->
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary mt-3">Complete Order</button>
-                            <p class="text-warning">Your card will be charged £{{ total_price|floatformat:2 }}</p class="text-warning">
-                        </div>
+<div class="container">
+    <h2>Checkout</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="payment-form">
+                <fieldset>
+                    <legend>Address Details</legend>
+                    {{ form.street_address1 }}
+                    {{ form.street_address2 }}
+                    {{ form.town_or_city }}
+                    {{ form.county }}
+                    {{ form.country }}
+                    {{ form.postcode }}
+                </fieldset>
+                <fieldset>
+                    <legend>Payment Details</legend>
+                    <div id="payment-element">
+                        <!-- Stripe.js injects the Payment Element -->
                     </div>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <h4>Booking Details</h4>
-                {% for booking in bookings %}
-                <div class="row">
-                    <div class="col-6">
-                        <img src="{{ booking.property.images.first.image.url }}" class="img-fluid checkout-img" alt="{{ booking.property.title }}">
-                    </div>
-                    <div class="col-6">
-                        <div class="booking-summary">
-                            <h5>{{ booking.property.title }}</h5>
-
-                            <p>Check-in: {{ booking.checkin }}</p>
-                            <p>Check-out: {{ booking.checkout }}</p>
-                            <p>Price per night: £{{ booking.property.price_per_night }}</p>
-                            <p>Total nights: {{ booking.total_nights }}</p>
-                            <hr>
-                            <p><strong>Total Price: £{{ booking.total_price|floatformat:2 }}</strong></p>
-                        </div>
-                    </div>
+                </fieldset>
+                <button id="submit">Pay Now</button>
+                <div id="payment-message" class="hidden"></div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4>Booking Details</h4>
+            {% for booking in bookings %}
+            <div class="row">
+                <div class="col-6">
+                    <img src="{{ booking.property.images.first.image.url }}" class="img-fluid checkout-img" alt="{{ booking.property.title }}">
                 </div>
-                        
-                {% endfor %}
+                <div class="col-6">
+                    <h5>{{ booking.property.title }}</h5>
+                    <p>Check-in: {{ booking.checkin }}</p>
+                    <p>Check-out: {{ booking.checkout }}</p>
+                    <p>Price per night: £{{ booking.property.price_per_night }}</p>
+                    <p>Total nights: {{ booking.total_nights }}</p>
+                    <hr>
+                    <p><strong>Subtotal: £{{ booking.total_price|floatformat:2 }}</strong></p>
+                </div>
             </div>
+            {% endfor %}
+            <hr>
+            <h5>Grand Total: £{{ total_price|floatformat:2 }}</h5>
         </div>
     </div>
 </div>
