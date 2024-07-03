@@ -139,7 +139,7 @@ a:focus {
     color: #fff;
 }
 
-.btn-warning {
+.btn-warning, .btn-danger {
     border-radius: 1.5rem;
     padding: 0.5rem 1rem;
 }

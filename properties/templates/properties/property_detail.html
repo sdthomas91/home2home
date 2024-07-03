@@ -77,7 +77,12 @@
                                 If you require more than 6 guests please <a href="{% url 'contact' %}">Contact Us</a> to discuss your booking.
                             </small>
                         </div>
+                        {% if request.user.is_authenticated %}
                         <button type="submit" class="btn brand-btn mb-3">Book Now</button>
+                        {% else %}
+                        <p>Only Registered Guests may reserve properties. Please <a href="{% url 'account_signup' %}">register</a> to complete your Booking</p>
+                        <p>Already registed? Please <a href="{% url 'account_login' %}">Login</a> to continue</p> 
+                        {% endif %}
                     </form>
                     <div class="row">
                         <div class="col-4">

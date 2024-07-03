@@ -5,22 +5,15 @@ from django.contrib.auth.models import User
 from datetime import timedelta
 
 class Booking(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        null=True, 
-        blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     checkin = models.DateField()
     checkout = models.DateField()
     guests = models.IntegerField()
     total_nights = models.IntegerField(editable=False, default=0)
     total_price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        editable=False,
-        default=0.0
-        )
+        max_digits=10, decimal_places=2, editable=False, 
+        default=0.0)
 
     def save(self, *args, **kwargs):
         # Calculate the number of nights
