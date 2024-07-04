@@ -32,3 +32,15 @@ select:invalid,
 select option[value=""] {
     color: #6c757d !important;
 }
+
+.page-container {
+    background: white;
+    height: 100%;
+}
+
+.checkout-container {
+    padding: 2rem 4rem;
+    margin-bottom: 3rem;
+    border-radius: 2rem;
+    background: white !important;
+}

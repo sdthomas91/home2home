@@ -373,18 +373,6 @@ a:focus {
     box-shadow: -3px 2px 5px rgba(50,50,50,0.3);
 }
 
-/* ---CHECKOUT--- */
-.page-container {
-    background: white;
-    height: 100%;
-}
-.checkout-container {
-    padding: 2rem 4rem;
-    margin-bottom: 3rem;
-    border-radius: 2rem;
-    box-shadow: 3px 2px 5px rgba(50,50,50,0.4);
-}
-
 .checkout-img {
     border-radius: 1rem;
 }
