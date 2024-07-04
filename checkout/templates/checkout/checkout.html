@@ -27,8 +27,8 @@ Checkout
                 <div class="row">
                     <div class="col-4 mb-1">
                         <a href="{% url 'property_detail' booking.property.id %}">
-                            {% if booking.property.image %}
-                            <img class="w-100" src="{{ MEDIA_URL }}{{ booking.property.image }}" alt="{{ booking.property.title }}">
+                            {% if booking.property.images %}
+                            <img src="{{ booking.property.images.first.image.url }}" class="img-fluid checkout-img" alt="{{ booking.property.title }}">
                             {% else %}
                             <img class="w-100" src="{{ MEDIA_URL }}holding-image.jpg" alt="{{ booking.property.title }}">
                             {% endif %}
