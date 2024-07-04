@@ -14,6 +14,7 @@ Checkout
     <div class="row">
         <div class="col text-center">
             <h2>Checkout</h2>
+            <hr class="brand-break">
         </div>
     </div>
 
@@ -40,6 +41,7 @@ Checkout
                         <p class="my-0">Check-out: {{ booking.checkout }}</p>
                         <p class="my-0">No. of nights: {{ booking.total_nights }}</p>
                         <p class="my-0">Guests: {{ booking.guests }}</p>
+                        <a href="{% url 'basket' %}" class="btn amend-btn mt-3">Amend Booking</a>
                     </div>
                 </div>
                 <hr>
@@ -96,13 +98,13 @@ Checkout
                     </fieldset>
 
                     <div class="submit-button text-center text-md-right mt-3 mb-2">
-                        <a href="{% url 'basket' %}" class="btn btn-outline-dark rounded-0 mt-1">
+                        <a href="{% url 'basket' %}" class="btn amend-btn">
                             <span>
                                 <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="font-weight-bold">Amend Basket</span>
                         </a>
-                        <button id="submit-button" class="btn btn-dark rounded-0 mt-1">
+                        <button id="submit-button" class="btn brand-btn">
                             <span class="font-weight-bold">Complete Order</span>
                             <span>
                                 <i class="fas fa-lock"></i>

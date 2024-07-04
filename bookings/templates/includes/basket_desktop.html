@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Guests</th>
+            <th>Price per Night</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.property.title }}</td>
+            <td>{{ booking.checkin }}</td>
+            <td>{{ booking.checkout }}</td>
+            <td>{{ booking.guests }}</td>
+            <td>£{{ booking.property.price_per_night }}</td>
+            <td>£{{ booking.total_price }}</td>
+            <td>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBookingModal{{ booking.id }}">
+                    Delete Booking
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

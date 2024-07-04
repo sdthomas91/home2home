@@ -1,0 +1,29 @@
+<div class="table-mobile">
+    {% for booking in bookings %}
+    <div class="table-row">
+        <div class="table-cell">
+            <strong>Property:</strong> {{ booking.property.title }}
+        </div>
+        <div class="table-cell">
+            <strong>Check-in:</strong> {{ booking.checkin }}
+        </div>
+        <div class="table-cell">
+            <strong>Check-out:</strong> {{ booking.checkout }}
+        </div>
+        <div class="table-cell">
+            <strong>Guests:</strong> {{ booking.guests }}
+        </div>
+        <div class="table-cell">
+            <strong>Price per Night:</strong> £{{ booking.property.price_per_night }}
+        </div>
+        <div class="table-cell">
+            <strong>Total:</strong> £{{ booking.total_price }}
+        </div>
+        <div class="table-cell">
+            <button type="button" class="btn btn-danger mt-3 mb-4" data-toggle="modal" data-target="#deleteBookingModal{{ booking.id }}">
+                Delete Booking
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -5,41 +5,21 @@ Basket
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="container-fuid basket-container">
-    <h1>Your Basket</h1>
+<div class="container mt-5  basket-container">
+    <div class="container-fuid">
+    <h1 class="text-center">Your Basket</h1>
+    <hr class="brand-break mb-4">
     {% if bookings %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Property</th>
-                <th>Check-in</th>
-                <th>Check-out</th>
-                <th>Guests</th>
-                <th>Price per Night</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.property.title }}</td>
-                <td>{{ booking.checkin }}</td>
-                <td>{{ booking.checkout }}</td>
-                <td>{{ booking.guests }}</td>
-                <td>£{{ booking.property.price_per_night }}</td>
-                <td>£{{ booking.total_price }}</td>
-                <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBookingModal{{ booking.id }}">
-                        Delete Booking
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'checkout' %}" class="btn brand-btn mt-3">Proceed to Checkout</a>
+    <!-- Desktop view -->
+    <div class="d-none d-md-block">
+        {% include 'includes/basket_desktop.html' %}
+    </div>
+    
+    <!-- Mobile view -->
+    <div class="d-md-none">
+        {% include 'includes/basket_mobile.html' %}
+    </div>
+    <a href="{% url 'checkout' %}" class="btn brand-btn mt-3">Proceed to Checkout<i class="icon fa-solid fa-angle-right ml-2"></i></a>
     <button type="button" class="btn btn-warning mt-3" data-toggle="modal" data-target="#clearBasketModal">
         Clear Basket
     </button>

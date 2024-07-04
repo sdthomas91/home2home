@@ -134,7 +134,7 @@ a:focus {
     background: #004747;
     color: #fff;
     border-radius: 1.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
 }
 
 .brand-btn:active,
@@ -413,5 +413,14 @@ a:focus {
     .contact-container {
         width: 80%;
         margin-top: 3rem;
+    }
+
+    .basket-container { 
+        background: white;
+        border-radius: 0rem !important;
+        padding: 3rem 4rem;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        padding-bottom: 10rem
     }
 }
