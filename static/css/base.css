@@ -60,13 +60,22 @@ a:focus {
     margin: auto;
 }
 
+/* --- global style --- */
+
+.shadow-1 {
+    box-shadow: 3px 2px 5px rgba(50,50,50,0.4);
+}
+
+.shadow-reverse {
+
+}
 
 /* ---lines--- */
 
 .brand-break {
     border: none;
     height: 3px;
-    border-radius: 6px;
+    border-radius: 1rem;
     background-color: #008080;
     width: 10rem;
 }
@@ -220,7 +229,6 @@ a:focus {
 
 #map {
     border-radius: 2rem;
-    box-shadow: 1px 1px 6px 3px rgba(40, 40, 40, 0.2);
     border: 1px solid #d4d4d4;
 }
 
@@ -285,7 +293,6 @@ a:focus {
     border-radius: 1rem;
     background-color: #fafafa;
     margin: 15px 0;
-    box-shadow: 2px 2px 4px rgba(40, 40, 40, 0.3);
 }
 
 .home-review-container {
@@ -379,6 +386,14 @@ a:focus {
 }
 
 .checkout-img {
+    border-radius: 1rem;
+}
+
+/* ---BOOKINGS--- */
+
+.booking-table {
+    padding: 3rem 2rem 1rem 2rem;
+    background: white;
     border-radius: 1rem;
 }
 

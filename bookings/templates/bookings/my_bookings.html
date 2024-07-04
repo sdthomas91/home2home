@@ -9,8 +9,10 @@ My Bookings
     <div class="container-fluid">
         <h1>My Bookings</h1>
 
+
         <h2 class="mt-4">Upcoming Stays</h2>
         {% if upcoming_bookings %}
+        <div class="booking-table">
         <table class="table">
             <thead>
                 <tr>
@@ -33,12 +35,14 @@ My Bookings
                 {% endfor %}
             </tbody>
         </table>
+        </div>
         {% else %}
         <p>No upcoming bookings. <a href="{% url 'all_properties' %}">Book Now!</a></p>
         {% endif %}
 
         <h2 class="mt-4">Your Previous Stays</h2>
         {% if past_bookings %}
+        <div class="booking-table">
         <table class="table">
             <thead>
                 <tr>
@@ -61,6 +65,7 @@ My Bookings
                 {% endfor %}
             </tbody>
         </table>
+    </div>
         {% else %}
         <p>No past bookings.</p>
         {% endif %}

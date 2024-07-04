@@ -123,7 +123,7 @@
             {% elif property.country %}
             <p class="card-text"><i class="fa-solid fa-location-dot"></i> {{ property.country }}</p>
             {% endif %}
-            <div id="map" style="height: 400px;"></div>
+            <div id="map" class="shadow-1" style="height: 400px;"></div>
             <p id="latitude" class="d-none">{{ property.latitude }}</p>
             <p id="longitude" class="d-none">{{ property.longitude }}</p>
         </div>
@@ -135,7 +135,7 @@
 <div class="row">
     {% for review in property.reviews.all|slice:":3" %}
     <div class="col-12 col-md-6 col-xl-4 mb-4">
-        <div class="card review-card">
+        <div class="card review-card shadow-1">
             <div class="card-body">
                 <h5>{{ review.guest.username }}</h5>
                 <p>
