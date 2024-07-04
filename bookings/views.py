@@ -12,7 +12,7 @@ def book_property(request, property_id):
     A view to allow users to add a property booking to their cart, but limit
     to one booking per order
     """
-    if Booking.objects.filter(user=request.user).exists():
+    if Booking.objects.filter(user=request.user, status='Pending').exists():
         messages.error(
             request,
             "You already have an active booking in your basket. Please complete the checkout first."
