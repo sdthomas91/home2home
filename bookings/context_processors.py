@@ -5,7 +5,7 @@ def basket_contents(request):
     total = 0
 
     if request.user.is_authenticated:
-        booking = Booking.objects.filter(user=request.user).first()
+        booking = Booking.objects.filter(user=request.user, status='Pending').first()
         if booking:
             total = booking.total_price
             basket_item = booking
