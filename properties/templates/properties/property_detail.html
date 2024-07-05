@@ -1,163 +1,202 @@
 {% extends "base.html" %}
-{% load static %}
-{% load ratings %}
-{% block extra-title %}
-{{ property.title }}
-{% endblock %}
-
+{% load static %} 
+{% load ratings %} 
+{% block extra-title %} {{ property.title }} {% endblock %}
 {% block content %}
 <div class="container-fluid bg-white">
-    <div class="detail-container mt-3">
-        <div class="row">
-            <div class="col-12 text-left">
-                <h1>{{ property.title }}</h1>
-                <p>
-                    {{ property.render_star_rating }} 
-                    {% if property.average_rating %}
-                        {{ property.average_rating|floatformat:1 }} / 5
-                    {% endif %}
-                </p>
-            </div>
-        </div>
+  <div class="detail-container mt-3">
     <div class="row">
-        <!-- Left Column -->
-        <div class="col-md-7 col-12">
-            <!-- Image Carousel with Thumbnails -->
-            <div id="propertyCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    {% for image in property.images.all %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ MEDIA_URL }}{{ image.image }}" class="d-block w-100" alt="{{ property.title }}">
-                    </div>
-                    {% endfor %}
-                </div>
-                <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+      <div class="col-12 text-left">
+        <h1>{{ property.title }}</h1>
+        <p>
+          {{ property.render_star_rating }} 
+          {% if property.average_rating %} 
+          {{ property.average_rating|floatformat:1 }} / 5 {% endif %}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-7 col-12">
+        <!-- Image Carousel with Thumbnails -->
+        <div id="propertyCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            {% for image in property.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img
+                src="{{ MEDIA_URL }}{{ image.image }}"
+                class="d-block w-100"
+                alt="{{ property.title }}"
+              />
             </div>
-
-            <!-- Thumbnail Navigation -->
-            <div class="row mt-3">
-                {% for image in property.images.all %}
-                <div class="col-3">
-                    <a href="#propertyCarousel" data-slide-to="{{ forloop.counter0 }}">
-                        <img src="{{ MEDIA_URL }}{{ image.image }}" class="thumbnail-img" alt="{{ property.title }}">
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-
+            {% endfor %}
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#propertyCarousel"
+            role="button"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#propertyCarousel"
+            role="button"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
 
-       
-        <!-- Right Column -->
-        <div class="col-md-5 col-12">
-            <div class="card">
-                <div class="card-body property-card-body">
-                    <h4 class="card-title">Booking Details</h4>
-                    <form method="post" action="{% url 'book_property' property.id %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="checkin">Check-in Date:</label>
-                            {{ form.checkin }}
-                        </div>
-                        <div class="form-group">
-                            <label for="checkout">Check-out Date:</label>
-                            {{ form.checkout }}
-                        </div>
-                        <div class="form-group">
-                            <label for="guests">Number of Guests:</label>
-                            {{ form.guests }}
-                            <small class="form-text text-muted">
-                                If you require more than 6 guests please <a href="{% url 'contact' %}">Contact Us</a> to discuss your booking.
-                            </small>
-                        </div>
-                        {% if request.user.is_authenticated %}
-                        <button type="submit" class="btn brand-btn mb-3">Book Now</button>
-                        {% else %}
-                        <p>Only Registered Guests may reserve properties. Please <a href="{% url 'account_signup' %}">register</a> to complete your Booking</p>
-                        <p>Already registered? Please <a href="{% url 'account_login' %}">Login</a> to continue</p>
-                        {% endif %}
-                    </form>
-                    <div class="row">
-                        <div class="col-4">
-                            <p><i class="bb-icon fa-solid fa-bed"></i> <span class="bb-text">{{ property.number_of_bedrooms }}</span></p>
-                        </div>
-                        <div class="col-4">
-                            <p><i class="bb-icon fa-solid fa-bath"></i> <span class="bb-text">{{ property.number_of_bathrooms }}</span></p>
-                        </div>
-                    </div>
-
-                    <h5>Amenities</h5>
-                    <div class="row">
-                        {% for amenity in property.amenities.all %}
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="{{ amenity.font_awesome_class }} am-icon"></i>
-                                </div>
-                                <div class="col-10 text-truncate">
-                                    {{ amenity.name }}
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
-            </div>
+        <!-- Thumbnail Navigation -->
+        <div class="row mt-3">
+          {% for image in property.images.all %}
+          <div class="col-3">
+            <a href="#propertyCarousel" data-slide-to="{{ forloop.counter0 }}">
+              <img
+                src="{{ MEDIA_URL }}{{ image.image }}"
+                class="thumbnail-img"
+                alt="{{ property.title }}"
+              />
+            </a>
+          </div>
+          {% endfor %}
         </div>
-        
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-5 col-12">
+        <div class="card">
+          <div class="card-body property-card-body">
+            <h4 class="card-title">Booking Details</h4>
+            <form method="post" action="{% url 'book_property' property.id %}">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="checkin">Check-in Date:</label>
+                {{ form.checkin }}
+              </div>
+              <div class="form-group">
+                <label for="checkout">Check-out Date:</label>
+                {{ form.checkout }}
+              </div>
+              <div class="form-group">
+                <label for="guests">Number of Guests:</label>
+                {{ form.guests }}
+                <small class="form-text text-muted">
+                  If you require more than 6 guests please
+                  <a href="{% url 'contact' %}">Contact Us</a> to discuss your
+                  booking.
+                </small>
+              </div>
+              {% if request.user.is_authenticated %}
+              <button type="submit" class="btn brand-btn mb-3">Book Now</button>
+              {% else %}
+              <p>
+                Only Registered Guests may reserve properties. Please
+                <a href="{% url 'account_signup' %}">register</a> to complete
+                your Booking
+              </p>
+              <p>
+                Already registered? Please
+                <a href="{% url 'account_login' %}">Login</a> to continue
+              </p>
+              {% endif %}
+            </form>
+            <div class="row">
+              <div class="col-4">
+                <p>
+                  <i class="bb-icon fa-solid fa-bed"></i>
+                  <span class="bb-text">{{ property.number_of_bedrooms }}</span>
+                </p>
+              </div>
+              <div class="col-4">
+                <p>
+                  <i class="bb-icon fa-solid fa-bath"></i>
+                  <span class="bb-text"
+                    >{{ property.number_of_bathrooms }}</span
+                  >
+                </p>
+              </div>
+            </div>
+
+            <h5>Amenities</h5>
+            <div class="row">
+              {% for amenity in property.amenities.all %}
+              <div class="col-6 col-md-12 col-lg-6">
+                <div class="row">
+                  <div class="col-2">
+                    <i class="{{ amenity.font_awesome_class }} am-icon"></i>
+                  </div>
+                  <div class="col-10 text-truncate">{{ amenity.name }}</div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Property Map -->
     <div class="row p-2 mb-4 mt-4">
-        <div class="col-12">
-            <h4>Location</h4>
-            {% if property.city and property.state and property.country %}
-            <p class="card-text"><i class="fa-solid fa-location-dot"></i> {{ property.city }}, {{ property.state }}, {{ property.country }}</p>
-            {% elif property.country %}
-            <p class="card-text"><i class="fa-solid fa-location-dot"></i> {{ property.country }}</p>
-            {% endif %}
-            <div id="map" class="shadow-1" style="height: 400px;"></div>
-            <p id="latitude" class="d-none">{{ property.latitude }}</p>
-            <p id="longitude" class="d-none">{{ property.longitude }}</p>
-        </div>
+      <div class="col-12">
+        <h4>Location</h4>
+        {% if property.city and property.state and property.country %}
+        <p class="card-text">
+          <i class="fa-solid fa-location-dot"></i> {{ property.city }}, {{
+          property.state }}, {{ property.country }}
+        </p>
+        {% elif property.country %}
+        <p class="card-text">
+          <i class="fa-solid fa-location-dot"></i> {{ property.country }}
+        </p>
+        {% endif %}
+        <div id="map" class="shadow-1" style="height: 400px"></div>
+        <p id="latitude" class="d-none">{{ property.latitude }}</p>
+        <p id="longitude" class="d-none">{{ property.longitude }}</p>
+      </div>
     </div>
 
     <!-- Reviews carousel -->
     <h4>Guest Reviews</h4>
-{% if property.reviews.exists %}
-<div class="row">
-    {% for review in property.reviews.all|slice:":3" %}
-    <div class="col-12 col-md-6 col-xl-4 mb-4">
+    {% if property.reviews.exists %}
+    <div class="row">
+      {% for review in property.reviews.all|slice:":3" %}
+      <div class="col-12 col-md-6 col-xl-4 mb-4">
         <div class="card review-card shadow-1">
-            <div class="card-body">
-                <h5>{{ review.guest.username }}</h5>
-                <p>
-                    <strong>Rating:</strong> 
-                    {% for i in "12345" %}
-                        <i class="fa {% if forloop.counter <= review.rating %}fa-solid fa-star{% else %}fa-regular fa-star{% endif %}"></i>
-                    {% endfor %}
-                </p>
-                <p>{{ review.comment }}</p>
-                <p><small>Reviewed on {{ review.created_at|date:"F j, Y" }}</small></p>
-                {% if request.user == review.guest %}
-                <a href="{% url 'edit_review' review.id %}" class="btn brand-btn">Edit</a>
-                {% endif %}
-            </div>
+          <div class="card-body">
+            <h5>{{ review.guest.username }}</h5>
+            <p>
+              <strong>Rating:</strong>
+              {% for i in "12345" %}
+              <i
+                class="fa {% if forloop.counter <= review.rating %}fa-solid fa-star{% else %}fa-regular fa-star{% endif %}"
+              ></i>
+              {% endfor %}
+            </p>
+            <p>{{ review.comment }}</p>
+            <p>
+              <small>Reviewed on {{ review.created_at|date:"F j, Y" }}</small>
+            </p>
+            {% if request.user == review.guest %}
+            <a href="{% url 'edit_review' review.id %}" class="btn brand-btn"
+              >Edit</a
+            >
+            {% endif %}
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% else %}
-<p>No reviews yet. Be the first to <a href="{% url 'write_review' property.id %}">write a review</a>!</p>
-{% endif %}
-</div>
+    {% else %}
+    <p>
+      No reviews yet. Be the first to
+      <a href="{% url 'write_review' property.id %}">write a review</a>!
+    </p>
+    {% endif %}
+  </div>
 </div>
 {% include 'properties/includes/property_map_script.html' %}
 {% include 'properties/includes/booking_form_script.html' %}
