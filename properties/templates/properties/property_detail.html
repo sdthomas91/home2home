@@ -81,7 +81,7 @@
                         <button type="submit" class="btn brand-btn mb-3">Book Now</button>
                         {% else %}
                         <p>Only Registered Guests may reserve properties. Please <a href="{% url 'account_signup' %}">register</a> to complete your Booking</p>
-                        <p>Already registed? Please <a href="{% url 'account_login' %}">Login</a> to continue</p> 
+                        <p>Already registered? Please <a href="{% url 'account_login' %}">Login</a> to continue</p>
                         {% endif %}
                     </form>
                     <div class="row">
@@ -160,4 +160,5 @@
 </div>
 </div>
 {% include 'properties/includes/property_map_script.html' %}
+{% include 'properties/includes/booking_form_script.html' %}
 {% endblock %}
