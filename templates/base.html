@@ -112,11 +112,14 @@
         <div class="row">
           <nav class="navbar navbar-expand-lg navbar-light w-100">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
-            {% include 'includes/mobile-header.html' %}
+            <div class="d-lg-none">
+              {% include 'includes/mobile-header.html' %}
+            </div>
+            
             {% include 'includes/main-nav.html' %}
-          </nav>
+        </nav>
         </div>
       </header>
       {% if messages %}

@@ -155,6 +155,13 @@ a:focus {
     height: 100vh;
 }
 
+/* ---navbar--- */
+.nav-text > a {
+    color: #008080 !important;
+    font-size: 1.2rem !important;
+    margin-left: 2rem;
+}
+
 /* ---hero--- */
 .hero-banner {
     background-image: url("{% media 'hero-main.jpg' %}");

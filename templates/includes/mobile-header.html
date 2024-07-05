@@ -49,16 +49,16 @@
   </li>
   <li class="list-inline-item">
     <a href="{% url 'basket' %}" class="user-action {% if total %} text-info font-weight-bold {% else %} brand-color {% endif %} nav-link">
-      <div class="text-center">
-        <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
-        <p class="my-0">
-          {% if total %}
-            £{{ total|floatformat:2 }}  
-          {% else %}
-          £0.00                    
-          {% endif %}
-        </p>
-      </div>
-    </a>
+                  <div class="text-center">
+                    <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
+                    <p class="my-0">
+                      {% if total %}
+                        £{{ total|floatformat:2 }}  
+                      {% else %}
+                      £0.00                    
+                      {% endif %}
+                    </p>
+                  </div>
+                </a>
   </li>
 </ul>
