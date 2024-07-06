@@ -453,3 +453,12 @@ a:focus {
         padding-bottom: 10rem
     }
 }
+
+@media (max-width: 576px) {
+    .nav-link {
+        padding: .5rem .5rem !important;
+    }
+    .mobile-header-container { 
+        width: 80%;
+    }
+}
