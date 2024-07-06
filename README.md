@@ -1,6 +1,25 @@
+# Home2Home
+
+## Milestone Project 4 - Full Stack Development
+
 Welcome,
 
 This project is a property rental platform utilizing Django for the backend and HTML, CSS, and JavaScript for the frontend. The platform allows users to register as guests or hosts, list and book properties, and communicate through an integrated messaging system. It also includes Google Maps integration for searching and viewing properties on a map.
+
+* Key features include:
+  - Dynamic Filtering : Users can filter properties using a variety of filters for quicker property searching.
+  - Active search : Users can search by keyword or phrase to find their ideal property
+  - Cart & Stripe Checkout: Users may book one stay per checkout, and proceed to checkout with Stripe. See [Stripe's testing card details](https://stripe.com/docs/testing?testing-method=card-numbers#visa) to place an order on the website.
+  - Authentication: Users can create an account to save their contact information and view their bookings (past and future)
+  - Reviews: Users can leave reviews only for properties at which they have stayed to ensure verified reviews. 
+
+## Live Project
+
+[View the live project here.](https://home-2-home-534807be7c72.herokuapp.com/)
+
+## Repository
+
+[Find the project repository here.](https://github.com/sdthomas91/home2home)
 
 ## Contents
    - [User experience](#user-experience)
