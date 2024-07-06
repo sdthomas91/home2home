@@ -456,7 +456,10 @@ a:focus {
 
 @media (max-width: 576px) {
     .nav-link {
-        padding: .5rem .5rem !important;
+        padding: .5rem .75rem !important;
+    }
+    .nav-list { 
+        padding-left: 0rem !important;
     }
     .mobile-header-container { 
         width: 80%;
