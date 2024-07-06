@@ -14,6 +14,7 @@ from pathlib import Path
 
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -31,7 +32,7 @@ SECRET_KEY = 'django-insecure-2d(rv77b0zjks_od0au(kc+w6!zp*c0+op!n@7bi2(^n7g%=b)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-sdthomas91-home2home-ocs7v64amty.ws-us115.gitpod.io']
+ALLOWED_HOSTS = ['home-2-home.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -139,12 +140,17 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 8  # minimum password length
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

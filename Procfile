@@ -1,0 +1,1 @@
+web: gunicorn home2home.wsgi:application
