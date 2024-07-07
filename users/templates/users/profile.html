@@ -19,30 +19,6 @@ My Profile
                     <div class="d-none d-lg-flex">
                         {% include 'includes/lg-profile.html' %}
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            {% if profile.profile_picture %}
-                            <p><img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }} Profile Picture" class="img-fluid rounded-circle"></p>
-                            {% else %}
-                            <p><img src="{{ MEDIA_URL }}no-profile-pic.jpg" alt="No Profile Picture" class="img-fluid rounded-circle"></p>
-                            {% endif %}
-                            <p class="d-none d-lg-block"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
-                        </div>
-                        <div class="col-7 offset-1">
-                            <p><strong>Full Name:</strong> {{ profile.first_name }} {{ profile.last_name}} </p>
-                            <p><strong>Email:</strong> {{ profile.user.email }}</p>  
-                            <p class="d-none d-lg-block"><strong>Address:</strong> {{ profile.address_1 }}, {{ profile.address_2 }}, {{ profile.city }}, {{ profile.state }}, {{ profile.postal_code }}</p>    
-                            <p class="d-none d-lg-block"><strong>Bio:</strong> {{ profile.bio }}</p>
-                            <p class="d-block d-lg-none"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
-                            </div>
-                    </div>
-                    <div class="row d-block d-lg-none mb-4">
-                        <div class="col-12">
-                            <p><strong>Address:</strong> {{ profile.address_1 }}, {{ profile.address_2 }}, {{ profile.city }}, {{ profile.state }}, {{ profile.postal_code }}, {{ profile.country }}</p>    
-                            <p><strong>Bio:</strong> {{ profile.bio }}</p>
-                            <p class="d-none d-lg-block"><strong>{% if profile.user.user_type == 'host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-footer profile-card-footer text-center mb-4">
                     <a href="{% url 'profile_edit' %}" class="brand-btn btn">Edit Profile</a>

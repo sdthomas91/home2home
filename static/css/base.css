@@ -463,6 +463,7 @@ a:focus {
 @media (max-width: 576px) {
     body {
         background: url(/media/hero-main.jpg) no-repeat right center fixed;
+        background-size: cover;
     }
     .nav-link {
         padding: .5rem .75rem !important;
