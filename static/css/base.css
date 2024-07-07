@@ -469,13 +469,13 @@ a:focus {
         padding: .5rem .75rem !important;
     }
     .list-inline-item:not(:last-child) {
-        margin-right: 0;
+        margin-right: 0 !important;
     }
     .nav-list { 
         padding-left: 0rem !important;
     }
     .mobile-header-container { 
-        width: 80%;
+        width: 75%;
     }
     .hero-banner {
         margin: 2rem 2rem;
