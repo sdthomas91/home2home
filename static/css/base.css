@@ -467,7 +467,7 @@ a:focus {
 @media (max-width: 576px) {
 
     .hero-container {
-        background: url(/media/hero-mobile.jpg) no-repeat center center;
+        background: url(/media/hero-mobile.jpg) no-repeat center center scroll;
         background-size: cover;
     }
     .nav-link {
