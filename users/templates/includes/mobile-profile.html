@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        {% if profile.profile_picture %}
+        <p><img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }} Profile Picture" class="img-fluid rounded-circle"></p>
+        {% else %}
+        <p><img src="{{ MEDIA_URL }}no-profile-pic.jpg" alt="No Profile Picture" class="img-fluid rounded-circle"></p>
+        {% endif %}
+        <p class="d-none d-lg-block"><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-12">
+        <p><strong>Full Name:</strong> {{ profile.first_name }} {{ profile.last_name}} </p>
+        <p><strong>Email:</strong> {{ profile.user.email }}</p>  
+        <p><strong>Address:</strong> {{ profile.address_1 }}, {{ profile.address_2 }}, {{ profile.city }}, {{ profile.state }}, {{ profile.postal_code }}</p>    
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <p><strong>{% if profile.user.user_type == 'Host' %}Host {% else %}Guest {% endif %} since:</strong> {{ profile.join_date }}</p>
+        </div>
+</div>

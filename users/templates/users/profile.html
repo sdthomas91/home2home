@@ -4,8 +4,7 @@
 My Profile
 {% endblock %}
 {% block content %}
-<div class="container-fluid profile-container">
-    <div class="row container-fluid justify-content-center">
+<div class="container-fluid row justify-content-center profile-container">
         <div class="col-md-8">
             <h2 class="text-center my-4">My Profile</h2>
             <hr class="brand-break">
@@ -14,6 +13,12 @@ My Profile
                     <h4>{{ profile.user.username }}</h4>
                 </div>
                 <div class="card-body profile-card-body">
+                    <div class="d-flex d-lg-none">
+                        {% include 'includes/mobile-profile.html' %}
+                    </div>
+                    <div class="d-none d-lg-flex">
+                        {% include 'includes/lg-profile.html' %}
+                    </div>
                     <div class="row">
                         <div class="col-3">
                             {% if profile.profile_picture %}
@@ -45,6 +50,5 @@ My Profile
                 </div>
             </div>
         </div>
-    </div>
 </div>
 {% endblock %}
