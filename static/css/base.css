@@ -485,7 +485,7 @@ a:focus {
     .hero-banner {
         margin: 2rem 2rem;
         background: rgba(255, 255, 255, 0.8);
-        padding: 1rem 2rem;
+        padding: 2rem 2rem 0rem;
         border-radius: 2rem;
     }
     .display-4 {
