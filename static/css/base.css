@@ -191,8 +191,8 @@ a:focus {
 }
 
 /* ---hero--- */
+
 .hero-banner {
-    background-image: url("{% media 'hero-main.jpg' %}");
     margin: 10rem 2rem;
 }
 
@@ -465,8 +465,9 @@ a:focus {
 }
 
 @media (max-width: 576px) {
-    body {
-        background: url(/media/hero-main.jpg) no-repeat right center fixed;
+
+    .hero-container {
+        background: url(/media/hero-mobile.jpg) no-repeat center center;
         background-size: cover;
     }
     .nav-link {
