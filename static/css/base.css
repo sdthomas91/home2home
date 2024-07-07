@@ -76,6 +76,10 @@ a:focus {
     width: 10rem;
 }
 
+.left-break {
+    margin-left: 0rem !important;
+}
+
 .footer-hr {
     height: 1px !important;
     width: 90% !important;
