@@ -4,7 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import re_path
 from allauth.account.views import SignupView
-from users.views import CustomSignupView
+from users.views import CustomS
+from .views import raise_500
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,5 +18,6 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('bookings/', include('bookings.urls')),
     path('reviews/', include('reviews.urls')),
-    path('checkout/', include('checkout.urls'))
+    path('checkout/', include('checkout.urls')),
+    path('raise-500/', raise_500, name='raise_500'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
