@@ -455,8 +455,14 @@ a:focus {
 }
 
 @media (max-width: 576px) {
+    body {
+        background: url(/media/hero-main.jpg) no-repeat right center fixed;
+    }
     .nav-link {
         padding: .5rem .75rem !important;
+    }
+    .list-inline-item:not(:last-child) {
+        margin-right: 0;
     }
     .nav-list { 
         padding-left: 0rem !important;
@@ -465,8 +471,10 @@ a:focus {
         width: 80%;
     }
     .hero-banner {
-        background: url(/media/hero-main.jpg) no-repeat center center fixed;
-        padding: 10rem 2rem;
+        margin: 2rem 2rem;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1rem 2rem;
+        border-radius: 2rem;
     }
     .display-4 {
         font-size: 3rem;
