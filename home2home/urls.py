@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from django.urls import re_path
 from allauth.account.views import SignupView
 from users.views import CustomSignupView
-from .views import trigger_error
 
 
 urlpatterns = [
@@ -19,5 +18,4 @@ urlpatterns = [
     path('bookings/', include('bookings.urls')),
     path('reviews/', include('reviews.urls')),
     path('checkout/', include('checkout.urls')),
-    path('trigger-error/', trigger_error, name='trigger_error'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
