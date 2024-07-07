@@ -1,52 +1,53 @@
-<li class="list-inline-item">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center brand-color">
-            <div><i class="fas fa-search"></i></div>
-            <p class="my-0 ">Search</p>
-        </div>
-    </a>
-  <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-      <form class="form" method="GET" action="">
-          <div class="input-group w-100">
-              <input class="form-control rounded-0" type="text" name="q" placeholder="Search for your stay">
-              <div class="input-group-append">
-                  <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
-                      <span class="icon">
-                          <i class="fas fa-search brand-color"></i>
-                      </span>
-                  </button>
-              </div>
+<div class="d-lg-none">
+  <li class="list-inline-item">
+      <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="text-center brand-color">
+              <div><i class="fas fa-search"></i></div>
+              <p class="my-0 ">Search</p>
           </div>
-      </form>
-  </div>
-</li>
-<li class="list-inline-item dropdown">
-  <a href="#" class="user-action nav-link" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <div class="text-center">
-      <div><i class="fas fa-user fa-lg"></i></div>
-      <p class="my-0">My Account</p>
+      </a>
+    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+        <form class="form" method="GET" action="">
+            <div class="input-group w-100">
+                <input class="form-control rounded-0" type="text" name="q" placeholder="Search for your stay">
+                <div class="input-group-append">
+                    <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
+                        <span class="icon">
+                            <i class="fas fa-search brand-color"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-  </a>
-  <div class="dropdown-menu border-0" aria-labelledby="user-options">
-    {% if request.user.is_authenticated %}
-      {% if request.user.is_superuser %}
-      <a href="{% url 'manage_properties' %}" class="dropdown-item">Property Management</a>
+  </li>
+  <li class="list-inline-item dropdown">
+    <a href="#" class="user-action nav-link" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="text-center">
+        <div><i class="fas fa-user fa-lg"></i></div>
+        <p class="my-0">My Account</p>
+      </div>
+    </a>
+    <div class="dropdown-menu border-0" aria-labelledby="user-options">
+      {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+        <a href="{% url 'manage_properties' %}" class="dropdown-item">Property Management</a>
+        {% endif %}
+        <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+        <a href="{% url 'my_bookings' %}" class="dropdown-item">My Bookings</a>
+        {% if request.user.profile.user_type == 'Host' %}
+        <a href="{% url 'my_properties' %}" class="dropdown-item">My Properties</a>
+        <a href="{% url 'add_property' %}" class="dropdown-item">Add Property</a>
+        {% endif %}
+        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+      {% else %}
+        <a href="{% url 'account_signup' %}" class="dropdown-item">Register as Guest</a>
+        <a href="{% url 'account_signup' %}" class="dropdown-item">Register as Host</a>
+        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
       {% endif %}
-      <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-      <a href="{% url 'my_bookings' %}" class="dropdown-item">My Bookings</a>
-      {% if request.user.profile.user_type == 'Host' %}
-      <a href="{% url 'my_properties' %}" class="dropdown-item">My Properties</a>
-      <a href="{% url 'add_property' %}" class="dropdown-item">Add Property</a>
-      {% endif %}
-      <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-    {% else %}
-      <a href="{% url 'account_signup' %}" class="dropdown-item">Register as Guest</a>
-      <a href="{% url 'account_signup' %}" class="dropdown-item">Register as Host</a>
-      <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-    {% endif %}
-  </div>
-</li>
-<li class="list-inline-item">
+    </div>
+  </li>
+  <li class="list-inline-item">
   <a href="{% url 'basket' %}" class="user-action {% if total %} text-info font-weight-bold {% else %} brand-color {% endif %} nav-link">
     <div class="text-center">
       <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
@@ -59,4 +60,5 @@
       </p>
     </div>
   </a>
-</li>
+  </li>
+</div>
