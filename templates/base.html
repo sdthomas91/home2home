@@ -45,7 +45,7 @@
   <body>
     <div class="d-flex flex-column min-vh-100">
       <header class="container-fluid fixed">
-        <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
+        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
             <a href="{% url 'home' %}" class="nav-link main-logo-link">
               <h2 class="logo-font my0">
@@ -114,10 +114,11 @@
         </div>
         <div class="row">
           <nav class="navbar navbar-expand-lg navbar-light w-100">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <div class="d-lg-none mobile-header-container">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="d-lg-none mobile-header-container">
               {% include 'includes/mobile-header.html' %}
             </div>
             
