@@ -364,6 +364,9 @@ a:focus {
     background: rgba(255,255,255,0.5);
 }
 
+.profile-inner {
+    margin: auto;
+}
 /* ---profile card overrides--- */
 
 .profile-card {
