@@ -25,13 +25,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initialize Flatpickr
     flatpickr(checkinInput, {
         minDate: "today",
+        disableMobile: "true",
         onChange: function(selectedDates, dateStr, instance) {
             checkoutInput._flatpickr.set('minDate', dateStr);
         }
     });
     
     flatpickr(checkoutInput, {
-        minDate: new Date().fp_incr(1), // tomorrow
+        minDate: new Date().fp_incr(1), // earliest checkout is tomorrow
+        disableMobile: "true",
         onChange: function(selectedDates, dateStr, instance) {
             checkinInput._flatpickr.set('maxDate', dateStr);
         }
