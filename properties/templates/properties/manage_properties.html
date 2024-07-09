@@ -19,23 +19,22 @@
                 <div class="card">
                     {% include 'properties/includes/image-carousel.html' %}
                     <div class="card-body">
-                        <h5 class="card-title">{{ property.title }}</h5>
+                        <h5 class="card-title text-truncate">{{ property.title }}</h5>
                     </div>
                     <div class="card-footer">
                         <p class="card-text">£{{ property.price_per_night }} per night</p>
-                        <a href="{% url 'superuser_edit_property' property.id %}" class="btn brand-btn">Edit Property</a>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePropertyModal">
+                        <a href="{% url 'superuser_edit_property' property.id %}" class="d-block mb-3 btn brand-btn">Edit Property</a>
+                        <button type="button" class="d-block w-100 btn btn-danger" data-toggle="modal" data-target="#deletePropertyModal{{ property.id }}">
                             Delete Property
-                          </button>
+                        </button>
                     </div>
                 </div>
             </div>
+            {% include 'properties/includes/delete_property_modal.html' %}
             {% endfor %}
         </div>
     </div>
 </div>
 {% include 'properties/includes/pagination.html' %}
-{% include 'includes/delete_property_modal.html' %}
 </div>
-<script src="{% static 'js/properties/properties.js' %}"></script>
 {% endblock %}

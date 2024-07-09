@@ -3,6 +3,8 @@
 {% block extra-title %}My Properties{% endblock %}
 
 {% block content %}
+<div class="property-page">
+
 <div class="container mt-4 h-100">
     
     <h1 class="text-center">My Properties</h1>
@@ -46,5 +48,6 @@
             No properties yet? <a href="{% url 'add_property' %}" class="alert-link">Get started on your first listing!</a>
         </div>
     {% endif %}
+</div>
 </div>
 {% endblock %}
