@@ -17,39 +17,30 @@ function initMap() {
 }
 
 // Property detail booking form script
-$(document).ready(function() {
-    // initialise date picker - users can book from today
-    $('.input-daterange').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: '0d',
-        autoclose: true,
-        changeMonth: true,
-        changeYear: true,
-        beforeShowDay: function(date) {
-            let YearMonthDay = date.getFullYear() +  "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
-            if ($.inArray(YearMonthDay, unavailableDates) != -1) {
-                return false;
-            } else {
-                return true;
-            }
+document.addEventListener("DOMContentLoaded", function() {
+    const checkinInput = document.getElementById('checkin');
+    const checkoutInput = document.getElementById('checkout');
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Disable past dates for checkin
+    checkinInput.setAttribute('min', today);
+    // Ensure checkout date is not earlier than tomorrow if selected first
+    checkoutInput.setAttribute('min', new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]);
+    
+    checkinInput.addEventListener('change', function() {
+        // Ensure checkout date is not earlier than checkin date
+        if (checkoutInput.value < this.value) {
+            checkoutInput.value = '';
         }
+        checkoutInput.setAttribute('min', this.value);
+    });
+    
+    checkoutInput.addEventListener('change', function() {
+        // Ensure checkin date is not after checkout date
+        if (checkinInput.value > this.value) {
+            checkinInput.value = '';
+        }
+        checkinInput.setAttribute('max', this.value);
     });
 
-    var $start = $('#startDate');
-    var $end = $('#endDate');
-
-    $start.datepicker('setDate', null);
-    $end.datepicker('setDate', null);
-
-    $start.on('change', function() {
-        var startDate = new Date($start.val());
-        startDate.setDate(startDate.getDate());
-        $end.datepicker('setDate', startDate);
-
-        $('#checkin').val($start.val());
-    });
-
-    $end.on('change', function() {
-        $('#checkout').val($end.val());
-    });
 });
