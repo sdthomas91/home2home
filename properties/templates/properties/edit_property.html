@@ -22,10 +22,14 @@ Edit Property
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="brand-btn btn btn-dark w-50 mt-4">Update Property</button>
                         </div>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePropertyModal">
+                            Delete Property
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% include 'includes/delete_property_modal.html' %}
 {% endblock %}
