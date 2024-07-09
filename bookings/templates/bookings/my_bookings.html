@@ -13,7 +13,13 @@ My Bookings
         <h2 class="mt-4">Upcoming Stays</h2>
         {% if upcoming_bookings %}
         <div class="booking-table">
-        <table class="table">
+            <div class="d-lg-none">
+                {% include 'includes/my-booking-mob.html' %}
+            </div>
+            <div class="d-none d-lg-block">
+                {% include 'includes/my-booking-lg.html' %}
+            </div>
+        <!-- <table class="table">
             <thead>
                 <tr>
                     <th>Property</th>
@@ -34,7 +40,7 @@ My Bookings
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
+        </table> -->
         </div>
         {% else %}
         <p>No upcoming bookings. <a href="{% url 'all_properties' %}">Book Now!</a></p>
