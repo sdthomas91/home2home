@@ -103,7 +103,7 @@
                       {% if total %}
                         (1)
                       {% else %}
-                       (0)                    
+                        (0)                    
                       {% endif %}
                     </p>
                   </div>
@@ -196,7 +196,9 @@
         $('.toast').toast('show');
       });
     </script>
+    <script src="{% static 'js/properties/property_detail.js' %}"></script>
     <script src="{% static 'js/core.js' %}"></script>
+    
     {% endblock %}
   </body>
 </html>
