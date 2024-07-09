@@ -77,6 +77,7 @@
           <div class="card-body property-card-body">
             <h4 class="card-title text-sm-center">Booking Details</h4>
             <hr class="d-block d-lg-none brand-break left-break">
+            <hr class="brand-break">
             <h5>Select Dates</h5>
             <form method="post" action="{% url 'book_property' property.id %}">
               {% csrf_token %}
@@ -192,4 +193,5 @@
     {% endif %}
   </div>
 </div>
+
 {% endblock %}

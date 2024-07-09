@@ -16,31 +16,24 @@ function initMap() {
     });
 }
 
-// Property detail booking form script
+
+// Flatpickr Date picker - used for style and functionality
 document.addEventListener("DOMContentLoaded", function() {
     const checkinInput = document.getElementById('checkin');
     const checkoutInput = document.getElementById('checkout');
-    const today = new Date().toISOString().split('T')[0];
     
-    // Disable past dates for checkin
-    checkinInput.setAttribute('min', today);
-    // Ensure checkout date is not earlier than tomorrow if selected first
-    checkoutInput.setAttribute('min', new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]);
-    
-    checkinInput.addEventListener('change', function() {
-        // Ensure checkout date is not earlier than checkin date
-        if (checkoutInput.value < this.value) {
-            checkoutInput.value = '';
+    // Initialize Flatpickr
+    flatpickr(checkinInput, {
+        minDate: "today",
+        onChange: function(selectedDates, dateStr, instance) {
+            checkoutInput._flatpickr.set('minDate', dateStr);
         }
-        checkoutInput.setAttribute('min', this.value);
     });
     
-    checkoutInput.addEventListener('change', function() {
-        // Ensure checkin date is not after checkout date
-        if (checkinInput.value > this.value) {
-            checkinInput.value = '';
+    flatpickr(checkoutInput, {
+        minDate: new Date().fp_incr(1), // tomorrow
+        onChange: function(selectedDates, dateStr, instance) {
+            checkinInput._flatpickr.set('maxDate', dateStr);
         }
-        checkinInput.setAttribute('max', this.value);
     });
-
 });
