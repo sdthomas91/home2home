@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import all_properties, property_detail, add_property, edit_property, search_results, manage_properties, superuser_edit_property
+from .views import all_properties, property_detail, add_property, edit_property, search_results, manage_properties, superuser_edit_property, delete_property
 
 urlpatterns = [
     path('properties/', all_properties, name='all_properties'),
