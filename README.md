@@ -129,3 +129,5 @@ This project is a property rental platform utilizing Django for the backend and 
 - Used bootstrap cards for visual heirarchy and easy design for properties, profiles and contact forms. These worked especially well for organising content such as property listings when more than one occurs. 
 
 # Wireframes
+
+- Please find all core wireframes [here](docs/readme/wireframes.md)
