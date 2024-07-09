@@ -2,9 +2,15 @@
 {% load static %} 
 {% load ratings %} 
 {% block extra-title %} {{ property.title }} {% endblock %}
+{% block extra-css %}
+<!-- Include Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
 {% block extra-js %}
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZGeojcWzcsbP8YNjo2HjkUBd-vLI9LSg&callback=initMap"></script>
+<!-- Include Flatpickr CSS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 {% endblock %}
 {% block content %}
 <div class="container-fluid bg-white">
@@ -77,7 +83,7 @@
           <div class="card-body property-card-body">
             <h4 class="card-title text-sm-center">Booking Details</h4>
             <hr class="d-block d-lg-none brand-break left-break">
-            <hr class="brand-break">
+            <hr class="brand-break d-none d-lg-block">
             <h5>Select Dates</h5>
             <form method="post" action="{% url 'book_property' property.id %}">
               {% csrf_token %}
