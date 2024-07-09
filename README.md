@@ -2,6 +2,8 @@
 
 ## Milestone Project 4 - Full Stack Development
 
+<h2 align="center"><img src="media/readme/home2home-mockup.jpg"></h2>
+
 Welcome,
 
 This project is a property rental platform utilizing Django for the backend and HTML, CSS, and JavaScript for the frontend. The platform allows users to register as guests or hosts, list and book properties, and communicate through an integrated messaging system. It also includes Google Maps integration for searching and viewing properties on a map.
@@ -30,6 +32,12 @@ This project is a property rental platform utilizing Django for the backend and 
          + [Booking and Checkout](#booking-and-checkout)
          + [Messaging](#messaging)
          + [Administration and Platform Management](#administration-and-platform-management)
+   - [Design](#design)
+      + [Colour Scheme](#colour-scheme)
+      + [Typography](#typography)
+      + [Imagery](#imagery)
+      + [Icons](#icons)
+      + [Cards](#cards)
 
 # User Experience
 
@@ -88,3 +96,36 @@ This project is a property rental platform utilizing Django for the backend and 
 3. I want to handle booking disputes and issues to provide customer support.
 4. I want to manage site content and updates to keep the platform running smoothly.
 5. I want to view site analytics to understand user behavior and improve the platform.
+
+
+# Design
+
+## Colour Scheme
+
+### Main Colour
+- #008080 - This teal is a revitalizing and rejuvenating color that also represents open communication and clarity of thought.
+
+### Accent Colour
+- #004747 - This maintains the teal but darkens the colour to provide user feedback with elements such as hover and active buttons
+
+### Supporting Colours
+- #fff & #000 - Used black and white for high contrast, increased accessibility nad user experience. 
+
+<img src="media/readme/file-design.jpg">
+
+## Tyography
+- Logo Font : Playwrite ES Deco was used as the main font for the logo/brand of the site. It could not be used for general headings due to readability but for a brand identity it worked nicely as a decorative piece
+- Title Font : Montserrat was used as the title font due to high readability, compatability and versatility with differing font weights. 
+- Body Font : Body was left as Arial/System font as it pairs well with Montserrat, is universal and highly readable. 
+
+## Imagery
+- Little imagery was required for the body of the site due to the population of space with property images. The same image was used for both desktop and mobile hero/body images, though it was scaled accordingly for different viewport sizes. 
+- Property images were largely from pexels and all credits will be included in a separate [CREDITS.md](docs/readme/credits.md)
+
+## Icons
+- All icons used come from the [FontAwesome library](https://www.fontawesome.com) - they were used to provide information without the need for excess text, though often times they are supported by text for optimum UX. Used across amenities, navbar and search bars.
+
+## Cards
+- Used bootstrap cards for visual heirarchy and easy design for properties, profiles and contact forms. These worked especially well for organising content such as property listings when more than one occurs. 
+
+# Wireframes
