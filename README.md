@@ -79,15 +79,6 @@ This project is a property rental platform utilizing Django for the backend and 
 4. I want to receive an order confirmation after booking to verify my reservation details.
 5. I want to receive an email confirmation of my booking to keep a record of my reservation.
 
-### Messaging
-#### User (Guest or Host)
-
-1. I want to send messages to the host to ask questions about a property before booking.
-2. I want to receive messages from guests inquiring about my property.
-3. I want to keep all communication within the platform for ease of access and tracking.
-4. I want to be notified when I receive a new message to respond promptly.
-5. I want to view the entire message thread to follow the conversation easily.
-
 ### Administration and Platform Management
 #### Admin
 
@@ -101,6 +92,7 @@ This project is a property rental platform utilizing Django for the backend and 
 # Design
 
 ## Colour Scheme
+ - The Colour scheme was generally kept simple and in line with best practices, with high WebAim contrast compatibilit as outlined in the [test document](docs/readme/TESTING.md)
 
 ### Main Colour
 - #008080 - This teal is a revitalizing and rejuvenating color that also represents open communication and clarity of thought.
@@ -131,3 +123,27 @@ This project is a property rental platform utilizing Django for the backend and 
 # Wireframes
 
 - Please find all core wireframes [here](docs/readme/wireframes.md)
+
+## Wireframe Deviations
+ - There were little to no deviations from the original wireframe. I had a clear idea of how I wanted the User Interface to look and the general navigation of the pages. 
+ - One element missed on the wireframe is the location of the filter element on the all properties page. Located below the page title for easy access and maximum UX. 
+ - Added "view details" button below properties for easy navigation and kept property cards fairly minimal
+
+# Database Schema
+
+## Diagram 
+ - The following image represents the database models and relevant relationships as utilised within the project
+
+ <img src="media/readme/home2home-db-diagram.png">
+
+### DB Models
+- A list of database models used in the project can be found below :
+   * **User** - stores user information including username, email, password, first name, last name, whether the user is a host, and the date they joined.
+   * **Profile** - stores additional information about the user such as bio, profile picture, and phone number. Relates to the User model.
+   * **Property** - stores information for each property including host ID, title, description, address, city, state, country, postal code, latitude, longitude, price per night, maximum guests, number of bedrooms, number of bathrooms, availability, creation date, and update date.
+   * **PropertyImage** - stores multiple images for each property. Relates to the Property model.
+   * **Booking** - stores booking information including guest ID, property ID, check-in date, check-out date, total price, booking status, creation date, and update date. Relates to the User and Property models.
+   * **Review** - stores rating and review information including guest ID, property ID, rating, comment, creation date, and update date. Relates to the User and Property models.
+   * **Amenity** - stores information about property amenities including the name and font awesome class for the amenity icon.
+   * **PropertyAmenity** - stores the relationship between properties and amenities. Relates to the Property and Amenity models.
+
