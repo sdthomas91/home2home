@@ -17,36 +17,39 @@ function initMap() {
 }
 
 // Property detail booking form script
-document.addEventListener("DOMContentLoaded", function() {
-    const checkinInput = document.getElementById('checkin');
-    const checkoutInput = document.getElementById('checkout');
-    const today = new Date().toISOString().split('T')[0];
-
-    if (!checkinInput || !checkoutInput) {
-        console.error('Checkin or checkout input not found');
-        return;
-    }
-
-    // Log initial state
-    console.log('Initial checkin min:', checkinInput.getAttribute('min'));
-    console.log('Initial checkout min:', checkoutInput.getAttribute('min'));
-
-    // Disable past dates for checkin
-    checkinInput.setAttribute('min', today);
-
-    checkinInput.addEventListener('change', function() {
-        // Ensure checkout date is not earlier than checkin date
-        console.log('Checkin date changed:', this.value);
-        checkoutInput.setAttribute('min', this.value);
+$(document).ready(function() {
+    // initialise date picker - users can book from today
+    $('.input-daterange').datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: '0d',
+        autoclose: true,
+        changeMonth: true,
+        changeYear: true,
+        beforeShowDay: function(date) {
+            let YearMonthDay = date.getFullYear() +  "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
+            if ($.inArray(YearMonthDay, unavailableDates) != -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     });
 
-    checkoutInput.addEventListener('change', function() {
-        // Ensure checkin date is not after checkout date
-        console.log('Checkout date changed:', this.value);
-        checkinInput.setAttribute('max', this.value);
+    var $start = $('#startDate');
+    var $end = $('#endDate');
+
+    $start.datepicker('setDate', null);
+    $end.datepicker('setDate', null);
+
+    $start.on('change', function() {
+        var startDate = new Date($start.val());
+        startDate.setDate(startDate.getDate());
+        $end.datepicker('setDate', startDate);
+
+        $('#checkin').val($start.val());
     });
 
-    // Log after setting attributes
-    console.log('Checkin min set to:', checkinInput.getAttribute('min'));
-    console.log('Checkout min set to:', checkoutInput.getAttribute('min'));
+    $end.on('change', function() {
+        $('#checkout').val($end.val());
+    });
 });

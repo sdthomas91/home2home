@@ -75,41 +75,33 @@
       <div class="col-md-5 col-12">
         <div class="card">
           <div class="card-body property-card-body">
-            <h4 class="card-title">Booking Details</h4>
+            <h4 class="card-title text-sm-center">Booking Details</h4>
             <hr class="d-block d-lg-none brand-break left-break">
+            <h5>Select Dates</h5>
+            <div class="container dates-container">
+                <div class="input-daterange row">
+                    <input type="text" id="startDate" class="form-control col-6" name="startDate" placeholder="Check in" aria-label="start date">
+                    <input type="text" id="endDate" class="form-control col-6" name="endDate" placeholder="Check out" aria-label="end date">
+                </div>
+            </div>
             <form method="post" action="{% url 'book_property' property.id %}">
               {% csrf_token %}
+              <input type="hidden" id="checkin" name="checkin">
+              <input type="hidden" id="checkout" name="checkout">
               <div class="form-group">
-                <label for="checkin">Check-in Date:</label>
-                {{ form.checkin }}
-              </div>
-              <div class="form-group">
-                <label for="checkout">Check-out Date:</label>
-                {{ form.checkout }}
-              </div>
-              <div class="form-group">
-                <label for="guests">Number of Guests:</label>
-                {{ form.guests }}
-                <small class="form-text text-muted">
-                  If you require more than 6 guests please
-                  <a href="{% url 'contact' %}">Contact Us</a> to discuss your
-                  booking.
-                </small>
+                  <label for="guests">Number of Guests:</label>
+                  {{ form.guests }}
+                  <small class="form-text text-muted">
+                      If you require more than 6 guests please <a href="{% url 'contact' %}">Contact Us</a> to discuss your booking.
+                  </small>
               </div>
               {% if request.user.is_authenticated %}
-              <button type="submit" class="btn brand-btn mb-4">Book Now</button>
+              <button type="submit" class="btn brand-btn mb-3">Book Now</button>
               {% else %}
-              <p>
-                Only Registered Guests may reserve properties. Please
-                <a href="{% url 'account_signup' %}">register</a> to complete
-                your Booking
-              </p>
-              <p>
-                Already registered? Please
-                <a href="{% url 'account_login' %}">Login</a> to continue
-              </p>
+              <p>Only Registered Guests may reserve properties. Please <a href="{% url 'account_signup' %}">register</a> to complete your Booking</p>
+              <p>Already registered? Please <a href="{% url 'account_login' %}">Login</a> to continue</p> 
               {% endif %}
-            </form>
+          </form>
             <div class="row">
               <div class="col-4">
                 <p>
