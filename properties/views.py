@@ -113,8 +113,8 @@ def add_property(request):
 def edit_property(request, property_id):
     property = get_object_or_404(Property, id=property_id)
     
-    # Check if the logged-in user is the host of the property
-    if property.host != request.user:
+    # Check if the logged-in user is the host of the property or superuser
+    if property.host != request.user and not request.user.is_superuser:
         return HttpResponseForbidden(
             "You are not allowed to edit this property."
             )
@@ -132,6 +132,21 @@ def edit_property(request, property_id):
         'properties/edit_property.html',
         {'form': form, 'property': property}
         )
+
+@login_required
+def delete_property(request, property_id):
+    property = get_object_or_404(Property, id=property_id)
+    
+    # Check if the logged-in user is the host of the property or superuser
+    if property.host != request.user and not request.user.is_superuser:
+        return HttpResponseForbidden("You are not allowed to delete this property.")
+    
+    if request.method == 'POST':
+        property.delete()
+        messages.success(request, 'Property deleted successfully!')
+        return redirect('my_properties')
+    
+    return render(request, 'properties/confirm_delete.html', {'property': property})
 
 
 def search_results(request):

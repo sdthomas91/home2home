@@ -24,6 +24,9 @@
                     <div class="card-footer">
                         <p class="card-text">£{{ property.price_per_night }} per night</p>
                         <a href="{% url 'superuser_edit_property' property.id %}" class="btn brand-btn">Edit Property</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePropertyModal">
+                            Delete Property
+                          </button>
                     </div>
                 </div>
             </div>
@@ -32,6 +35,7 @@
     </div>
 </div>
 {% include 'properties/includes/pagination.html' %}
+{% include 'includes/delete_property_modal.html' %}
 </div>
 <script src="{% static 'js/properties/properties.js' %}"></script>
 {% endblock %}
