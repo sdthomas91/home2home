@@ -1,15 +1,18 @@
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomSignupForm, ProfileSetupForm, ProfileEditForm, AddressEditForm
+from .forms import (
+    CustomSignupForm, ProfileSetupForm, ProfileEditForm, AddressEditForm
+    )
 from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Profile
 from properties.models import Property
 
+
 class CustomSignupView(SignupView):
     """
-    A custom view that alters the standard allauth signup process to allow 
+    A custom view that alters the standard allauth signup process to allow
     for custom forms
     """
     template_name = 'account/signup.html'
@@ -18,6 +21,7 @@ class CustomSignupView(SignupView):
     def form_valid(self, form):
         response = super().form_valid(form)
         return redirect('profile_setup')
+
 
 @login_required
 def profile_setup(request):
@@ -35,6 +39,7 @@ def profile_setup(request):
         form = ProfileSetupForm(instance=profile)
     return render(request, 'users/profile_setup.html', {'form': form})
 
+
 @login_required
 def profile_edit(request):
     """
@@ -49,6 +54,7 @@ def profile_edit(request):
     else:
         form = ProfileEditForm(instance=profile)
     return render(request, 'users/profile_edit.html', {'form': form})
+
 
 @login_required
 def profile_view(request):
@@ -85,7 +91,7 @@ def my_properties(request):
     if request.user.profile.user_type != 'Host':
         messages.error(request, 'You must be a host to view this page.')
         return redirect('home')
-    
+
     properties = Property.objects.filter(host=request.user)
     return render(
         request,

@@ -34,7 +34,11 @@ DEBUG = 'DEVELOPMENT' in os.environ
 
 # DEBUG = True
 
-ALLOWED_HOSTS = ['home-2-home-534807be7c72.herokuapp.com', 'localhost', '.gitpod.io']
+ALLOWED_HOSTS = [
+    'home-2-home-534807be7c72.herokuapp.com',
+    'localhost',
+    '.gitpod.io'
+    ]
 
 
 # Application definition
@@ -93,23 +97,20 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # Required by AA
-                'django.contrib.auth.context_processors.auth', 
+                'django.template.context_processors.request',  # Required by AA
+                'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                # Context processor used for basket 
+                # Context processor used for basket
                 # https://dev.to/sarahhudaib/context-processors-in-django-15h2
                 'bookings.context_processors.basket_contents',
-                
             ],
         },
     },
 ]
 
 AUTHENTICATION_BACKENDS = [
-    
     'django.contrib.auth.backends.ModelBackend',
-
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -119,7 +120,7 @@ WSGI_APPLICATION = 'home2home.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# from previouse project 
+# from previouse project
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
@@ -131,7 +132,7 @@ LOGIN_URL = 'accounts/login/'
 ACCOUNT_SIGNUP_REDIRECT_URL = 'profile_setup'
 LOGIN_REDIRECT_URL = '/'
 
-# additional login requirements 
+# additional login requirements
 
 ACCOUNT_SESSION_REMEMBER = True  # remember user session
 
@@ -161,16 +162,22 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+        'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+        'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+        'NumericPasswordValidator',
     },
 ]
 
@@ -206,19 +213,16 @@ if 'USE_AWS' in os.environ:
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
         'CacheControl': 'max-age=94608000',
     }
-
     AWS_STORAGE_BUCKET_NAME = 'home-2-home'
     AWS_S3_REGION_NAME = 'eu-west-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
     # Static and Media Files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
-
     # Override static and media urls in products
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
@@ -229,11 +233,10 @@ if 'USE_AWS' in os.environ:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Crispy Forms Templates 
-
+# Crispy Forms Templates
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# STRIPE Credentials 
+# STRIPE Credentials
 STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

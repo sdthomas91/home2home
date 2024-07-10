@@ -3,6 +3,7 @@ from properties.models import Property
 from django.contrib.auth.models import User
 from datetime import datetime
 
+
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
@@ -16,15 +17,19 @@ class Booking(models.Model):
     checkout = models.DateField()
     guests = models.IntegerField()
     total_nights = models.IntegerField(editable=False, default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False, default=0.0)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    total_price = models.DecimalField(
+        max_digits=10, decimal_places=2, editable=False, default=0.0
+        )
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default='Pending'
+        )
 
     def save(self, *args, **kwargs):
         if isinstance(self.checkin, str):
             self.checkin = datetime.strptime(self.checkin, "%Y-%m-%d").date()
         if isinstance(self.checkout, str):
             self.checkout = datetime.strptime(self.checkout, "%Y-%m-%d").date()
-            
+
         self.total_nights = (self.checkout - self.checkin).days
         self.total_price = self.total_nights * self.property.price_per_night
         super().save(*args, **kwargs)

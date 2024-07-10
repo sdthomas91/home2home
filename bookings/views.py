@@ -6,6 +6,7 @@ from properties.models import Property
 from .forms import BookingForm
 from .models import Booking
 
+
 @login_required
 def book_property(request, property_id):
     """
@@ -15,7 +16,8 @@ def book_property(request, property_id):
     if Booking.objects.filter(user=request.user, status='Pending').exists():
         messages.error(
             request,
-            "You already have an active booking in your basket. Please complete the checkout first."
+            "You already have an active booking in your basket. "
+            "Please complete the checkout first."
             )
         return redirect('basket')
 
@@ -44,6 +46,7 @@ def book_property(request, property_id):
         {'property': property, 'form': form}
         )
 
+
 @login_required
 def basket_view(request):
     """
@@ -51,6 +54,7 @@ def basket_view(request):
     """
     bookings = Booking.objects.filter(user=request.user, status='Pending')
     return render(request, 'bookings/basket.html', {'bookings': bookings})
+
 
 @login_required
 def delete_booking(request, booking_id):
@@ -61,6 +65,7 @@ def delete_booking(request, booking_id):
     booking.delete()
     messages.success(request, 'Booking deleted successfully!')
     return redirect('basket')
+
 
 @login_required
 def clear_basket(request):

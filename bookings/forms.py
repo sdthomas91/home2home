@@ -1,5 +1,6 @@
 from django import forms
 
+
 class BookingForm(forms.Form):
     checkin = forms.DateField(
         widget=forms.DateInput(

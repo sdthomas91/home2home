@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from users.models import User
 from django.db.models import Avg
 
+
 class Amenity(models.Model):
     name = models.CharField(max_length=100)
     font_awesome_class = models.CharField(max_length=50)
@@ -17,6 +18,7 @@ class Amenity(models.Model):
         verbose_name = _("Amenity")
         verbose_name_plural = _("Amenities")
         ordering = ['order', 'name']
+
 
 class Property(models.Model):
     host = models.ForeignKey(
@@ -42,7 +44,12 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     featured = models.BooleanField(default=False)
     amenities = models.ManyToManyField(Amenity, blank=True)
-    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    average_rating = models.DecimalField(
+        max_digits=3,
+        decimal_places=2,
+        null=True,
+        blank=True
+        )
 
     def __str__(self):
         return self.title
@@ -59,17 +66,21 @@ class Property(models.Model):
     def render_star_rating(self):
         if not self.average_rating:
             return format_html('<span class="text-info">No Ratings Yet</span>')
-        
         filled_stars = int(self.average_rating)
         empty_stars = 5 - filled_stars
         half_star = 1 if self.average_rating - filled_stars >= 0.5 else 0
-        
-        stars_html = ''.join(['<i class="fa-solid fa-star"></i>' for _ in range(filled_stars)])
-        stars_html += ''.join(['<i class="fa-regular fa-star"></i>' for _ in range(empty_stars - half_star)])
+        stars_html = ''.join(
+            ['<i class="fa-solid fa-star"></i>' for _ in range(filled_stars)]
+            )
+        stars_html += ''.join(
+            ['<i class="fa-regular fa-star"></i>' for _ in range(
+                empty_stars - half_star
+                )]
+            )
         if half_star:
             stars_html += '<i class="fa-solid fa-star-half-alt"></i>'
-        
         return format_html(stars_html)
+
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(

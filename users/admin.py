@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Profile
 
+
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
     verbose_name_plural = 'profiles'
+
 
 class CustomUserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
@@ -22,6 +24,9 @@ class CustomUserAdmin(BaseUserAdmin):
     def get_list_display(self, request):
         return self.list_display + ('user_type',)
 
+
 # Re-register UserAdmin
 admin.site.unregister(User)
+
+
 admin.site.register(User, CustomUserAdmin)

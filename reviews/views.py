@@ -6,18 +6,18 @@ from properties.models import Property
 from .forms import ReviewForm
 from bookings.models import Booking
 
+
 @login_required
 def write_review(request, property_id):
     """
     View for users to leave reviews on properties in which they have stayed
     """
     property = get_object_or_404(Property, id=property_id)
-    
+
     if not request.user.bookings.filter(property=property).exists():
         messages.error(request, "You haven't stayed here yet, book now!")
         return redirect('property_detail', property_id=property.id)
 
-        
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -35,6 +35,7 @@ def write_review(request, property_id):
         {'form': form, 'property': property}
         )
 
+
 @login_required
 def property_reviews(request, property_id):
     """
@@ -48,13 +49,14 @@ def property_reviews(request, property_id):
         {'property': property, 'reviews': reviews}
         )
 
+
 @login_required
 def edit_review(request, review_id):
     """
     View to edit existing review
     """
     review = get_object_or_404(Review, id=review_id, guest=request.user)
-    
+
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
@@ -63,9 +65,9 @@ def edit_review(request, review_id):
             return redirect('property_detail', property_id=review.property.id)
     else:
         form = ReviewForm(instance=review)
-    
+
     return render(
-        request, 
+        request,
         'reviews/edit_review.html',
         {'form': form, 'review': review}
         )

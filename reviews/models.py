@@ -4,6 +4,7 @@ from properties.models import Property
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+
 class Review(models.Model):
     RATING_CHOICES = [(i, i) for i in range(1, 6)]
 
@@ -39,9 +40,11 @@ class Review(models.Model):
         super().delete(*args, **kwargs)
         self.property.update_average_rating()
 
+
 @receiver(post_save, sender=Review)
 def update_property_rating_on_save(sender, instance, **kwargs):
     instance.property.update_average_rating()
+
 
 @receiver(post_delete, sender=Review)
 def update_property_rating_on_delete(sender, instance, **kwargs):

@@ -12,6 +12,7 @@ from bookings.forms import BookingForm
 def is_superuser(user):
     return user.is_superuser
 
+
 def all_properties(request):
     """
     View to display all properties with filters
@@ -62,6 +63,7 @@ def all_properties(request):
         'selected_amenities': amenities,
     })
 
+
 def property_detail(request, property_id):
     """
     View to display selected property
@@ -73,6 +75,7 @@ def property_detail(request, property_id):
         'properties/property_detail.html',
         {'property': property, 'form': form, 'request': request}
         )
+
 
 @login_required
 def add_property(request):
@@ -86,13 +89,13 @@ def add_property(request):
             property_instance = form.save(commit=False)
             property_instance.host = request.user
             property_instance.save()
-            
+
             for file in request.FILES.getlist('images'):
                 PropertyImage.objects.create(
                     property=property_instance,
                     image=file
                     )
-            
+
             messages.success(request, 'Property added successfully!')
             return redirect(
                 'property_detail',
@@ -112,13 +115,13 @@ def add_property(request):
 @login_required
 def edit_property(request, property_id):
     property = get_object_or_404(Property, id=property_id)
-    
+
     # Check if the logged-in user is the host of the property or superuser
     if property.host != request.user and not request.user.is_superuser:
         return HttpResponseForbidden(
             "You are not allowed to edit this property."
             )
-    
+
     if request.method == 'POST':
         form = PropertyEditForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
@@ -133,20 +136,27 @@ def edit_property(request, property_id):
         {'form': form, 'property': property}
         )
 
+
 @login_required
 def delete_property(request, property_id):
     property = get_object_or_404(Property, id=property_id)
-    
+
     # Check if the logged-in user is the host of the property or superuser
     if property.host != request.user and not request.user.is_superuser:
-        return HttpResponseForbidden("You are not allowed to delete this property.")
-    
+        return HttpResponseForbidden(
+            "You are not allowed to delete this property."
+            )
+
     if request.method == 'POST':
         property.delete()
         messages.success(request, 'Property deleted successfully!')
         return redirect('my_properties')
-    
-    return render(request, 'properties/confirm_delete.html', {'property': property})
+
+    return render(
+        request,
+        'properties/confirm_delete.html',
+        {'property': property}
+        )
 
 
 def search_results(request):
@@ -164,14 +174,16 @@ def search_results(request):
         )
     else:
         results = Property.objects.none()
-    
+
     return render(
         request,
         'properties/search_results.html',
         {'results': results, 'query': query}
         )
 
+
 # SUPERUSER VIEWS
+
 
 @login_required
 @user_passes_test(is_superuser)
@@ -180,12 +192,16 @@ def manage_properties(request):
     Specific view for superusers viewing properties to edit
     """
     properties = Property.objects.all()
-    
+
     paginator = Paginator(properties, 12)
     page_number = request.GET.get('page')
     properties_page = paginator.get_page(page_number)
-    
-    return render(request, 'properties/manage_properties.html', {'properties': properties_page})
+
+    return render(
+        request,
+        'properties/manage_properties.html',
+        {'properties': properties_page}
+        )
 
 
 @login_required
@@ -203,5 +219,8 @@ def superuser_edit_property(request, property_id):
             return redirect('manage_properties')
     else:
         form = PropertyEditForm(instance=property)
-    return render(request, 'properties/edit_property.html', {'form': form, 'property': property})
-
+    return render(
+        request,
+        'properties/edit_property.html',
+        {'form': form, 'property': property}
+        )

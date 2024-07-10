@@ -6,9 +6,21 @@ from bookings.models import Booking
 from users.models import Profile
 from django.db.models import Sum
 
+
 class Order(models.Model):
-    booking = models.ForeignKey(Booking, on_delete=models.SET_NULL, null=True, blank=True)
-    user_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
+    """
+    Create an order for payment
+    """
+    booking = models.ForeignKey(
+        Booking, on_delete=models.SET_NULL, null=True, blank=True
+        )
+    user_profile = models.ForeignKey(
+        Profile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='orders'
+        )
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
@@ -23,7 +35,9 @@ class Order(models.Model):
     payment_status = models.CharField(max_length=50, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=''
+        )
 
     def _generate_order_number(self):
         """
@@ -35,9 +49,11 @@ class Order(models.Model):
         """
         Update total each time a line item is added,
         """
-        self.total_price = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.total_price = self.lineitems.aggregate(
+            Sum('lineitem_total')
+            )['lineitem_total__sum'] or 0
         self.save()
-    
+
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the order number
@@ -50,19 +66,34 @@ class Order(models.Model):
     def __str__(self):
         return self.order_number
 
+
 class OrderLineItem(models.Model):
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    property = models.ForeignKey(Property, null=False, blank=False, on_delete=models.CASCADE)
-    type = models.CharField(max_length=50, null=False, blank=False, default="Reservation")
+    order = models.ForeignKey(
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='lineitems'
+        )
+    property = models.ForeignKey(
+        Property, null=False, blank=False, on_delete=models.CASCADE
+        )
+    type = models.CharField(
+        max_length=50, null=False, blank=False, default="Reservation"
+        )
     date = models.DateField(null=True, blank=True)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    lineitem_total = models.DecimalField(
+        max_digits=6, decimal_places=2, null=False, blank=False, editable=False
+        )
 
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        self.lineitem_total = self.property.price_per_night * self.order.booking.total_nights
+        self.lineitem_total = (
+            self.property.price_per_night * self.order.booking.total_nights
+            )
         super().save(*args, **kwargs)
 
     def __str__(self):

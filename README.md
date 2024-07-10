@@ -470,11 +470,11 @@ The following tools were used for testing and code validation. You can see resul
 
 # Testing
 
-- Please refer [here](docs/TESTING.md) for more information on tests conducted on the Home2Home site
+- Please refer [here](docs/readme/TESTING.md) for more information on tests conducted on the Home2Home site
 
 # Deployment
 
-- Please refer [here](docs/DEPLOYMENT.md) for more information on the deployment of the Home2Home site
+- Please refer [here](docs/readme/DEPLOYMENT.md) for more information on the deployment of the Home2Home site
 
 # Credits
 

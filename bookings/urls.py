@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import book_property, basket_view, delete_booking, clear_basket, my_bookings
+from .views import (
+    book_property, basket_view, delete_booking, clear_basket, my_bookings
+    )
+
 
 urlpatterns = [
     path('book/<int:property_id>/', book_property, name='book_property'),

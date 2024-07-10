@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import ContactForm
 
+
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

@@ -2,6 +2,7 @@ from django import forms
 from .models import Property, PropertyImage, Amenity
 from users.models import Profile
 
+
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
@@ -21,6 +22,7 @@ class PropertyForm(forms.ModelForm):
             'host'
             ].label_from_instance = lambda obj: f"{obj.user.username}"
 
+
 class PropertyCreateForm(forms.ModelForm):
     amenities = forms.ModelMultipleChoiceField(
         queryset=Amenity.objects.all(),
@@ -39,10 +41,12 @@ class PropertyCreateForm(forms.ModelForm):
 
         self.fields['amenities'].widget.attrs['class'] = 'form-check-input'
 
+
 class PropertyImageForm(forms.ModelForm):
     class Meta:
         model = PropertyImage
         fields = ['image']
+
 
 class PropertyEditForm(forms.ModelForm):
     class Meta:

@@ -1,35 +1,44 @@
 # checkout/views.py
 
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+    )
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 from bookings.context_processors import basket_contents
-
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from bookings.models import Booking
 from users.models import Profile
-
 import stripe
 import json
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 @require_POST
 def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.PaymentIntent.modify(pid, metadata={
-            'booking': json.dumps(list(Booking.objects.filter(user=request.user).values())),
+            'booking': json.dumps(
+                list(Booking.objects.filter(user=request.user).values())
+                ),
             'save_info': request.POST.get('save_info'),
             'username': request.user.username,
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
+        messages.error(
+            request,
+            'Sorry, your payment cannot be processed right now.'
+            'Please try again later.'
+            )
         return HttpResponse(content=e, status=400)
+
 
 @login_required
 def checkout(request):
@@ -37,7 +46,9 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     basket = basket_contents(request)
-    booking = Booking.objects.filter(user=request.user, status='Pending').first()
+    booking = Booking.objects.filter(
+        user=request.user, status='Pending'
+        ).first()
     total = basket['total']
 
     if not booking:
@@ -83,11 +94,15 @@ def checkout(request):
 
             booking.status = 'Confirmed'
             booking.save()
-            
+
             messages.success(request, 'Checkout completed successfully!')
             return redirect(reverse('checkout_success', args=[order.id]))
         else:
-            messages.error(request, 'There was an error with your form. Please double-check your information.')
+            messages.error(
+                request,
+                'There was an error with your form.'
+                'Please double-check your information.'
+                )
     else:
         if request.user.is_authenticated:
             try:
@@ -110,7 +125,10 @@ def checkout(request):
             order_form = OrderForm()
 
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. Set it in the environment.')
+        messages.warning(
+            request,
+            'Stripe public key is missing. Set it in the environment.'
+            )
 
     template = 'checkout/checkout.html'
     context = {
@@ -122,6 +140,7 @@ def checkout(request):
     }
 
     return render(request, template, context)
+
 
 @login_required
 def checkout_success(request, order_id):
@@ -147,7 +166,11 @@ def checkout_success(request, order_id):
                 setattr(profile, key, value)
             profile.save()
 
-    messages.success(request, f'Order successfully processed! Your order number is {order_id}. A confirmation email will be sent to {order.email}.')
+    messages.success(
+        request, f'Order successfully processed!'
+        'Your order number is {order_id}.'
+        'A confirmation email will be sent to {order.email}.'
+    )
 
     template = 'checkout/checkout_success.html'
     context = {

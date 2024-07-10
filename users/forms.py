@@ -5,21 +5,23 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div, Row, Column
 from .models import Profile
 
+
 # Custom signup form to include Guest or Host signup selection
 class CustomSignupForm(SignupForm):
     USER_TYPE_CHOICES = (
         ('Host', 'Host'),
         ('Guest', 'Guest'),
     )
-    
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, label="Are you a Host or Guest?")
+
+    user_type = forms.ChoiceField(
+        choices=USER_TYPE_CHOICES, label="Are you a Host or Guest?"
+        )
 
     def save(self, request):
         user = super().save(request)
         user.profile.user_type = self.cleaned_data.get('user_type')
         user.profile.save()
         return user
-
 
 
 class ProfileSetupForm(forms.ModelForm):
@@ -33,8 +35,16 @@ class ProfileSetupForm(forms.ModelForm):
     country = forms.CharField()
     bio = forms.CharField(widget=forms.Textarea, required=False)
     profile_picture = forms.ImageField(required=False)
-    hobbies = forms.CharField(widget=forms.TextInput, required=False, label="Hobbies (comma separated)")
-    interests = forms.CharField(widget=forms.TextInput, required=False, label="Interests (comma separated)")
+    hobbies = forms.CharField(
+        widget=forms.TextInput,
+        required=False,
+        label="Hobbies (comma separated)"
+        )
+    interests = forms.CharField(
+        widget=forms.TextInput,
+        required=False,
+        label="Interests (comma separated)"
+        )
 
     class Meta:
         model = Profile
@@ -53,6 +63,7 @@ class ProfileSetupForm(forms.ModelForm):
             'interests'
         ]
 
+
 # form for updating address
 class AddressEditForm(forms.ModelForm):
     class Meta:
@@ -66,10 +77,19 @@ class AddressEditForm(forms.ModelForm):
             'country'
         ]
 
+
 # form for updating profile
 class ProfileEditForm(forms.ModelForm):
-    hobbies = forms.CharField(widget=forms.TextInput, required=False, label="Hobbies (comma separated)")
-    interests = forms.CharField(widget=forms.TextInput, required=False, label="Interests (comma separated)")
+    hobbies = forms.CharField(
+        widget=forms.TextInput,
+        required=False,
+        label="Hobbies (comma separated)"
+        )
+    interests = forms.CharField(
+        widget=forms.TextInput,
+        required=False,
+        label="Interests (comma separated)"
+        )
 
     class Meta:
         model = Profile
