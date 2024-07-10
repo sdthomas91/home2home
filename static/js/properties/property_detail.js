@@ -1,3 +1,6 @@
+/* jshint esversion: 6 */
+/* global google, flatpickr */
+
 // Property detail map script
 function initMap() {
     let latitude = parseFloat(document.getElementById('latitude').innerText);

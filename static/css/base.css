@@ -24,7 +24,6 @@ a:focus {
 
 .logo-font {
     font-family: "Playwrite ES Deco", cursive !important;
-    font-optical-sizing: auto;
     font-style: normal;
     color: #008080 !important;
 }

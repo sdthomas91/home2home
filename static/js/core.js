@@ -1,3 +1,4 @@
+/* global $ */
 // Back to top button
 
 // Show or hide the back to top button

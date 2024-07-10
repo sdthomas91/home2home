@@ -28,7 +28,7 @@ The Gather recipe website has been tested using the following methods:
 
 ## W3C HTML Validator
 
-The Lonely House website landing page passed all tests using the W3C HTML Validator tool
+Home2Home site HTML faced a couple of issues due to dynamic templating including the action for the search remaining empty until used - details below
 
 Via URL
 
@@ -64,35 +64,29 @@ Direct Input (Logged In View)
 
 The Lonely House website passed all tests using the W3C CSS Validator tool
 
-<h2 align="center"><img src="TESTING/css-validation/base-css.jpg"></h2>
+<h2 align="center"><img src="../../media//testing//core-css-valid.png"></h2>
 
-<h2 align="center"><img src="TESTING/css-validation/checkout-css.jpg"></h2>
-
-<h2 align="center"><img src="TESTING/css-validation/profile-css.jpg"></h2>
+<h2 align="center"><img src="../../media//testing/checkout-css-valid.png"></h2>
 
 ## JSHINT Javascript Code Quality Tool
 
-The Lonely House website passed all tests using the JSHint Validator tool
+- Home2Home site Javascript was all validated using JSHint - had to include $ as a global to resolve some JQuery related errors
 
-<h2 align="center"><img src="TESTING/js-validation/checkoutjs.jpg"></h2>
-
-<h2 align="center"><img src="TESTING/js-validation/googlemapsjs.jpg"></h2>
-
-<h2 align="center"><img src="TESTING/js-validation/listingdetailscriptjs.jpg"></h2>
-
-<h2 align="center"><img src="TESTING/js-validation/listingsscriptjs.jpg"></h2>
-
-<h2 align="center"><img src="TESTING/js-validation/profile.js.jpg"></h2>
-
-* There was an issue highlighted by JSHint. i believe it's because I am using a template literal within a jQuery selector. However, as the code performs as I desire it to, and if I use quotes then it does not work, I have decided not to change it.
-
-<h2 align="center"><img src="TESTING/js-validation/listingsscriptjs1.jpg"></h2>
+| core.js | properties.js | stripe_elements.js | property_details.js |
+| -------- | -------- | ------- | ---- |
+| <img src="../../media//testing/core-js.png"> | <img src="../../media//testing/properties-pep8.png"> | <img src="../../media//testing/stripe-elements-js.png"> | <img src="../../media//testing/property-detail-js.png"> | 
 
 ## Python Validation using Gitpod
 
-* I have checked all Python documents using a PEP8 linter to ensure they are compliant.
+* Used pycodestyle in gitpod to verify PEP8 compliance accross all py files - no exceptions
 
-* Exceptions include code I have not written in Django settings.
+| Bookings | Checkout | Contact | Home |
+| -------- | -------- | ------- | ---- |
+| <img src="../../media//testing/bookings-pep8.png"> | <img src="../../media//testing/checkout-pep8.png"> | <img src="../../media//testing/contact-pep8.png"> | <img src="../../media//testing/home-pep8.png"> | 
+
+| Main Files | Properties | Reviews | Users |
+| -------- | -------- | ------- | ---- |
+| <img src="../../media//testing/main-files-pep8.png"> | <img src="../../media//testing/properties-pep8.png"> | <img src="../../media//testing/reviews-pep8.png"> | <img src="../../media//testing/users-pep8.png"> | 
 
 # Accessibility 
 
