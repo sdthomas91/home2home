@@ -132,6 +132,16 @@ This project is a property rental platform utilizing Django for the backend and 
 
 # Database Schema
 
+## Considerations
+
+Thins I had to take into account when compiling the DB models were:
+- How a user could be listed as a host or a guest and the different actions that would allow
+- How I could pass multiple amenities to a property whilst maintaining a clean model
+- How bookings would be marked as pending/confirmed for users viewing them in the basket or their my bookings page
+- How could I allow different levels of editing for guests, hosts and superusers
+- How to allow multi image capacity to property model
+- How reviews would link to specific properties as well as the hosts
+
 ## Diagram 
  - The following image represents the database models and relevant relationships as utilised within the project
 
@@ -249,23 +259,107 @@ This project is a property rental platform utilizing Django for the backend and 
 - Sends booking confirmation email
 
 ## Authentification Pages
-- Register/ Log In/ Log Out/ Reset Password Pages
-- Features largely provided by Django allauth
+- Register/ Log In/ Log Out/ Reset Password Pages all styled to match theme
+- Custom signup form using DJango Allauth template allowing users to select whether they are signing up as a host or a guest
 
 ## User Profile Page
-- Default information form
-- Order history
+- Customised profile page including:
+   - profile picture
+   - name
+   - address
+   - bio
+   - edit profile button
 - Users must be logged in
 - Users can only access their own User Profile
 
-## Reviews Pages
-- Users can view all their reviews
-- Users must be logged in
-- Users can only access their own reviews
+## Edit Profile page
+- Allow logged in users to edit their own profile including all personal information
+- No authentication info can be edited here
 
-## Add/ Edit/ Delete Reviews
-- Add Review Page
-- Edit Review Page
-- Delete Review
-- Users must be logged in
-- Users can only access their own reviews
+## My Bookings page
+- Logged in users can access a page displaying their bookings including:
+   - Upcoming stays - future bookings allocated using checkin date
+   - Previous Stays - past bookings allocated using checkout date
+- Displayed inline multi-column on larger screens and as a sinlge column per booking on smaller screens
+
+## My Properties Page
+- Logged in hosts can access a "my properties" page that includes:
+   - List containing cards (same styling as other properties pages for consistency)
+   - Edit property button
+
+## Manage Properties Page
+- Superusers can access all properties with the same styling as the my properties page and same edit property button
+
+## Edit property page
+- Allow hosts and superusers to edit the property details in full including:
+   - All property information
+   - Confirm Edit button
+   - Delet button - opening deletion confirmation modal
+
+
+# Future Features
+
+## UX Features
+
+### Datepicker
+
+#### Datepicker displays dynamic availability
+
+* The datepicker as present doesn't draw from an existing "availability" database and so a property could get double booked. Would like to implement the availability model/view within the booking app to allow for a more dynamic booking experience.
+
+#### Datepicker UX improvements/optimisation on mobile
+
+* Mobile devices default override of the datepicker is frustrating. Seems a common issue and tried multiple workarounds found on a variety of forums. Would consider updating the datepicker to a more versatile open source library such as MobiScroll.
+
+### Property Pages
+
+#### Interactive Map
+
+* Implement a "search by map" function, would need additional page space likely incorporated into the search results page
+
+#### Sort By
+
+* Allow for property sorting in addition to standard filtering such as "Sort by Price (Low to High)"
+
+#### Categorise properties
+
+* Allow hosts to add a category to their listing to allow for a more robust and precise search experience for users. This could include categories such as Luxury Stays, Seasid retreats etc. 
+
+### Hosts/Guests
+
+#### View host 
+
+* Allow guests/users to view the hosts profile including property reviews/average rating for trust building
+
+#### Review guests/hosts
+
+* Allow guests and hosts to rate eachother accordingly following a stay allowed only after checkout is complete
+
+### Cart & Checkout
+
+#### Dynamic editing of booking
+
+* Allow the user to edit details such as checkin/checkout dates within the cart view and have it update cart total
+
+### Bookings
+
+* Allow for users to "rebook" a stay from their my bookings page if they enjoyed it
+
+### Additional Apps
+
+#### Blog
+
+* Incorporate a site blog for increased SEO and user interaction
+
+#### Custom admin interface
+
+* Utilise something like Jazzmin to customise the user interface in django easily allow for a custom admin experience and keeping admin/user experiences separate
+
+#### Newsletter 
+
+* Include a newsletter signup opportunity for future promotions and communications
+
+#### Favourites
+
+* Allow users to "favourite" a property and add it to the navigation under a heading such as "My Favourites"
+
