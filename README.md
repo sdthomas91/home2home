@@ -128,6 +128,7 @@ This project is a property rental platform utilizing Django for the backend and 
  - There were little to no deviations from the original wireframe. I had a clear idea of how I wanted the User Interface to look and the general navigation of the pages. 
  - One element missed on the wireframe is the location of the filter element on the all properties page. Located below the page title for easy access and maximum UX. 
  - Added "view details" button below properties for easy navigation and kept property cards fairly minimal
+ - Introduced additional interface pages such as my properties (for hosts), manage properties (for super users) and my bookings (for all users)
 
 # Database Schema
 
@@ -138,8 +139,8 @@ This project is a property rental platform utilizing Django for the backend and 
 
 ### DB Models
 - A list of database models used in the project can be found below :
-   * **User** - stores user information including username, email, password, first name, last name, whether the user is a host, and the date they joined.
-   * **Profile** - stores additional information about the user such as bio, profile picture, and phone number. Relates to the User model.
+   * **User** - stores user information including username, email, password, first name, last name, whether the user is a host or guest, and the date they joined.
+   * **Profile** - stores additional information about the user such as bio, profile picture, address and phone number. Relates to the User model.
    * **Property** - stores information for each property including host ID, title, description, address, city, state, country, postal code, latitude, longitude, price per night, maximum guests, number of bedrooms, number of bathrooms, availability, creation date, and update date.
    * **PropertyImage** - stores multiple images for each property. Relates to the Property model.
    * **Booking** - stores booking information including guest ID, property ID, check-in date, check-out date, total price, booking status, creation date, and update date. Relates to the User and Property models.
@@ -147,3 +148,124 @@ This project is a property rental platform utilizing Django for the backend and 
    * **Amenity** - stores information about property amenities including the name and font awesome class for the amenity icon.
    * **PropertyAmenity** - stores the relationship between properties and amenities. Relates to the Property and Amenity models.
 
+# Features - Inc. in final project
+
+## All Pages
+
+- Responsive design using Bootstrap columns
+- Semantic HTML
+- Custom CSS to give the website a cohesive and user-friendly appearance
+- Back to top button for easy page navigation
+- Toasts/JS for clearer messaging
+- Footer - to clarify end of page and provide business information
+
+### Header & Navigation
+
+- Logo consisting of text in Logo Font
+- Top navigation including:
+   - Search bar (to search all properties)
+   - My Account (depicted by profile icon) with dropdown for all profile navigations
+      - Conditional logic to display differently dependant on user status (guest, host, superuser)
+   - Cart including cart contents counter for user feedback on whether the cart has a live booking in or not
+- Secondary navigation:
+   - Home link - for easy navigation to home page at any time
+   - All properties for an easier browsing experience
+   - Contact - leading to contact form
+
+### Footer
+
+- Company information
+- Social media Links 
+
+### Flash Messages
+- Styled and located for increased UI/UX and includes messages for:
+   - Success message
+   - Info message
+   - Error message
+   - Warning message
+
+## Homepage
+
+- Jumbotron - includes CTA and high contrast for readability
+- Featured Properties - another CTA
+- Become a Home2Home host - CTA to join the platform as a host
+- Featured Reviews - increase user trust with a final CTA to book a stay
+
+## All Properties Page
+
+- Clear title
+- Filter toggle button with clear indicator using fontawesome slider icon including functions such as:
+  - Collapse for better UI
+  - Dropdowns for bed/bath/price/city selection
+  - Multiple choice checkbox for amenity filtering (includes show more button to keep UI clean)
+  - Filters update dynamically and display results immediately
+  - Filters can be edited/updated dynamically any time
+  - Clear filters button to reset filters
+- Property Cards with bootstrap card structure and custom css:
+  - First property image with carousel if property has mutliple images
+  - Price per night
+  - View details button to go through to property detail / booking
+- Pagination - allows users to easily navigate through pages to view more properties
+
+## Propert Details Page
+- Property Title
+- Property averge rating
+- First property image with carousel if property has mutliple images
+- Date range picker allowing for booking date selection which includes:
+   - inability to book prior to the present day
+   - inability to book checkout prior to checkin date selected
+   - select a date range that dynamically adds to booking details when added to cart
+- Number of guests selector dropdown (maximum selection) with link to contact if need to book extra guests
+- Book now button, adds to cart with dates and guest number
+- Bed/Bathroom count with icons
+- Top amenity list (currently limited to 8)
+- Google Map with pin locator
+- Property reviews
+
+## Cart Page
+- Dynamic cart allowing for only one propery booking at a time for host convenience
+- Dynamic cart with delete/clear buttons to remove booking
+- Line item details including 
+   - price per night
+   - total nights
+   - subtotal
+- Cart Total
+- Secure Checkout button
+
+## Checkout Page
+- Order summary including : 
+   - property image
+   - booking details including check in and out
+   - total nights
+- Checkout form that includes:
+  - Contact detaisl and address
+  - Option to save to profile
+  - Auto populates with content saved to user profile
+  - Stripe payment with warning to notify of final charge amount
+
+## Checkout Confirmation Page
+- Checkout success page includes booking details 
+- Marks booking as completed and adds to "My Bookings"
+- Sends booking confirmation email
+
+## Authentification Pages
+- Register/ Log In/ Log Out/ Reset Password Pages
+- Features largely provided by Django allauth
+
+## User Profile Page
+- Default information form
+- Order history
+- Users must be logged in
+- Users can only access their own User Profile
+
+## Reviews Pages
+- Users can view all their reviews
+- Users must be logged in
+- Users can only access their own reviews
+
+## Add/ Edit/ Delete Reviews
+- Add Review Page
+- Edit Review Page
+- Delete Review
+- Users must be logged in
+- Users can only access their own reviews
