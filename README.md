@@ -455,3 +455,74 @@ Thins I had to take into account when compiling the DB models were:
 
 - [ChatGPT](https://openai.com/blog/chatgpt/)
   - OpenAI's ChatGPT was used in part to generate amenities lists, fake host bios and random addresses for properties.
+
+## Testing & Code Validation
+
+The following tools were used for testing and code validation. You can see results in the Testing section of this README.
+
+- [W3C Markup Validation Service](https://validator.w3.org/)
+- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+- [JSHint](https://jshint.com/)
+- [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en)
+- [Python Linting on Gitpod](https://open-vsx.org/extension/ms-python/python)
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [WAVE Web Accessibility Evaluation Tools](https://wave.webaim.org/)
+
+# Testing
+
+- Please refer [here](docs/TESTING.md) for more information on tests conducted on the Home2Home site
+
+# Deployment
+
+- Please refer [here](docs/DEPLOYMENT.md) for more information on the deployment of the Home2Home site
+
+# Credits
+
+## Code
+
+### Code Institute:
+  - I used the CodeInstitue github repo template and also utilised multiple elements from the Boutique Ado Walkthrough, though the site is largely custom built with similarities only being drawn in the navbar and the checkout (including Stripe Functionality)
+
+### Django:
+- I referred to the Django documentation whilst building my project. I used the docs a number of times including :
+   - [Static files](https://docs.djangoproject.com/en/5.0/howto/static-files/)
+   - [Built-In Template Tags](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/)
+   - [Model Admin Filters](https://docs.djangoproject.com/en/5.0/ref/contrib/admin/filters/)
+   - [Widgets](https://docs.djangoproject.com/en/5.0/ref/forms/widgets/)
+   - [Forms API](https://docs.djangoproject.com/en/5.0/ref/forms/api/)
+
+### Bootstrap:
+  - I have used Bootstrap classes throughout my project, including for layout utilities and cards. I sourced code from the Bootstrap documentation when building the navbar, image carousels, modals, dropdowns and cards. These were sourced through the [Bootstrap documentation](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+
+
+### Stack Overflow: 
+  I used and/ or referenced code from the following Stack Overflow articles as listed below:
+- Datepicker
+   - https://stackoverflow.com/questions/74649032/uidatepicker-max-and-min-date-range
+   - https://stackoverflow.com/questions/62300321/mobile-ios-input-type-date-min-and-max-not-working-on-chrome-and-safari
+   - https://stackoverflow.com/questions/54982031/flatpickr-mobile-format
+- dateTime issues
+   - https://stackoverflow.com/questions/19934248/nameerror-name-datetime-is-not-defined
+- Custom filters
+   -https://stackoverflow.com/questions/12102697/creating-custom-filters-for-list-filter-in-django-admin
+  
+### GeeksForGeeks:
+  - I used [GeeksforGeeks](https://www.geeksforgeeks.org/python-datetime-timedelta-function/) for datetime functionality
+
+## Content
+
+- The images used are stock images sourced from FreePik and Pexels - more details can be found in the [CREDITS.md](docs/readme/credits.md)
+
+- The host information and property details were ficitious and largely generated using Open AI's chatGPT
+
+- I took a lot of inspiration for the booking model from [AirBnb](https://www.airbnb.com/)
+
+## Acknowledgements
+
+- Thank you to the tutors and staff at Code Institute for their support.
+
+- Thank you to Ben Smith and Pasquale Fasulo at City of Bristol College for their support.
+
+Please note this is a personal project. This website is purely for the sake of the developer's portfolio and not for public consumption.
+
+Samuel Thomas, 2024.
