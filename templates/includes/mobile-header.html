@@ -1,4 +1,5 @@
 <div class="d-lg-none">
+  <ul>
   <li class="list-inline-item">
       <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="text-center brand-color">
@@ -22,13 +23,13 @@
     </div>
   </li>
   <li class="list-inline-item dropdown">
-    <a href="#" class="user-action nav-link" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a href="#" class="user-action nav-link" id="mobile-user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <div class="text-center">
         <div><i class="fas fa-user fa-lg"></i></div>
         <p class="my-0">My Account</p>
       </div>
     </a>
-    <div class="dropdown-menu border-0" aria-labelledby="user-options">
+    <div class="dropdown-menu border-0" aria-labelledby="mobile-user-options">
       {% if request.user.is_authenticated %}
         {% if request.user.is_superuser %}
         <a href="{% url 'manage_properties' %}" class="dropdown-item">Property Management</a>
@@ -61,4 +62,5 @@
     </div>
   </a>
   </li>
+  </ul>
 </div>
