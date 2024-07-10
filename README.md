@@ -363,3 +363,95 @@ Thins I had to take into account when compiling the DB models were:
 
 * Allow users to "favourite" a property and add it to the navigation under a heading such as "My Favourites"
 
+# Technologies Used
+
+## Languages Used
+
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+
+- [CSS3](https://en.wikipedia.org/wiki/CSS)
+
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+
+- [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+## Frameworks & Libraries
+
+- [Django](https://www.djangoproject.com/)
+  - This website is built using Django, a high-level Python web framework. Home2Home features multiple apps with model, view and template layers. I have also used Django to provide an admin view, create forms and test my website. Further features used include [Django Allauth](https://django-allauth.readthedocs.io/en/latest/index.html) for user authentification, Pillow for uploading images, and Crispy Forms for better form styling.
+
+- [Jinja](https://jinja.palletsprojects.com/en/3.0.x/)
+  - Templating language I've used with Python to add logic to my html templates.
+
+- [jQuery](https://jquery.com/)
+  - I used jQuery to add functionality to Bootstrap components and within my scripts.
+
+- [Bootstrap 4](https://getbootstrap.com/) 
+  - I used bootstrap throughout the site to make it responsive. The website uses Bootstrap's Containers, Grid System, Flexbox and Spacing utilities. I sourced code from the Bootstrap documentation when building the Navbar, Image Carousels, Cards and Buttons.
+
+- [Google Fonts](https://fonts.google.com/)
+  - Fonts are imported from google fonts.
+  
+- [Font awesome](https://fontawesome.com/)
+  - I used icons from font awesome across the website
+
+- [FlatPickr Date Picker](https://flatpickr.js.org/options/)
+  - I used this CDN to display the datepicker on the property detail page
+
+## Storage & Hosting
+
+- [Heroku](https://id.heroku.com/login)
+  - Heroku is the deployment source I used for this project.
+
+- [Github](https://github.com/)
+  - Github was used to create and store the project repository.
+
+- [Amazon Web Services](https://aws.amazon.com/)
+  - AWS is used to host and store static files and media.
+
+- [ElephantSQL](https://www.elephantsql.com/)
+  - ElephantSQL is used to host the website's PostgreSQL database.
+
+## Payments
+
+- [Stripe](https://stripe.com/gb)
+  - Stripe is used to handle website payments.
+
+## APIs
+
+- [Google Maps API](https://developers.google.com/maps/)
+  - I used Google MAPS API to show the property location on a google map via coordinates.
+
+## IDE & Version Control
+
+- [Git](https://git-scm.com/)
+  - Git was used as a version control in the terminal.
+
+- [Gitpod](https://gitpod.io/)
+  - Gitpod was used to create my files and where I wrote the code.
+
+## Other Tools
+
+- [Figma](https://figma.com/)
+  - Figma was used to create Wireframes for the project during the initial planning stage.
+
+- [Adobe Illustrator](https://www.adobe.com/ie/products/illustrator.html)
+  - Photoshop was used to resize images for the website as well as create multi-device mockup
+
+- [TinyJPG](https://tinyjpg.com/)
+  - TinyJPG was used to compress images for a faster loading time.
+
+- [Google Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
+  - Google Chrome's Dev Tools were used while building the project to test responsiveness and for debugging.
+
+- [DBDiagram.io](https://dbdiagram.io/)
+  - Tool used to mock up database structure diagram.
+
+- [Pexels](https://pexels.com/)
+  - Pexels was used to source the profile pic imagery.
+
+- [Freepik](https://freepik.com/)
+   - Freepik was used to source property imagery
+
+- [ChatGPT](https://openai.com/blog/chatgpt/)
+  - OpenAI's ChatGPT was used in part to generate amenities lists, fake host bios and random addresses for properties.
