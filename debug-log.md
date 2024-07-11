@@ -7,7 +7,7 @@
     * identified incorrect path being used thanks to DEBUG - accounts/signup.html instead of "account"
     * corrected and form displayed with additional field
 
- - Cirspy Forms issues
+ - Crispy Forms issues
     * could not get crispy forms to load to the system correctly - installed using pip
     * added to installed apps already, hadn't loaded correctly in signup.html {% load i18n crispy_forms_tags %}
     * still had issues - added CRISPY_TEMPLATE_PACK = Boostrap4 to settings and installed crispy_bootstrap4 using pip
@@ -50,7 +50,7 @@
     * Map
         - Tried adding diferent sized maps but it actually made UI worse - only medium screens where it looks like too much white space. Will stick with 1 size map below all info
 
-- Users
+- User Profiles
     * Profiles
         - difficulty choosing how to properly setup, as I wanted separate profiles for hosts and guests
         - Went with separation at signup stage by having a signup selection field - override standard allauth signup form

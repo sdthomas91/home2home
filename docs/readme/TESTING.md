@@ -30,11 +30,14 @@ The Gather recipe website has been tested using the following methods:
 
 Home2Home site HTML faced a couple of issues due to dynamic templating including the action for the search remaining empty until used - details below
 
-Via URL
+<h2 align="center"><img src="../../media/testing/html-error.png"></h2>
+<h2 align="center"><img src="../../media/testing/html-error-2.png"></h2>
+
+Faced a continued issue with the filter setup - when no filters are applied, certain elements are hidden and so they cause an error. Will be addressed in future releases.
 
 ## W3C CSS Validator
 
-The Lonely House website passed all tests using the W3C CSS Validator tool
+Home2Home passed all tests using the W3C CSS Validator tool
 
 <h2 align="center"><img src="../../media//testing//core-css-valid.png"></h2>
 
