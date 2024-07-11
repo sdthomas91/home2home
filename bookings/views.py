@@ -48,7 +48,7 @@ def book_property(request, property_id):
 
 
 @login_required
-def basket_view(request):
+def basket(request):
     """
     Allow users to view their basket before checkout
     """

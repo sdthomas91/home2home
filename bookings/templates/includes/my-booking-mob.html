@@ -1,3 +1,4 @@
+{% for booking in bookings %}
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">{{ booking.property.title }}</h5>
@@ -5,5 +6,9 @@
         <p class="card-text"><strong>Check-out:</strong> {{ booking.checkout }}</p>
         <p class="card-text"><strong>Guests:</strong> {{ booking.guests }}</p>
         <p class="card-text"><strong>Total:</strong> £{{ booking.total_price }}</p>
+        {% if review_button %}
+        <a href="{% url 'write_review' booking.property.id %}" class="btn brand-btn">Leave Review</a>
+        {% endif %}
     </div>
 </div>
+{% endfor %}

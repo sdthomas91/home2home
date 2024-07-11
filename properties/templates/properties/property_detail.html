@@ -196,6 +196,11 @@
       </div>
       {% endfor %}
     </div>
+          {% if has_past_booking %}
+      <div class="mt-4 text-center">
+          <a href="{% url 'write_review' property.id %}" class="btn brand-btn">Share your thoughts!</a>
+      </div>
+      {% endif %}
     {% else %}
     <p>
       No reviews have been left for this property yet! Book now to leave your review

@@ -49,8 +49,7 @@ This project is a property rental platform utilizing Django for the backend and 
 1. I want to be able to view a list of available properties to find one that suits my needs.
 2. I want to view individual property details to see the price, description, images, amenities, and reviews.
 3. I want to use filters to narrow down property options by location, price range, number of bedrooms, and other criteria.
-4. I want to view properties on a map to understand their locations relative to points of interest.
-5. I want to easily navigate the site to find and compare properties.
+4. I want to easily navigate the site to find and compare properties.
 
 ### Registration and User Accounts
 #### User
@@ -58,8 +57,7 @@ This project is a property rental platform utilizing Django for the backend and 
 1. I want to easily register for an account to access personalized features.
 2. I want to log in and out securely to access my account information.
 3. I want to recover my password if I forget it to regain access to my account.
-4. I want to receive an email confirmation after registration to verify my account.
-5. I want a personalized user profile to view my booking history, manage my listings (if I'm a host), and update my information.
+4. I want a personalized user profile to view my booking history, manage my listings (if I'm a host), and update my information.
 
 ### Property Listings and Management
 #### Host
@@ -67,8 +65,7 @@ This project is a property rental platform utilizing Django for the backend and 
 1. I want to add a new property listing to the platform to make it available for booking.
 2. I want to edit and update my property listings to keep the information accurate and up to date.
 3. I want to upload images for my property listings to attract potential guests.
-4. I want to manage the availability of my properties to accurately reflect when they can be booked.
-5. I want to delete a property listing if it is no longer available for booking.
+4. I want to delete a property listing if it is no longer available for booking.
 
 ### Booking and Checkout
 #### Guest
@@ -77,16 +74,13 @@ This project is a property rental platform utilizing Django for the backend and 
 2. I want to view the total cost of my booking to avoid any surprises at checkout.
 3. I want to enter my payment information securely to complete my booking.
 4. I want to receive an order confirmation after booking to verify my reservation details.
-5. I want to receive an email confirmation of my booking to keep a record of my reservation.
 
 ### Administration and Platform Management
 #### Admin
 
 1. I want to manage user accounts to maintain the integrity and safety of the platform.
 2. I want to monitor property listings to ensure they comply with platform guidelines.
-3. I want to handle booking disputes and issues to provide customer support.
-4. I want to manage site content and updates to keep the platform running smoothly.
-5. I want to view site analytics to understand user behavior and improve the platform.
+3. I want to manage site content and updates to keep the platform running smoothly.
 
 
 # Design

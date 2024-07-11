@@ -6,16 +6,22 @@
             <th>Check-out</th>
             <th>Guests</th>
             <th>Total</th>
+            {% if review_button %}
+            <th>Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
-        {% for booking in upcoming_bookings %}
+        {% for booking in bookings %}
         <tr>
             <td>{{ booking.property.title }}</td>
             <td>{{ booking.checkin }}</td>
             <td>{{ booking.checkout }}</td>
             <td>{{ booking.guests }}</td>
             <td>£{{ booking.total_price }}</td>
+            {% if review_button %}
+            <td><a href="{% url 'write_review' booking.property.id %}" class="btn brand-btn">Leave Review</a></td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

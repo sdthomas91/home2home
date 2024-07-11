@@ -1,5 +1,3 @@
-# checkout/views.py
-
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponse
     )
@@ -14,6 +12,8 @@ from bookings.models import Booking
 from users.models import Profile
 import stripe
 import json
+
+
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -167,9 +167,7 @@ def checkout_success(request, order_id):
             profile.save()
 
     messages.success(
-        request, f'Order successfully processed!'
-        'Your order number is {order_id}.'
-        'A confirmation email will be sent to {order.email}.'
+        request, f'Order successfully processed! Your order number is {order.order_number}. A confirmation email will be sent to {order.email}.'
     )
 
     template = 'checkout/checkout_success.html'

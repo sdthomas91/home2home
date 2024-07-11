@@ -9,38 +9,15 @@ My Bookings
     <div class="container-fluid">
         <h1>My Bookings</h1>
 
-
         <h2 class="mt-4">Upcoming Stays</h2>
         {% if upcoming_bookings %}
         <div class="booking-table">
             <div class="d-lg-none">
-                {% include 'includes/my-booking-mob.html' %}
+                {% include 'includes/my-booking-mob.html' with bookings=upcoming_bookings %}
             </div>
             <div class="d-none d-lg-block">
-                {% include 'includes/my-booking-lg.html' %}
+                {% include 'includes/my-booking-lg.html' with bookings=upcoming_bookings %}
             </div>
-        <!-- <table class="table">
-            <thead>
-                <tr>
-                    <th>Property</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Guests</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for booking in upcoming_bookings %}
-                <tr>
-                    <td>{{ booking.property.title }}</td>
-                    <td>{{ booking.checkin }}</td>
-                    <td>{{ booking.checkout }}</td>
-                    <td>{{ booking.guests }}</td>
-                    <td>£{{ booking.total_price }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table> -->
         </div>
         {% else %}
         <p>No upcoming bookings. <a href="{% url 'all_properties' %}">Book Now!</a></p>
@@ -49,32 +26,17 @@ My Bookings
         <h2 class="mt-4">Your Previous Stays</h2>
         {% if past_bookings %}
         <div class="booking-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Property</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Guests</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for booking in past_bookings %}
-                <tr>
-                    <td>{{ booking.property.title }}</td>
-                    <td>{{ booking.checkin }}</td>
-                    <td>{{ booking.checkout }}</td>
-                    <td>{{ booking.guests }}</td>
-                    <td>£{{ booking.total_price }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            <div class="d-lg-none">
+                {% include 'includes/my-booking-mob.html' with bookings=past_bookings review_button=True %}
+            </div>
+            <div class="d-none d-lg-block">
+                {% include 'includes/my-booking-lg.html' with bookings=past_bookings review_button=True %}
+            </div>
+        </div>
         {% else %}
         <p>No past bookings.</p>
         {% endif %}
     </div>
 </div>
 {% endblock %}
+

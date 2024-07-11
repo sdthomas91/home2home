@@ -3,10 +3,12 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseForbidden
+from django.utils import timezone
 from django.db.models import Q
 from .models import Property, Amenity, PropertyImage
 from .forms import PropertyCreateForm, PropertyImageForm, PropertyEditForm
 from bookings.forms import BookingForm
+from bookings.models import Booking
 
 
 def is_superuser(user):
@@ -70,15 +72,32 @@ def property_detail(request, property_id):
     """
     property = get_object_or_404(Property, id=property_id)
     form = BookingForm()
+    
+    has_past_booking = False
+    if request.user.is_authenticated:
+        has_past_booking = Booking.objects.filter(
+            user=request.user,
+            property=property,
+            checkout__lt=timezone.now(),
+            status='Confirmed'
+        ).exists()
+
     return render(
         request,
         'properties/property_detail.html',
-        {'property': property, 'form': form, 'request': request}
-        )
+        {
+            'property': property,
+            'form': form,
+            'has_past_booking': has_past_booking
+        }
+    )
 
 
 @login_required
 def add_property(request):
+    """
+    View to allow hosts to add properties
+    """
     if not request.user.profile.user_type == 'Host':
         messages.error(request, 'You must be a host to add a property.')
         return redirect('home')
@@ -114,6 +133,9 @@ def add_property(request):
 
 @login_required
 def edit_property(request, property_id):
+    """
+    View to allow hosts and superusers to edit properties
+    """
     property = get_object_or_404(Property, id=property_id)
 
     # Check if the logged-in user is the host of the property or superuser
@@ -139,6 +161,9 @@ def edit_property(request, property_id):
 
 @login_required
 def delete_property(request, property_id):
+    """
+    View to allow hosts and superusers to delete properties 
+    """
     property = get_object_or_404(Property, id=property_id)
 
     # Check if the logged-in user is the host of the property or superuser
