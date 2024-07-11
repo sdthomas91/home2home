@@ -12,13 +12,15 @@ The Gather recipe website has been tested using the following methods:
     - [Wave Webaim Accessibility Checker](#wave-webaim-accessibility-checker)
 - [Lighthouse](#lighthouse)
 - [Responsiveness](#responsiveness)
-- [Browser Compatibility](#browser-compatibility)
 - [Testing User Stories](#testing-user-stories)
-    - [First Time User](#first-time-user)
-    - [Returning User](#returning-user)
-    - [Business Owner](#business-owner)
-- [Manual Testing](#manual-testing)
+    - [User Stories](#user-stories)
+        - [Viewing and Nav](#viewing-and-navigation)
+        - [Registration and User Accounts](#registration-and-user-accounts)
+        - [Property Listings and Management](#property-listings-and-management)
+        - [Booking and Checkout](#booking-and-checkout)
+        - [Administration and Platform Management](#administration-and-platform-management)
 - [Automated Testing](#automated-testing)
+- [Manual Testing](#manual-testing)
 - [Peer Review](#peer-review)
 - [Bugs](#bugs)
     - [Resolved](#resolved)
@@ -97,8 +99,6 @@ Refining and streamlining script embeds so they are not required on every page w
 <img src="../../media/testing/desktop-lighthouse.png">
 <img src="../../media/testing/mobile-lighthouse.png"> 
 
-
-# Browser Compatibility
 
 # Responsiveness
 
