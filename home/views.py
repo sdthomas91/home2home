@@ -23,7 +23,7 @@ def test_email(request):
     subject = 'Test Email'
     message = 'This is a test email sent from Django using Gmail.'
     from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ['your_email@example.com']
+    recipient_list = ['samueldthomas91@gmail.com']
 
     send_mail(subject, message, from_email, recipient_list)
 
