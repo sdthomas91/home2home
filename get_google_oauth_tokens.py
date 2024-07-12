@@ -11,7 +11,12 @@ CLIENT_SECRETS = {
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret": os.getenv("OAUTH_CLIENT_SECRET")
+    "client_secret": os.getenv("OAUTH_CLIENT_SECRET"),
+    "redirect_uris": [
+      "http://localhost",
+      "http://localhost:5000",
+      "https://home-2-home-534807be7c72.herokuapp.com/oauth2callback"
+    ]
   }
 }
 
