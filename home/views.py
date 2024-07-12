@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from properties.models import Property
 from reviews.models import Review
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
 
 
 def home(request):
@@ -14,3 +17,14 @@ def home(request):
             'latest_reviews': latest_reviews
         }
         )
+
+
+def test_email(request):
+    subject = 'Test Email'
+    message = 'This is a test email sent from Django using Gmail.'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = ['your_email@example.com']
+
+    send_mail(subject, message, from_email, recipient_list)
+
+    return HttpResponse('Email sent successfully')
