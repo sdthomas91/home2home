@@ -169,8 +169,6 @@ I also personally tested the website on iPhone 14 pro, Honor Pad Pro, MacBook Pr
     - Basket calculates price per night and total nights to provide a total booking cost before checkout
 3. I want to enter my payment information securely to complete my booking.
     - Stripe payment system securely manages payment details 
-4. I want to receive an order confirmation after booking to verify my booking details.
-    - Stripe webhook provides order confirmation email to users upon booking completion
 
 ### Administration and Platform Management
 #### Admin
@@ -509,5 +507,13 @@ I also personally tested the website on iPhone 14 pro, Honor Pad Pro, MacBook Pr
 - Seems a regular issue according to forums as linked in README - tried reformatting JS and tried several different libraries and plugins but still no luck.
 - Cannot find a remedy on forums - even tried copying some code across from another project but had the same issue - will leave unresolved for now but will be a future development - completely custom built booking system. 
 - Perhaps adding availability to listings would enhance the experience - could automatically mark past dates as unavailable and then cannot be booked on calendar. 
+
+### Email Confirmation
+
+- Google authentication has updated since provided walkthrough details. Followed Google API documentation and tried implementing OAUTH but it would not resolve. IT doesn't cause any issues on the site, but would be an obvious user issue in the long term.
+<h2 align="center"><img src="../../media/testing/email-issues.png"></h2>
+
+- Tried several test methods including custom views but no luck - due to time constraints on this project it is something that I will need to address in the future 
+<h2 align="center"><img src="../../media/testing/email-test.png"></h2>
 
 Back to [README.md](/README.md#testing)

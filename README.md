@@ -110,7 +110,6 @@ This project is a property rental platform utilizing Django for the backend and 
 1. I want to easily select check-in and check-out dates to book a property.
 2. I want to view the total cost of my booking to avoid any surprises at checkout.
 3. I want to enter my payment information securely to complete my booking.
-4. I want to receive an order confirmation after booking to verify my reservation details.
 
 ### Administration and Platform Management
 #### Admin
@@ -287,7 +286,7 @@ Thins I had to take into account when compiling the DB models were:
 ## Checkout Confirmation Page
 - Checkout success page includes booking details 
 - Marks booking as completed and adds to "My Bookings"
-- Sends booking confirmation email
+- Booking confirmation email issues - see testing.md
 
 ## Authentification Pages
 - Register/ Log In/ Log Out/ Reset Password Pages all styled to match theme
