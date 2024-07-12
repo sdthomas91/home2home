@@ -1,0 +1,23 @@
+Hello {{ order.first_name }} {{ order.last_name }},
+
+This is a confirmation of your booking with Home2Home. Your order information is below:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.created_at }}
+
+Order Total: ${{ order.total_price }}
+
+Booking Details:
+{% for item in order.lineitems.all %}
+Property: {{ item.property.title }}
+Check-in Date: {{ item.checkin }}
+Check-out Date: {{ item.checkout }}
+{% endfor %}
+
+We've got your phone number on file as {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Kind regards,
+
+Home2Home
