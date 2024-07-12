@@ -5,11 +5,13 @@ from django.conf.urls.static import static
 from django.urls import re_path
 from allauth.account.views import SignupView
 from users.views import CustomSignupView
+from .views import test_email
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('test-email/', test_email, name='test_email'),
     path('', include('users.urls')),
     path(
         'accounts/signup/',
