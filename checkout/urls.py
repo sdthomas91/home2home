@@ -14,4 +14,3 @@ urlpatterns = [
         ),
     path('wh/', webhook, name='webhook'),
 ]
-]
