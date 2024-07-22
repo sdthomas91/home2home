@@ -10,7 +10,6 @@ from users.models import Profile
 import json
 import time
 
-
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
 
@@ -90,15 +89,10 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-                # Commented out name fields to fix bug caused by
-                # possibly non-matching fields.
                 order = Order.objects.get(
-                    # first_name__iexact=first_name,
-                    # last_name__iexact=last_name,
                     email__iexact=billing_details.email,
                     phone_number__iexact=billing_details.phone,
                     country__iexact=billing_details.address.country,
-                    # shipping postcode
                     postcode__iexact=shipping_details.address.postal_code,
                     town_or_city__iexact=billing_details.address.city,
                     street_address1__iexact=billing_details.address.line1,
@@ -128,7 +122,6 @@ class StripeWH_Handler:
                     email=billing_details.email,
                     phone_number=billing_details.phone,
                     country=billing_details.address.country,
-                    # shipping postcode
                     postcode=shipping_details.address.postal_code,
                     town_or_city=billing_details.address.city,
                     street_address1=billing_details.address.line1,
