@@ -424,6 +424,10 @@ a:focus {
     border-radius: 1rem;
 }
 
+.bookings-container {
+    margin-bottom: 3rem;
+}
+
 /* ---FOOTER--- */
 
 .social-links {
