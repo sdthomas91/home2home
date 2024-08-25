@@ -184,6 +184,7 @@ a:focus {
     height: auto;
     background: white;
     padding-bottom: 2rem;
+    min-height: 70vh;
 }
 
 /* ---navbar--- */
@@ -431,12 +432,6 @@ a:focus {
 
 
 /* ---MEDIA QUERIES--- */
-@media screen and (min-width: 796px) {
-    .form-container {
-        min-height: 90vh;
-        padding-bottom: 2rem;
-}
-}
 
 @media screen and (max-width: 1200px) {
 
