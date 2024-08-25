@@ -181,7 +181,9 @@ a:focus {
 /* ---forms--- */
 
 .form-container {
-    height: 100vh;
+    height: auto;
+    background: white;
+    padding-bottom: 2rem;
 }
 
 /* ---navbar--- */
